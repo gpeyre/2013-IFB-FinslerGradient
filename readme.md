@@ -4,7 +4,7 @@ G. Nardi, G. Peyré, F-X. Vialard. [Geodesics on Shape Spaces with Bounded Varia
 
 G. Charpiat, G. Nardi, G. Peyré, F-X. Vialard. [Finsler Steepest Descent with Applications to Piecewise-regular Curve Evolution](https://hal.archives-ouvertes.fr/hal-00849885/). Interfaces and Free Boundaries, 18(1), pp. 1–44, 2016.
 
-![Example of piecewise-rigid flow](pr-flow.png)
+![Example of piecewise-rigid flow](img/pr-flow.png)
 
 * load_curve.m loads the different curves used for the tests.
 
