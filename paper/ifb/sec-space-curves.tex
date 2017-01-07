@@ -1,0 +1,276 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Finsler Gradient in the Spaces of Curves}\label{SC}
+
+This section specializes our method to a space of piecewise-regular curves. We target applications to piecewise rigid evolutions to solve a curve matching problem (see Section~\ref{CM}). Note that, in order to perform piecewise rigid evolutions, we are led to deal with curves whose first and second derivatives are not continuous. This leads us to consider  the setting of $BV^2$-functions. We refer the reader to Appendix  for the definition and the main properties of $BV$ and $BV^2$ functions.  
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{$BV^2$-curves}
+
+In this section we define the space of $BV^2$-curves and introduce its main properties. This models closed, connected curves admitting a  $BV^2$-parameterization.
+\par In the following, for every $\GA\in BV^2(\Circ, \RR^2)$, we denote by  $\d\GA$ the measure defined as 
+
+$$
+\d \GA(A)=\int_A |\GA'(s)| \d s \;, \quad \forall \, A\subset \Circ
+$$
+where $\GA'$ denotes the approximate derivative of $\GA$ (see for instance \cite{AFP}). In the following we identify $[0,1]$ with the unit circle $\Circ$.
+
+
+\begin{defn}[{\bf $BV^2$-curves}]\label{BV2curves}
+We set $\Bb = BV^2( \Circ, \R^2)$ equipped with the  $BV^2$-norm.
+For any $\Ga \in \Bb$, we set $T_\GA \Bb = BV^2(\GA)$, the space $BV^2(\Circ,\RR^2)$ equipped with the measure  $\d\GA$.
+In $BV^2(\GA)$, differentiation and integration are done with respect to the measure $\d\GA$. For every $\Phi \in T_\GA \Bb$, we have  in particular 
+
+$$\frac{\d \Phi}{\d \GA}(s)\,=\, \underset{\varepsilon \rightarrow 0}{\lim} \, \frac{\Phi(s+\varepsilon)-\Phi(s)}{\d \GA((s-\varepsilon, s+\varepsilon))} \,,\quad \|\Phi\|_{L^1(\GA)} = \int_{\Circ} |\Phi(s)||\GA'(s)|\, \d s\,. $$
+We also point out that $\frac{\d \Phi}{\d \GA}(s)= \Phi'(s)/|\GA'(s)|$ for a.e. $s\in \Circ$, which implies that such a derivative is Lebesgue-measurable. Remark that in order to make the previous derivation well defined we have to make a hypothesis  on the derivative. We refer to next section, in particular to \eqref{cond-derivative}, for a discussion about the necessity of such a condition.
+
+The first and second variation are defined as
+\begin{equation}\label{TV}
+	 TV_\GA\left(\Phi\right) = \sup \enscond{
+		\int_{\Circ}\Phi(s)\cdot \frac{\d g}{\d \GA}(s)\, \d\Ga(s) 
+	}{
+		g\in \mathrm{C}^1_c(\Circ, \RR^2),\|g\|_{L^\infty(\Circ,\R^2)}\leq 1
+	} \,
+\end{equation}
+and 
+ \begin{equation}
+ TV^2_\GA(\Phi)=\sup \enscond{
+ 	\int_{\Circ}\Phi\cdot \frac{\d^2 g}{\d\GA^2}(s)\, \d \GA(s) 
+	}{
+		g\in \mathrm{C}^2_c({\Circ},\mathbb{R}^2 ),\|g\|_{L^{\infty}(\Circ,\mathbb{R}^2 )}\leq 1
+	}\,
+\end{equation}
+for every $\Phi\in BV^2(\Circ,\RR^2)$. Now, as $\frac{\d g}{\d\GA}(s)\, \d\Ga(s)=g'(s)\,\d s$ we get $TV_\GA(\Phi) = \|\Phi'\|_{L^1(\Circ,\RR^2)}$.   The $BV^2$-norm on the tangent space is defined by 
+$$\|\Phi\|_{BV^2(\GA)} = \|\Phi\|_{W^{1,1}(\GA)} + TV^2_\GA(\Phi)\,.$$
+In a similar way we define $W^{2,1}(\GA)$. Every $\Phi \in T_\GA \Bb$ operates on a curve $\GA \in \Bb$ as
+\eq{
+	(\GA + \Phi)(s)= \GA(s) + \Phi(s)\,,\quad \foralls s\in\Circ.
+}
+
+\end{defn}
+
+
+\begin{defn}[{\bf Tangent, normal, and curvature}]\label{curvature-dfn}
+For every $\GA\in \mathcal{B}$ we define  the following vector
+$$\nu_\GA(s)= \underset{r\rightarrow 0}{\lim}\, \frac{D \GA((s-r,s+r))}{|D \GA|((s-r,s+r))} \,$$
+where $|D\GA|$ denotes the total variation of $\GA$ and $D\GA$ denotes the vector-valued measure associated with the total variation. Note that, as $\GA\in W^{1,1}(\Circ, \RR^2)$, $|D\GA|$ coincides with the measure $\d \GA$ (we recall that the total variation of a $ W^{1,1}$-function coincides with the $L^1$-norm of its derivative) and the limit defining $\nu_\GA$ exists  for $\d\GA$-a.e. $s\in \Circ$.
+%(note in particular that a set is $|D\GA|$-negligible if and only if it is Lebesgue-negligible so that $\nu_\GA$ is defined a.e.).
+Moreover we have $\|\nu_\GA\|=1$ for $\d\GA$-a.e. $s\in\Circ$. 
+
+
+
+%As $\GA$ is a $BV^2$-function of one variable we can represent the previous measure by its good representatives (see \cite{AFP}, Theorem 3.28) which implies that  the previous limit exists at each point and 
+ 
+
+Now, $\GA\in W^{1,1}(\Circ, \RR^2)$, and we can suppose  that $|\GA'(s)|\neq 0$ for almost every $s\in \Circ$. This implies in particular that a subset of $\Circ$ is $\d\GA$-negligible if and only if it is Lebesgue-negligible.  Then,  the tangent and normal vectors to the curve at $\d\GA$-a.e. point $\Ga(s)$ are defined as 
+\begin{equation}\label{def-tangente}
+	\tgam(s) = \frac{\nu_\GA(s)}{\|\nu_\GA(s)\|}\quad \quad \n_\ga(s)= \tgam(s)^\bot
+\end{equation}
+\eq{
+	\qwhereq (x,y)^\bot= (-y,x)\;,\quad \foralls (x,y)\in \RR^2.
+}
+\par  We point out that $\nu_\GA(s) = \GA'(s)/|\GA'(s)|$ for a.e. $s\in \Circ$ and  $\tgam\in BV(\Circ,\RR^2)$ with   $\tgam\cdot\tgam=1$ for a.e. $s\in \Circ$. Thus, by differentiating with respect to $\d \GA$, we get that the measure  $\tgam\cdot D_\GA\tgam $ is null ($D_\GA$ denotes here the vector-valued measure associated with the total variation $TV_\GA$).
+Then, there exists a real measure $\rm{curv}_\GA$ such that
+\begin{equation}\label{deriv-tang}
+D_\GA\tgam = \ngam \,\rm{curv}_\GA\,.
+\end{equation}
+By the definition of $\ngam$ we also have
+\begin{equation}\label{deriv-norm}
+	D_\GA\ngam = -\tgam \,\rm{curv}_\GA\,.
+\end{equation}
+The measure $\rm{curv}_\GA$ is  called generalized curvature of $\GA$, and, in the case of a smooth curve,  it  coincides with the measure $\kappa_\GA \,\d s$ where $\kappa_\GA$ denotes the standard scalar curvature of $\GA$. 
+\par From the properties of the total variation  (see for instance~\cite{AFP}) it follows that 
+\begin{equation}\label{curvature}
+	|\rm{curv}_\GA|(\Circ)\leq |D^2\GA|(\Circ)
+\end{equation}
+where $|\rm{curv}_\GA|(\Circ)$ denotes the total variation of the generalized curvature on the circle. 
+%\par We remark that $BV^2( \Circ, \R^2)$ and $BV^2(\GA)$ represent the same set of functions. 
+\end{defn}
+
+%\begin{exa} We give an example showing that in the case of a $C^2$-piecewise curve $\nu_\GA(s)$ corresponds to the standard tangent vector at every point excepted the articulation points. At these points  $\nu_\GA(s)$ coincides with a linear combination of the left and right limits of the tangent vectors.\par Let  $\GA$ the square with vertices $\{(0,0),(1,0),(1,1),(0,1)\}$ parameterized as$$\GA(s)=\left\{\begin{array}{ll} (4s,0) & \mbox{if}\;s\in (0,1/4)\\ (1,4(s-1/4)) & \mbox{if}\;s\in (1/4,1/2)\\ (1-4(s-1/2),1) & \mbox{if}\;s\in (1/2,3/4)\\  (0,1-4(s-3/4)) & \mbox{if}\;s\in (3/4,1)\\\end{array}\right.$$
+% Then we have following open curve be the angle with size $\alpha<\pi$ represented if Figure~\ref{angle}.  
+% \begin{figure}[h!]
+%       \centerline{
+%       {\epsfxsize=2in
+%       \epsfbox{angle.eps}
+ %      }}
+ %      \caption{Generalized tangent at $(0,0)$.}\label{angle}
+ %      \vspace{0.3cm}
+%       \end{figure}where we have identified $\Circ$ with the interval $[0,1]$.By the previous definition, for every $s\in [0,1]$,we have $$\nu_{\GA}(s)=\left\{\begin{array}{ll} (1,0) & \mbox{if}\;s\in (0,1/4)\\ (0,1) & \mbox{if}\;s\in (1/4,1/2)\\ (-1,0) & \mbox{if}\;s\in (1/2,3/4)\\  (0,-1) & \mbox{if}\;s\in (3/4,1)\\\end{array}\right.$$and at the vertices we have $$\nu_{\GA}(0)= \frac{1}{2}(1,-1),\\nu_{\GA}(1/4)= \frac{1}{2}(1,1),\,\nu_{\GA}(1/2)= \frac{1}{2}(-1,1),\,\nu_{\GA}(3/4)= \frac{1}{2}(-1,-1)\,.$$In particular we have that the tangent and normal vectors are constant on each edge of the square and at the vertices they coincide with a linear combination of the left and right limits.  This implies that the generalized curvature is a Dirac measure concentrated at the vertices:$$\rm{curv}_\GA=\delta_{0}+\delta_{1/4}+\delta_{1/2}+\delta_{3/4}\,.$$\end{exa}
+
+\begin{defn}[{\bf Projectors}]
+We denote by $\Pi_\GA$ the  projection on the normal vector field $ \n_\ga$
+\begin{equation}\label{normal-proj}
+	\Pi_\GA (\Phi)(s) \;\;=\;\; \Big( \Phi(s) \cdot \n_\ga(s) \Big)\, \n_\ga(s),
+\end{equation}
+where $\cdot$ is the inner product in $\RR^2$. 
+We denote by $\Sigma_\GA$ the  projection on the tangent vector  field $\tgam$
+\begin{equation}\label{tangent-proj}
+	\Sigma_\GA (\Phi)(s) \;\;=\;\; \Big( \Phi(s) \cdot \tgam(s) \Big)\, \tgam(s)\, .
+\end{equation}
+\end{defn}
+
+\begin{defn}[{\bf Hilbertian structure}]\label{hilbert-struct}
+The Banach space $\Bb=BV^2(\Circ,\RR^2)$ is continuously embedded in the  Hilbert space $H =W^{1,2}(\Circ,\RR^2)$. 
+
+For every $\GA\in \Bb$, we define $W^{1,2}(\GA) = W^{1,2}(\Circ, \RR^2)$, where integration is done with respect to the measure $\d \GA$. In particular, if $\GA$ verifies $\underset{s\in\Circ}{{\rm essinf}}|\GA'(s)|> 0$, then the norms of $W^{1,2}(\Circ, \RR^2)$ and $W^{1,2}(\GA)$ are equivalent.  
+This defines the following inner product on $T_\GA \Bb$
+\eql{\label{eq-inner-prod-curve}
+	\langle\Phi,\,\Psi\rangle_{W^{1,2}(\GA)} =\int_{\Circ} \Phi(s) \cdot \Psi(s)\; \d\Ga(s) + \int_{\Circ} \frac{\d\Phi}{\d \GA}(s) \cdot  \frac{\d\Psi}{\d \GA}(s)\; \d\Ga(s) \quad \forall \, \Phi, \Psi\in T_\GA \Bb\,.
+}
+
+\end{defn}
+
+%The quantity $\dotpd{\Phi}{\Psi}$ is intrinsic in the sense that it is  invariant to  re-parameterization of $\GA$. Section~\ref{repa} gives more details about parameterization of $BV^2$ curves. 
+
+Finally, recall that for a Fr\'echet-differentiable energy $E$ on $H$, the $W^{1,2}(\GA)$-gradient of $E$ at $\Ga$ is defined as the unique deformation $\nabla_{W^{1,2}(\GA)} E(\Ga)$ satisfying :
+$$D E(\Ga)(\Phi) \; = \; \langle\nabla_{W^{1,2}(\GA)} E(\Ga),\,\Phi\rangle_{W^{1,2}(\GA)}\,, \quad  \foralls \Phi\, \in\, T_\GA\Bb\, $$
+where $D E(\Ga)(\Phi)$ is the directional derivative. 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Geometric Curves and Parameterizations}\label{repa}
+
+For applications in computer vision, it is important that the developed method (e.g. a gradient descent flow to minimize an energy) only depends on the actual geometry of the planar curve, and not on its particular parametrization. We denote $[\GA] = \GA(\Circ)$ the geometric realization of the curve, i.e. the image of the parameterization in the plane.
+
+If, for two curves $\GA_1,\GA_2 \in \Bb$ there exists a smooth invertible map $\phi:\Circ \to \Circ$ such that $\GA_2 = \GA_1 \circ \phi$, then $\GA_2$ is a reparameterization of $\GA_1$ and these parameterizations share the same image, i.e. $[\GA_1] = [\GA_2]$. This section shows, in some sense, the converse implication in the $BV^2$ framework, namely the existence of a reparameterization map between two curves sharing the same geometric realization. This result is important since it shows the geometric invariance of the developed Finsler gradient flow. 
+
+Note however that this is clearly not possible without any constraint on the considered curve. For instance, there is no canonical parameterization of an eight-shaped curve in the plane. We will only consider injective curves $\GA \in \Bb$ satisfying the following additional property 
+\begin{equation}\label{cond-derivative}
+	0\notin \overline{\text{Conv}}(\GA'(s^+),\GA'(s^-)) \quad \foralls s\in \Circ\,.
+\end{equation}
+Here $\overline{\text{Conv}}$ denotes the closed convex envelope (a line segment) of the right and left limits $\GA'(s^+)$ and $\GA'(s^-))$ of the derivative of $\GA$ at $s$. We will show in the following that such a property gives a generalized definition of immersion for  $BV^2$-curves and implies that the support of the curve has no cusp points. 
+\par We define the set of curves
+\begin{equation}
+	\Bb_0 = \{ \GA \in BV^2(\Circ,\Pl) 
+	\,:\,
+		\GA\;\mbox{is injective and satisfies}\;\eqref{cond-derivative}
+	\}
+\end{equation}
+equipped with the $BV^2$-norm. 
+
+Note that it is difficult to ensure that the iterates $\{\Gamma_k\}$ defined by \eqref{sequence} stay in $\Bb_0$, since $\Bb_0$ is not a linear space. As shown in Proposition \ref{openB0} below, $\Bb_0$ is an open set, so that one might need to use small step sizes $\tau_k$ to guarantee that $\Gamma_k \in \Bb_0$. This is however no acceptable, because it could contradict the constraints (2.8) and prevent the convergence of $\Gamma_k$ to a stationary point of $E$. This issue reflects the well known fact that during an evolution, a parametric curve can cross itself and become non-injective. 
+
+%Proposition~\ref{openB0} below shows that $\Bb_0$ is an open set of $\Bb$. Note however that it is not a linear space, so that, to guarantee that the evolution~\eqref{sequence} stays inside $\Bb_0$, the step size $\tau_k$ should be small enough. This however contradicts the constraints~\eqref{Wolfe} that are needed to ensure the convergence of the flow. This reflects the well known fact that during an evolution, a parametric curve can cross itself and become non-injective. 
+
+We also note that, as pointed out in Definitions \ref{hilbert-struct} and \ref{BV2curves}, condition \eqref{cond-derivative} guarantees that the norms on $L^2(\Circ, \RR^2)$ and $L^2(\GA)$ and on $BV^2(\Circ, \RR^2)$ and $BV^2(\GA)$ are equivalent, so that the abstract setting described in Section \ref{F} is adapted to our case.
+
+We first show that property \eqref{cond-derivative} implies local injectivity of the curve and that this local injectivity remains true in a neighborhood of the curve.
+
+
+\begin{prop}\label{open_condition}   
+Let $\Gamma_0 \in BV^2(\Circ,\Pl) $ and $t \in \Circ$ such that condition \eqref{cond-derivative} is satisfied. There exists $\varepsilon>0 \, ,  \gamma>0$ and $n \in \R^2$ a unit vector such that,  if $\|\Gamma_0 - \Gamma \|_{BV^2(\Circ,\Pl) } < \gamma$, then $\GA_0$ and $\GA$ are injective on $|s-t|<\varepsilon$, and 
+$$|\langle \Gamma(s) -\GA(t) ,n \rangle| > \gamma|s-t|\quad \mbox{on} \quad |s - t| < \varepsilon\,.$$
+\end{prop}
+
+\begin{proof}
+As $\GA_0'$ is a function of bounded variation, the left and right limits exist and are finite. Moreover, $\GA_0$ verifies \eqref{cond-derivative} at $t$  if and only if there exists a  unit vector $n$ such that $\langle \GA_0'(t^+), n \rangle > 0$ and $\langle \GA_0'(t^-), n \rangle > 0$. 
+Let $\gamma_0 = \frac 1 2 \min\{\langle \GA_0'(t^-), n \rangle ,\langle \GA_0'(t^+), n \rangle\}$. 
+By the fact that $\lim_{s \to t^-} \GA_0'(s)= \GA_0'(t^-)$ and $\lim_{s \to t^+} \GA_0'(s)= \GA_0'(t^+)$, there exists $\epsilon>0$
+such that 
+$$|\langle \Gamma_0(s) -\GA_0(t) ,n \rangle| > \gamma_0|s-t|\quad \mbox{if} \quad |s - t| < \varepsilon\,,$$
+%$\langle \GA_0'(s^+), n \rangle > \gamma_0$ and $\langle \GA_0'(s^-), n \rangle > \gamma_0$ 
+which proves the local injectivity for $\GA_0$.
+
+Now, since $BV(\Circ,\RR^2)$ is continuously embedded in $L^\infty(\Circ,\RR^2)$, if
+ $\|\Gamma_0 - \Gamma \|_{BV^2(\Circ,\Pl) } < \gamma_0/2$, then $\langle \GA'(t^+), n \rangle > \gamma_0/2$ and $\langle \GA'(t^-), n \rangle > \gamma_0/2$ which proves that $\GA$ verifies \eqref{cond-derivative}. Moreover we get 
+$$|\langle \Gamma(s) -\GA(t) ,n \rangle| > \frac{\gamma_0}{2}|s-t|\quad \mbox{on} \quad |s - t| < \varepsilon\,,$$ 
+which proves the local injectivity of $\GA$.
+ %on $|s - t| < \varepsilon$, which proves that $\GA$ is injective and verifies \eqref{cond-derivative}  on $|s - t| < \varepsilon$. 
+  The result ensues by setting  $\gamma = \gamma_0 / 2$.
+%\textcolor{red}{Si je comprends bien ton argument,  tu utilises ici une hypothese de continuite. Par contre,  $\Gamma'(s)$ n'est pas bien defini en tout point et la condition $\langle \GA_0'(s), n \rangle > \gamma_0$ ne peut etre vraie que pour \underline{presque} tout $s$ tel que $|s - t| < \varepsilon$. 
+%Je pense qu'il faut appliquer l'argument   aux extensions continues a droite et gauche de $\Gamma_0'$ definies par 
+%$$\GA_{0,g(d)}'(s)= \underset{x\rightarrow s^{-(+)} }{\lim} \GA_0'(x)\,.$$
+%Donc, d'apres la continuite a gauche et droite, pour tout $0<\eta<\gamma_0$ ($\gamma_0$ n'est pas forcement un minimum local!) il existe $\varepsilon >0$ tel que
+%$$\langle \GA_{0,d}'(s), n \rangle > \eta\quad \forall s\in [t, t+\varepsilon[ \,,$$
+%$$ \langle \GA_{0,g}'(s), n \rangle > \eta \quad \forall s\in  ]t-\varepsilon,t]\,.$$
+%Or, si $\|\Gamma_0 - \Gamma \|_{BV^2(\Circ,\Pl) } < \delta$, par injection on a $\|\Gamma_0' - \Gamma' \|_{L^\infty(\Circ,\Pl) } < \delta$, ce qui implique 
+%$$|\Gamma_{0,g(d)}'(s) - \Gamma
+%_{g(d)}'(s) | < \delta\quad \underline{\forall}\, s\in \Circ \,.$$ Donc
+%$$\langle \GA_{g(d)}'(s),n\rangle = \langle \GA_{g(d)}'(s)-\GA_{0,g(d)}'(s),n\rangle  + \langle \GA_{0,g(d)}'(s),n\rangle > \eta - \delta\quad \forall s\in ]t-\varepsilon,t]([t,t+\varepsilon[)$$
+%et le resultat suit en posant $\eta=\gamma_0/2$ et $\gamma=\delta = \eta/2$.  Du coup le choix de $\varepsilon$ depend aussi de $\gamma_0$. Il faut de plus modifier l'enonce en remplacant $f'(s)>\gamma$ par $f'(s^{+(-)})> \gamma$.
+%En gros, il faut regarder les limites gauches et droites comme l'on a fait dans le deuxieme papier (cond 2.4 du papier geodesiques). Ici on donne par contre une condition plus forte. On ne demande pas seulement que les limites soient non nulles, mais on impose que le cone tangent ne soit jamais plat. Cela revient a imposer  $f'(s^{+(-)})> \gamma$ dans un voisinage opportun.}
+\end{proof}
+
+\begin{prop}\label{openB0}   
+	$\Bb_0$ is an open set  of $\Bb=BV^2(\Circ, \RR^2)$. 
+\end{prop}
+
+\begin{proof}
+If $\Lambda\in \Bb_0$ then 
+\eq{
+	m = \underset{s\in \Circ}{\rm{essmin}} \,| \Lambda'(s) |> 0\,.
+}
+Now, by Proposition \ref{open_condition}, if $$\|\GA - \Lambda\|_{BV(\Circ, \RR^2)}< m/4$$ then $\GA$ is locally injective and verifies \eqref{cond-derivative}. 
+%as $BV$ is embedded in $L^\infty$ (i.e. there exists a constant $C>0$ such that $ \|\GA\|_{L^\infty(\Circ, \RR^2)}\leq C \|\GA\|_{BV(\Circ, \RR^2)} $), every curve $\GA\in BV^2(\Circ, \RR^2)$ such that  satisfies~\eqref{cond-derivative}.  
+Moreover, as $\Circ$ is compact and \eqref{cond-derivative} is satisfied on $\Circ$, there exists $\varepsilon,\alpha>0$  such that
+\begin{equation}\label{local-injective}
+|\Lambda(s)-\Lambda(s')|\geq \alpha|s-s'|, \quad \forall\,s,s'\in\Circ\;\; \mbox{such that}\;\;|s-s'|\leq \varepsilon\,.
+\end{equation}
+%Every $\GA$ such that $\|\GA' - \Lambda'\|_{L^\infty(\Circ,\RR^2)}< \alpha/2$  satisfies~\eqref{local-injective} so it is locally injective. 
+
+Then, as $\Lambda$ is injective, if we take $\|\GA - \Lambda\|_{BV^2(\Circ,\RR^2)}< \beta(\Lambda)$ where 
+$$\beta(\Lambda) = \frac{1}{2}\mbox{min}\,\left\{\alpha, \underset{s\in\Circ}{\inf}\;\underset{|s-s'|> \varepsilon}{\inf}\,\|\Lambda(s)-\Lambda(s')\|\right\}$$
+then  $\GA$ is also globally injective.
+\par Then
+$$\left\{\GA\in \mathcal{B}_0\, \big| \;\|\GA - \Lambda\|_{BV^2(\Circ, \RR^2)}< {\rm{min}}\left\{\frac{m}{4}, \beta(\Lambda)\right\}\right\}\subset \Bb_0\, $$
+which proves that $\Bb_0$ is an open set of $ BV^2(\Circ, \RR^2)$.
+\end{proof} 
+  
+
+
+The next proposition proves the existence of a reparameterization between two curves sharing the same image. 
+\begin{prop}\label{reparameterization}({\bf Reparameterization})
+For every  $\GA_1, \GA_2\in \Bb_0$ such that $[\GA_1]=[\GA_2]$,  there exists a homeomorphism  $\varphi\in BV^2(\Circ,\Circ)$ such that 
+$$\GA_1=\GA_2\circ\varphi \,.$$
+%\par 2)\,({\bf Local coordinates}) For every  $\GA\in \Bb_0$ the set $\GA(\Circ)$ can be locally represented as the graph of a $BV^2$-function.
+\end{prop}
+
+\begin{proof}
+For every $\GA_1, \GA_2\in\Bb_0$ we consider the arc-length parameterizations defined by
+$$\varphi_{\GA_1}, \varphi_{\GA_2} : \Circ \rightarrow \Circ$$
+$$\varphi_{\GA_1}(s) = \frac{1}{\mbox{Length}(\GA_1)}\int_{s_1}^s \,|\GA_1'(t)| \,dt \quad ,\;\varphi_{\GA_2}(s) = \frac{1}{\mbox{Length}(\GA_2)}\int_{s_2}^s \,|\GA_2'(t)|\,dt $$
+with $s_1, s_2\in \Circ$ such that $\GA_1(s_1)=\GA_2(s_2)$.
+
+Because of property~\eqref{cond-derivative} we can apply the inverse function theorem for Lipschitz functions (see Theorem 1 in~\cite{Clarke}) which allows to define  %$\varphi_\GA\in BV^2(\Circ, \Circ)\subset W^{1,\infty}(\Circ, \Circ)$ and its inverse
+$\varphi_{\GA_1}^{-1}, \varphi_{\GA_2}^{-1}\in BV^2(\Circ, \Circ)$. It follows that
+$$(\GA_1 \circ \varphi_{\GA_1}^{-1} \circ \varphi_{\GA_2})(s) = \GA_2(s)\quad \foralls s\in \Circ.$$
+\end{proof}
+%2) It suffices to adapt  the classical proof  in the case of smooth curves using Theorem 1 in~\cite{Clarke}. 
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Geometric Invariance}
+
+For $BV^2$ curves, the geometric invariance of the developed methods should be understood as an invariance with respect to $BV^2$ reparameterizations. 
+
+\begin{defn}
+	Let $G_{BV^2}$ denote the set of homeomorphisms  $\varphi\in BV^2(\Circ,\Circ)$ such that $\varphi^{-1} \in BV^2(\Circ,\Circ)$. 
+ Note that for every $\GA \in BV^2(\Circ, \RR^2)$ we have $\GA\circ \varphi \in BV(\Circ, \RR^2)$ for every $\varphi\in G_{BV^2}$. In fact, as every $BV^2$-function  is Lipschitz-continuous, by the chain-rule for $BV$-function, we get $\GA\circ \varphi \in BV(\Circ, \RR^2)$. Moreover, $(\GA\circ \varphi)'= \GA'(\varphi)\varphi' \in BV(\Circ, \RR^2)$ because $BV$ is a Banach algebra (one can check that $\GA'(\varphi)\in BV(\Circ, \RR^2)$ by performing the change of variables $t=\varphi(s)$ in the definition of total variation).   
+\end{defn}
+
+To ensure this invariance, we consider energies $E$ and penalties $R_\GA$ such that
+$$
+	E(\GA\circ\varphi) = E(\GA)\;\;, \quad R_{\GA\circ\varphi}(\Phi\circ\varphi) = R_{\GA}(\Phi)\quad\quad  \foralls \GA \in \Bb_0,\,\foralls \phi \in G_{BV^2} ,\,\foralls\Phi \in T_\GA\Bb\,.
+$$
+This implies that 
+$$\nabla_{R_{\GA\circ\varphi}}E(\GA\circ\varphi)(\Phi\circ\varphi)= \nabla_{R_{\GA}}E(\GA)(\Phi)\circ\varphi$$
+so that the descent scheme~\eqref{sequence} does not depend on the parameterization of $\GA$. Finally, as 
+$$(\GA - \tau\nabla_{R_{\GA}} E(\GA))\circ \varphi = \GA\circ \varphi  - \tau\nabla_{R_{\GA\circ \varphi }} E(\GA\circ \varphi ), $$
+for $\tau=\tau_k$, the descent step in~\eqref{sequence} is also invariant under reparameterization. 
+
+This shows that the Finsler gradient flow can actually be defined over the quotient space
+$\Bb/G_{BV^2}$. To avoid unnecessary technicalities, we decided not to use this framework and develop our analysis in the setting of the vector space $\Bb$.
+
+Another consequence of this invariance is that, as long as the evolution~\eqref{sequence} is in $\Bb_0$, the flow does not depend on the choice of the parameterization. However, as already noted in Section~\ref{repa}, it might happen that the sequence leaves $\Bb_0$, in which case different choices of parameterizations of an initial geometric realization can lead to different evolutions. 
+
+
+
+
+
+
+

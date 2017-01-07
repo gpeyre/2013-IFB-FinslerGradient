@@ -1,0 +1,69 @@
+% \documentclass[11pt,twoside]{article}
+\documentclass[12pt,twoside]{article}
+
+% Be sure to use PDF Latex
+\pdfoutput=1
+
+\newenvironment{simplified}{simplified}
+
+\usepackage[latin1]{inputenc}
+\usepackage{amsmath,amsthm,amssymb, mathrsfs, calrsfs} % bbm
+\usepackage{tikz}
+\usepackage{graphicx}
+\graphicspath{{./images/}}
+
+\usepackage{pdfsync}
+\usepackage{epsfig}
+\usepackage{epstopdf}
+\usepackage{mystyle}
+\usepackage{url}
+\usepackage{ifb}
+
+
+\graphicspath{{./images/}}
+
+
+\title{Piecewise rigid curve deformation \\ via a Finsler steepest descent}
+
+
+\markboth{G. Charpiat et al. }{Finsler Steepest Descent}
+
+
+\author{
+	\begin{tabular}{c}
+		Guillaume Charpiat\\[6mm]
+		Stars Lab \\ 
+		INRIA Sophia-Antipolis\footnote{\texttt{Guillaume.Charpiat@inria.fr}}
+	\end{tabular} 
+	\begin{tabular}{c}
+		Giacomo Nardi, Gabriel Peyr\'e \\ Fran\c{c}ois-Xavier Vialard \\[2mm]
+		Ceremade, \\ Universit\'e Paris-Dauphine\footnote{\texttt{\{nardi,peyre,vialard\}@ceremade.dauphine.fr}}\\
+	\end{tabular}	
+}
+\date{}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+\maketitle
+
+%sections/
+\input{sec-abstract}
+\input{sec-intro}
+\input{sec-finsler-descent}
+\input{sec-space-curves}
+\input{sec-piecewise-rigid}
+\input{sec-curve-matching}
+\input{sec-discretization}
+\input{sec-numerics}
+\input{sec-piecewise-similarity}
+\input{sec-conclusion}
+\input{sec-appendix}
+
+
+\bibliographystyle{plain}  % plain alpha
+\bibliography{bibliography}	
+
+\end{document}
+

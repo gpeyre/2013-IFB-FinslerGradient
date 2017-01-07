@@ -1,0 +1,83 @@
+%\textit{}%\emph{\begin{flushright}
+%\end{flushright}}% \documentclass[11pt]{article}
+\documentclass[12pt]{article}
+\usepackage{mystyle}
+
+\newenvironment{simplified}{simplified}
+
+
+
+\usepackage[latin1]{inputenc}
+\usepackage{amsmath,amsthm,amssymb, bbm, tikz, verbatim, mathrsfs,bbm} \usepackage{comment}
+%\usetikzlibrary{arrows}
+\usepackage{graphicx}
+\usepackage{framed}
+
+
+\graphicspath{{./images/}}
+%\usepackage{xtdeqnra}
+%\usepackage{mathenv}
+
+\usepackage{pdfsync}
+\usepackage{epsfig}
+\usepackage{epstopdf}
+\usepackage{url}
+
+
+% format A4
+% \usepackage{vmargin}
+% \setpapersize{A4} 
+
+\usepackage{ifb}
+\newcommand{\todo}[1]{
+\par
+{\color{blue}
+\begin{framed}
+TODO: #1
+\end{framed}
+}
+}
+\graphicspath{{./images/}}
+ 
+\title{Geodesics on Shape Spaces
+with \\ Bounded Variation and Sobolev Metrics}
+
+
+%\markboth{G. Nardi et al. }{}
+
+
+\author{
+	\begin{tabular}{c}
+		Giacomo Nardi, Gabriel Peyr\'e,  Fran\c{c}ois-Xavier Vialard \\[2mm]
+		Ceremade, Universit\'e Paris-Dauphine\footnote{\texttt{\{nardi,peyre,vialard\}@ceremade.dauphine.fr}}\\
+	\end{tabular}	
+}
+\date{}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+\maketitle
+\excludecomment{simplified}
+
+\input{Abstract}
+\input{Introduction}
+\input{BV2-geodesics}
+\input{Hs-geodesics}
+\input{Discretization}
+\input{Conclusion}
+%sections/
+\newpage
+\bibliographystyle{plain}  % plain alpha
+\bibliography{bibliography}	
+
+\end{document}
+
+
+
+
+
+
+
+

@@ -1,0 +1,288 @@
+\begin{thebibliography}{10}
+
+\bibitem{Opt-manifolds}
+P.-A. Absil, R.~Mahony, and R.~Sepulchre.
+\newblock Optimization on manifolds: {M}ethods and applications.
+\newblock {\em {R}ecent {A}dvances in {O}ptimization and its {A}pplications in
+  {E}ngineering. {T}he 14th {B}elgian-{F}rench-{G}erman {C}onference on
+  {O}ptimization. {S}pringer}, pages 125--144, 2010.
+
+\bibitem{prox-banach-1}
+Y.~I. Alber, R.~S. Burachik, and A.~N. Iusem.
+\newblock A proximal point method for nonsmooth convex optimization problems in
+  banach spaces.
+\newblock {\em Abstract and Applied Analysis}, 2(1--2):97--120, 1997.
+
+\bibitem{AFP}
+L.~Ambrosio, N.~Fusco, and D.~Pallara.
+\newblock Functions of {B}ounded {V}ariation and {F}ree {D}iscontinuity
+  {P}roblems.
+\newblock {\em Oxford Science Publications}, 2000.
+
+\bibitem{AGS}
+L.~Ambrosio, N.~Gigli, and L.~Savar\'e.
+\newblock {G}radient {F}lows in {M}etric {S}paces and in {S}paces of the
+  {P}robability {M}easures.
+\newblock {\em Birkh{\"a}user}, 2008.
+
+\bibitem{prox-banach-2}
+K.~Aoyama, F.~Kohsaka, and W.~Takahashi Abstract.
+\newblock Proximal {P}oint {M}ethods {F}or {M}onotone {O}perators {I}n {B}anach
+  {S}paces.
+\newblock {\em Taiwanese {J}ournal of {M}athematics}, 15(1):259--281, 2011.
+
+\bibitem{rkhs2}
+N.~Aronszajn.
+\newblock Theory of reproducing kernels.
+\newblock {\em Trans. Am. Math. Soc.}, 68(3):337--404, 1950.
+
+\bibitem{f}
+J.~Ashburner.
+\newblock A fast diffeomorphic image registration algorithm.
+\newblock {\em Neuro{I}mage}, 38(1):95--113, 2007.
+
+\bibitem{RF-geometry}
+D.~Bao, S.S. Chern, and Z.~Shen.
+\newblock An introduction to {R}iemaniann-{F}insler geometry.
+\newblock {\em Springer-Verlag New York, Inc.}, 2000.
+
+\bibitem{convex-optimization}
+S.~Boyd and L.~Vandenberghe.
+\newblock Convex optimization.
+\newblock {\em Cambridge University Press}, 2004.
+
+\bibitem{Brezis}
+H.~Brezis.
+\newblock Functional {A}nalysis, {S}obolev {S}paces, and {P}artial
+  {D}ifferential {E}quations.
+\newblock {\em Springer}, 2010.
+
+\bibitem{caselles-active-contours}
+V.~Caselles, R.~Kimmel, and G.~Sapiro.
+\newblock Geodesic active contours.
+\newblock {\em International Journal of Computer Vision}, 22(1):61--79, 1997.
+
+\bibitem{CV-01}
+T.~Chan and L.~Vese.
+\newblock Active contours without edges.
+\newblock {\em IEEE Transactions on Image Processing}, 10(2):266--277, 2001.
+
+\bibitem{chang08articulated}
+W.~Chang and M.~Zwicker.
+\newblock Automatic registration for articulated shapes.
+\newblock {\em Computer Graphics Forum (Proceedings of SGP 2008)},
+  27(5):1459--1468, 2008.
+
+\bibitem{charpiat-new-metrics}
+G.~Charpiat, R.~Keriven, J.~P. Pons, and O.~D. Faugeras.
+\newblock Designing spatially coherent minimizing flows for variational
+  problems based on active contours.
+\newblock {\em Proc. ICCV}, 2:1403--1408, 2005.
+
+\bibitem{charpiat-generalized-gradient}
+G.~Charpiat, P.~Maurel, J.~P. Pons, R.~Keriven, and O.~D. Faugeras.
+\newblock Generalized {G}radients: {P}riors on {M}inimization {F}lows.
+\newblock {\em International Journal of Computer Vision}, 73(3):325--344, July
+  2007.
+
+\bibitem{citeulike}
+Y.~Chen and G.~Medioni.
+\newblock Object modeling by registration of multiple range images.
+\newblock {\em Proc. Conf. on Robotics and Automation}, pages 2724--2729, 1991.
+
+\bibitem{Clarke}
+F.H. Clarke.
+\newblock On the inverse function theorem.
+\newblock {\em Pacific J. Math.}, 64(1):97--102, 1976.
+
+\bibitem{Demengel}
+F.~Demengel.
+\newblock Fonctions \`a hessien born\'e.
+\newblock {\em Annales de l'Institut Fourier}, 34(2):155--190, 1984.
+
+\bibitem{EG}
+L.~Evans and R.F. Garipey.
+\newblock Measure theory and fine properties of functions.
+\newblock {\em CRC Press}, 1992.
+
+\bibitem{d}
+G.~Gilboa and S.~Osher.
+\newblock Nonlocal linear image regularization and supervised segmentation.
+\newblock {\em {SIAM} {M}ultiscale {M}odeling and {S}imulation}, 6:595--630,
+  2007.
+
+\bibitem{Glaunes-matching}
+J.~Glaunes, A.~Trouv\'{e}, and L.~Younes.
+\newblock Diffeomorphic matching of distributions : A new approach for
+  unlabelled point-sets and sub-manifolds matching.
+\newblock {\em Proc. of CVPR'04}, 2:712--718, 2004.
+
+\bibitem{Mennucci-Stiefel-manifolds}
+P.~Harms and A.~Mennucci.
+\newblock Geodesics in infinite dimensional {S}tiefel and {G}rassmann
+  manifolds.
+\newblock {\em Compte Rendus de l'Acad\'amie des Sciences},
+  350(15?16):773--776, 2012.
+
+\bibitem{c}
+A.~Herbulot, S.~Jehan Besson, S.~Duffner, M.~Barlaud, and G.~Aubert.
+\newblock Segmentation of vectorial image features using shape gradients and
+  information measures.
+\newblock {\em Journal of {M}athematical {I}maging and {V}ision}, 25:365--386,
+  2006.
+
+\bibitem{Ulbrich}
+M.~Hinze, R.~Pinnau, M.~Ulbrich, and S.~Ulbrich.
+\newblock Optimization with {PDE}-{C}onstraints.
+\newblock {\em Springer}, 2008.
+
+\bibitem{Kass88Snakes}
+M.~Kass, A.~Witkin, and D.~Terzopoulos.
+\newblock Snakes: Active contour models.
+\newblock {\em International Journal of Computer Vision}, 1(4):321--331,
+  January 1988.
+
+\bibitem{Kilian-shape-space}
+M.~Kilian, N.J. Mitra, and H.~Pottmann.
+\newblock Geometric modeling in shape space.
+\newblock {\em ACM Transactions on Graphics}, 26(3):1--8, 2007.
+
+\bibitem{b}
+J.~Kim, J.W. Fisher, A.~Yezziand, M.~Cetin, and A.S. Willsky.
+\newblock A nonparametric statistical method for image segmentation using
+  information theory and curve evolution.
+\newblock {\em {IEEE} {T}rans. {I}mage {P}roc.}, 14:486--502, 2005.
+
+\bibitem{malladi-shape-modeling}
+R.~Malladi, J.~A. Sethian, and B.~C. Vemuri.
+\newblock Shape modeling with front propagation: {A} level set approach.
+\newblock {\em IEEE Trans. Patt. Anal. and Mach. Intell.}, 17(2):158--175,
+  1995.
+
+\bibitem{Mennucci-CIME}
+A.C. Mennucci.
+\newblock Level set and {PDE} based reconstruction methods: Applications to
+  inverse problems and image processing.
+\newblock {\em Lecture Notes in Mathematics, Lectures given at the C.I.M.E.
+  Summer School held in Cetraro, 8-13 September 2008, Springer-Verlag}, 2013.
+
+\bibitem{MaMi}
+P.W. Michor and D.~Mumford.
+\newblock Riemannian geometries on spaces of plane curves.
+\newblock {\em J. Eur. Math. Soc.}, 8(1):1--48, 2006.
+
+\bibitem{MumfordShah89}
+D.~Mumford and J.~Shah.
+\newblock Optimal approximations by piecewise smooth functions and associated
+  variational problems.
+\newblock {\em Communications on Pure and Applied Mathematics}, XLII(4), 1989.
+
+\bibitem{a}
+K.~Ni, X.~Bresson, T.F. Chan, and S.~Esedoglu.
+\newblock Local histogram based segmentation using the {W}asserstein distanc.
+\newblock {\em International {J}ournal of {C}omputer {V}ision}, 84:97--111,
+  2009.
+
+\bibitem{Nocedal}
+J.~Nocedal and S.J. Wright.
+\newblock Numerical optimization.
+\newblock {\em Springer}, 1999.
+
+\bibitem{Ring-opti-manifolds}
+W.~Ring and B.~Wirth.
+\newblock Optimization methods on {R}iemannian manifolds and their application
+  to shape space.
+\newblock {\em SIAM Journal on Optimization}, 22(2):596--627, 2012.
+
+\bibitem{FX-ref}
+L.~Risser, F.-X. Vialard, R.~Wolz, M.~Murgasova, D.~Holm, and D.~Rueckert.
+\newblock Simultaneous multiscale registration using large deformation
+  diffeomorphic metric mapping.
+\newblock {\em IEEE Transactions on Medical Imaging}, 30(10):1746--1759, 2011.
+
+\bibitem{Shelton-2000}
+C.R. Shelton.
+\newblock Morphable surface models.
+\newblock {\em Int. J. Comput. Vision}, 38(1):75--91, June 2000.
+
+\bibitem{SotirasDP13}
+A.~Sotiras, C.~Davatzikos, and N.~Paragios.
+\newblock Deformable medical image registration: {A} survey.
+\newblock {\em IEEE Trans. Med. Imaging}, 32(7):1153--1190, 2013.
+
+\bibitem{sundaramoorthi-2006}
+G.~Sundaramoorthi, J.D. Jackson, A.~J. Yezzi, and A.~C. Mennucci.
+\newblock Tracking with {S}obolev active contours.
+\newblock {\em Proc. CVPR}, 1:674--680, 2006.
+
+\bibitem{Mennucci-filtering}
+G.~Sundaramoorthi, A.C.G. Mennucci, S.~Soatto, and A.~Yezzi.
+\newblock A new geometric metric in the space of curves, and applications to
+  tracking deforming objects by prediction and filtering.
+\newblock {\em SIAM J. Imaging Sciences}, 4(1):109--145, 2011.
+
+\bibitem{sundaramoorthi-sobolev-active}
+G.~Sundaramoorthi, A.~J. Yezzi, and A.~C. Mennucci.
+\newblock Sobolev {A}ctive {C}ontours.
+\newblock {\em International Journal of Computer Vision}, 73(3):345--366, July
+  2007.
+
+\bibitem{Yezzi-H2}
+G.~Sundaramoorthi, A.~J. Yezzi, and A.~C. Mennucci.
+\newblock Properties of {S}obolev-type metrics in the space of curves.
+\newblock {\em Interfaces and Free Boundaries}, 10(4):423--445, 2008.
+
+\bibitem{sundaramoorthi-new-possibilities}
+G.~Sundaramoorthi, A.~J. Yezzi, A.~C. Mennucci, and G.~Sapiro.
+\newblock New {P}ossibilities with {S}obolev {A}ctive {C}ontours.
+\newblock {\em International Journal of Computer Vision}, 84(2):113--129,
+  August 2009.
+
+\bibitem{2010.03.20}
+A.~Trouv{\'e} and F.-X. Vialard.
+\newblock Shape splines and stochastic shape evolutions: A second order point
+  of view.
+\newblock {\em Quarterly of Applied Mathematics}, 70:219--251, 2012.
+
+\bibitem{currents-matching}
+M.~Vaillant and J.~Glaun\`{e}s.
+\newblock Surface matching via currents.
+\newblock {\em Information Processing in Medical Imaging, Lecture Notes in
+  Computer Science}, 3565:381--392, 2005.
+
+\bibitem{Younes-04}
+M.~Vaillant, M.~I Miller, L.~Younes, and A.~Trouv\'e.
+\newblock Statistics on diffeomorphisms via tangent space representations.
+\newblock {\em NeuroImage}, 23(1):161--169, 2004.
+
+\bibitem{e}
+Tom Vercauteren, Xavier Pennec, Aymeric Perchant, and Nicholas Ayache.
+\newblock Diffeomorphic demons: Efficient non-parametric image registration.
+\newblock {\em Neuro{I}mage}, 45(1, supplement 1):S61--S72, 2009.
+
+\bibitem{rkhs}
+G.~Wahba.
+\newblock Spline models for observational data.
+\newblock {\em CBMS-NSF Regional conference series. SIAM}, 1990.
+
+\bibitem{Yezzi-Menn-2005b}
+A.~Yezzi and A.~Mennucci.
+\newblock Conformal metrics and true ``gradient flows'' for curves.
+\newblock {\em Proc. ICCV}, 1:913--919, 2005.
+
+\bibitem{Yezzi-Menn-2005a}
+A.~Yezzi and A.~Mennucci.
+\newblock Metrics in the space of curves.
+\newblock {\em arXiv:math/0412454v2}, 2005.
+
+\bibitem{Younes-elastic-distance}
+L.~Younes.
+\newblock Computable elastic distances between shapes.
+\newblock {\em SIAM Journal of Applied Mathematics}, 58(2):565--586, 1998.
+
+\bibitem{Younes-explicit-geodesic}
+L.~Younes, P.W. Michor, J.~Shah, and D.~Mumford.
+\newblock A metric on shape space with explicit geodesics.
+\newblock {\em Rend. Lincei Mat. Appl.}, 19(1):25--57, 2008.
+
+\end{thebibliography}

@@ -1,0 +1,182 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\section{Finsler Descent Method in Banach Spaces}\label{F}
+
+Let   $(H, \dotp{\cdot}{\cdot}_{H})$ be  a Hilbert space and let $E$ be a Fr\'echet differentiable energy defined on $H$.
+
+We consider a  Banach space $(\Bb, \|.\|_\Bb)$  which is dense in $H$ and continuously embedded in $H$, and we consider the restriction of  $E$ to $\Bb$ (such a restriction will be also denoted by $E$). 
+
+We aim to solve the following minimization problem
+\begin{equation}\label{initial-eq}
+	\underset{\GA\in \Bb}{\inf}\; E(\Ga)
+\end{equation}
+using a steepest descent method. We treat $\Bb$ as a manifold modeled on itself and denote  by $T_\GA \Bb$ the tangent space at $\GA \in \Bb$. In the following we suppose that at every point $\GA\in \Bb$, the space $T_\GA \Bb$ coincides with $\Bb$, although our descent method can be adapted to more general settings. 
+
+For every $\GA\in \Bb$  we define an inner product  $\dotp{\cdot}{\cdot}_{H(\Ga)}$ that is continuous with respect to  $\Ga \in \Bb$, and we suppose that the norms $\|\cdot\|_H$ and $\|\cdot\|_{H(\GA)}$ are uniformly equivalent for every $\GA$  belonging to a ball of $\Bb$ (with respect to the norm on $\Bb$). This makes $H$ complete with respect to the norm $\|\cdot\|_{H(\GA)}$. 
+Note that this inner product may be different from the inner product induced by $\dotp{\cdot}{\cdot}_H$ on $T_\GA \Bb$, and in particular it might depend on $\GA$. For instance in the case of Sobolev metrics for the space of curves we usually consider $H= W^{1,2}([0,1],\RR^2)$ and set $\Bb=T_\GA \Bb= W^{1,2}([0,1],\RR^2)$ equipped with the measure defined by the arclength of $\GA$ (see Remark \ref{rem-fins-sob}).
+
+Since $E$ is Fr\'echet differentiable and $(H, \dotp{\cdot}{\cdot}_{H(\GA)})$ is a Hilbert space, by the Riesz representation theorem,  there exists a unique vector  
+$v\in H$ such that
+$$D E(\GA)(\Phi) = \dotp{v}{\Phi}_{H(\Ga)}\quad \forall \,\Phi\in T_\GA \Bb\,.$$
+The vector $v$ represents  
+the gradient of $E$ at $\GA$ with respect to the inner product $\dotp{\cdot}{\cdot}_{H(\Ga)}$, and it  is denoted by $v=\nabla_{H(\GA)} E(\GA)$. 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Finsler Gradient}
+
+The Finsler gradient determines a descent direction by modifying $\nabla_{H(\GA)} E(\GA)$ with respect to a penalty $R_\GA$ that  depends on $\GA$. It is defined by minimizing $R_\GA$ under a constraint $\Ll_\GA$. 
+
+
+\begin{defn}[\BoxTitle{Finsler gradient}] \label{FinslerGrad}
+For every $\GA \in \Bb$, let $R_\GA : T_\GA\Bb \rightarrow \R^+\cup\{+\infty\}$ be a function such that  $R_\GA \neq +\infty$ and  $\Ll_\GA \subset T_\GA\Bb$  a   set satisfying
+\begin{equation}\label{cond-constraints}
+	\Ll_\GA \subset \enscond{
+		 	\Phi \in T_\GA\Bb
+		}{ 
+			\left\langle \nabla_{H(\GA)}E (\GA) , \Phi \right\rangle_{H(\GA)} \geq (1-\rho) \|\nabla_{H(\GA)}E (\GA)\|_{H(\GA)} \|\Phi \|_{H(\GA)}
+		 } \,
+\end{equation}
+where $\rho \in (0,1)$ is a fixed parameter independent of $\GA$. This parameter is typically adapted to the targeted applications (see Section~\ref{examples}), and in particular to the energy $E$. If $R_\GA$ admits a minimum on $\Ll_\GA$ then  a Finsler  gradient for $E$ at $\GA$ with respect to $R_\GA$ is defined as: 
+	\eql{\label{defgrad}
+		\nabla_{R_\GA} E(\GA) \in {\rm argmin}\; \enscond{ R_\GA(\Phi) }{  \Phi\in \Ll_\GA } \,.
+	}
+Note that if $ \nabla_{H(\GA)}E (\GA)=0$ then $\Gamma$ is a critical point and any descent algorithm  stops. Note that $R_\Gamma$ is in general not equal to the Banach norm defined over the tangent space. This is important for some applications, such as the one considered in Section \ref{PWR} (piecewise rigid deformations).
+\end{defn}	
+
+\par The next theorem gives an existence result for the Finsler gradient which is proved by using the standard  direct method of  calculus of variations. 
+
+\begin{thm}\label{general-existence} Let $T_\GA\Bb$ be a Banach space equipped with a topology $\mathcal{T}(T_\GA\Bb)$ such that every bounded sequence  in $T_\GA\Bb$ converges (up to a subsequence) with respect to the topology $\mathcal{T}(T_\GA\Bb)$.  Let $R_\GA$ be  coercive (i.e., $R_\GA(\Phi)\rightarrow +\infty$ as $\|\Phi\|_{T_\GA\Bb}\rightarrow +\infty$) and lower  semi-continuous with respect to the topology $\mathcal{T}(T_\GA\Bb)$ and we suppose that $\Ll_\GA$ is closed in $T_\GA\Bb$ with respect to the topology $\mathcal{T}(T_\GA\Bb)$. Then Problem~\eqref{defgrad} admits at least a solution.
+\end{thm}
+
+\begin{proof} As $R_\GA$ is coercive, every minimizing sequence is bounded in $T_\GA\Bb$ so  it converges (up to a subsequence) with respect to the topology $\mathcal{T}(T_\GA\Bb)$ toward an element of $\Ll_\GA$. Now, because of the lower semi-continuity of $R_\GA$, the theorem ensues.
+\end{proof}
+
+\par Such a result is the generalization of the usual existence theorem of calculus of variations on a reflexive Banach space. In fact (see Corollary 3.23 p. 71 in \cite{Brezis}), if  $T_\GA\Bb$ is reflexive, the existence of the Finsler gradient is guaranteed whenever  $\Ll_\GA$ is convex and closed with respect to the strong topology of $T_\GA\Bb$, and $R_\GA$ is  coercive, $R_\GA\neq+\infty$, convex, and lower semi-continuous  with respect to the strong topology of $T_\GA\Bb$. These hypotheses guarantee in particular an existence result if $T_\GA\Bb$ is a Hilbert space.
+\par The previous theorem guarantees the existence of a minimum on non-reflexive Banach spaces. The key point is the existence of a suitable topology which guarantees compactness of minimizing sequences. We point out that, in general, such a topology is weaker than the strong topology of the Banach space. 
+\par We point out that the applications studied in this work concern a minimization problem on $T_\GA\Bb=BV^2(\Circ,\RR^2)$. Such a space is not reflexive but the weak* topology of $BV^2(\Circ,\RR^2)$ satisfies the hypotheses of the previous theorem (see Appendix). Then, for some suitable set $\Ll_\GA$ and penalty $R_\GA$, the existence of the Finsler gradient is guaranteed.
+\par The set $\Ll_\GA$ imposes a constraint on the direction of the Finsler gradient and more precisely on the angle between the Finsler and Hilbert gradient. It is crucial to guarantee the convergence of the descent method by the Zoutendijk theorem (see Theorem~\ref{convergence}). The parameter $\rho$ controls the deviation of the Finsler gradient with respect to $\nabla_{H(\GA)}E (\GA)$. This parameter can be tuned by the user to modify the geometry of the trajectory of the flow defined in Section~\ref{subsec-finsler-descent}. The impact of $\rho$ is studied by several numerical simulations in Section~\ref{sec-influ-rho}.
+
+If  the hypotheses of Theorem \ref{general-existence} are verified then  the minimum in~\eqref{defgrad} exists, but in general it is not unique. A Finsler gradient is any minimum of the functional minimized in~\eqref{defgrad}.
+
+Condition~\eqref{cond-constraints} implies
+\begin{equation}\label{strictdirection}
+	\left\langle \frac{\nabla_{H(\GA)}E (\GA)}{\|\nabla_{H(\GA)}E (\GA)\|_{H(\GA)}} , \frac{\nabla_{R_\GA}E (\GA) }{\|\nabla_{R_\GA}E (\GA) \|_{H(\GA)}}\right\rangle_{H(\GA)} \geq (1-\rho)>0 \quad\quad \foralls \GA\in \Bb.
+ \end{equation}
+This shows that the Finsler gradient is a valid descent direction, in the sense that
+\eq{
+	\frac{\d}{\d t} E(\Ga - t\nabla_{R_\GA}E (\GA))\Big|_{t=0} = 
+	- \dotp{ \nabla_{H(\GA)}E (\GA) }{ \nabla_{R_\GA}E (\GA) }_{H(\GA)}
+	< \, 0\,.
+}
+
+\begin{rem}[\BoxTitle{Relationship with~\cite{charpiat-generalized-gradient}}]
+Our definition of Finsler gradient is partly inspired by the generalized gradient introduced  in Section 6.1 of~\cite{charpiat-generalized-gradient}. An important difference is that we introduce a constraint $\Ll_\GA$ whereas ~\cite{charpiat-generalized-gradient} defines the gradient as a minimum of $DE(\GA)(\Phi)+R_\GA(\Phi)$ on $T_\GA\Bb$. This is a crucial point because, as shown in the next section, this constraint guarantees the convergence of the descent method associated with the Finsler gradient toward a stationary point of $E$.  
+\end{rem}
+
+\begin{rem}[\BoxTitle{Relationship with Sobolev gradient}]\label{rem-fins-sob} We consider the spaces $\Bb=W^{1,2}([0,1],\RR^2)$, $H=L^2([0,1],\RR^2)$. More precisely, for every $\GA\in\Bb$, we set $T_\GA \Bb= W^{1,2}([0,1],\RR^2)$ and we denote by  $L^2(\GA)$ the space $L^2([0,1],\RR^2)$ equipped with the norm 
+\eq{
+	\norm{\Psi}_{L^2(\GA)}^2 = \int_0^1 |\Psi(s)|^2 |\GA'(s)| \d s.
+}
+ In order to make such a norm well-defined we suppose that  $|\GA'(s)|\neq 0$  for a.e. $s\in \Circ$.
+This setting models smooth parametric planar curves and their deformations $\Psi$. Note that the space of curves is further detailed in Section~\ref{SC}. 
+
+We introduce 
+\eq{
+	R_\GA(\Phi) = \norm{ D\Phi }_{L^2(\GA)}^2, \qquad  \foralls \Phi \in T_\GA \Bb,
+}
+\eql{\label{eq-constr-sobolgrad}
+	\Ll_\Ga= \enscond{  
+		\Phi\in T_\GA \Bb
+	}{
+		\norm{\nabla_{L^2(\GA)}E(\GA) - \Phi }_{L^{2}(\GA)} \leq \rho \norm{\nabla_{L^2(\GA)}E(\GA) }_{L^{2}(\GA)}
+	}~
+}
+where we denote by $D\Phi$ the weak derivative of $\Phi$. Note that $\Ll_\GA$ satisfies condition~\eqref{cond-constraints}.
+For a given differentiable energy $E$,~\eqref{defgrad} becomes
+\begin{equation}	\label{example-sobolev-finsler}	
+	\nabla_{R_\GA} E(\GA) \in \uargmin{ \Phi \in \Ll_\Ga } \norm{ D\Phi }_{L^2(\GA)}^2~.
+\end{equation}
+We remark that, comparing with Proposition 4 p. 17 in~\cite{charpiat-generalized-gradient}, the Finsler gradient~\eqref{example-sobolev-finsler}  represents a constrained version of the Sobolev gradient. Note also that in  Definition~\ref{FinslerGrad}, the penalty $R_\GA$ need not  be quadratic so that the negative Finsler gradient can be understood as a generalization of the Sobolev gradient.
+\end{rem}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Finsler Descent Method}
+\label{subsec-finsler-descent}
+
+In this section we consider the minimization problem~\eqref{initial-eq} of  an energy $E$ on  $\Bb$. Given some initialization $\GA_0 \in \Bb$, the Finsler gradient descent is defined as
+\begin{equation}\label{sequence}
+	\GA_{k+1} = \GA_k - \tau_k \nabla_{R_{\GA_k}} E(\GA_k)
+\end{equation}
+where  $\nabla_{R_{\GA_k}} E(\GA_k)$ is any minimizer of~\eqref{defgrad} and the step size $\tau=\tau_k>0$ is chosen in order to satisfy the Wolfe constraints 
+\begin{equation}\label{Wolfe}
+\left\{
+\begin{array}{lll}
+	E(\GA+\tau v)&\leq& E(\GA)+\alpha\tau \dotp{\nabla_{H}E(\GA)}{v}_{H}\\
+	\dotp{ \nabla_{H}E(\GA+\tau v) }{ v }_{H} &\geq& \beta \dotp{\nabla_{H}E(\GA) }{ v }_{H}
+\end{array}\right.
+\end{equation}
+for some  fixed $0<\alpha<\beta<1$ and with $v = -\nabla_{R_{\GA_k}} E(\GA_k)$, see for instance~\cite{Nocedal}, p.37. 
+
+
+We have the following result.
+
+\begin{thm}\label{convergence} 
+Let $E\in C^1(H, \R^+)$ be a non-negative energy. We suppose that 
+there exists a constant $L>0$ such that 
+\begin{equation}\label{grad-lip}
+\|\nabla_{H} E (\GA_1) - \nabla_{H} E (\GA_2)\|_H \leq L \|\GA_1-\GA_2\|_H\quad \forall\, \GA_1, \GA_2 \in H\,.
+\end{equation}
+Then, for the sequence  $\{\GA_k\}_k$ (defined in~\eqref{sequence}),
+$\|\nabla_{H} E(\Ga_{k})\|_H\rightarrow 0$. 
+
+%every accumulation point of the sequence $\{\GA_k\}_k$ (defined in~\eqref{sequence}) for the topology on $\Bb$ is a critical point of $E$.
+\end{thm}
+
+\begin{proof} 
+Since $\{ \GA_k \}$ is the sequence defined by the gradient descent satisfying the assumption of the Zoutendijk theorem (see~\cite{Nocedal}: Theorem 3.2 p.43) for the ambient norm on $H$, we have:
+$$\sum_{k=0}^{\infty} \dotp{ 
+ 		\frac{\nabla_{H}E (\GA_k)}{\|\nabla_{H} E(\Ga_k)\|_H}
+	}{ 
+		\frac{\nabla_{R_{\GA_k}}E(\GA_k)}{\|\nabla_{R_{\GA_k}}E(\Ga_k)\|_H} 
+	}_{H}^2 \,\|\nabla_{H} E(\Ga_k)\|_{H}^2\, < \, \infty\,.$$
+
+%Now, consider a subsequence $\{\GA_{\psi(k)}\}$  converging to $\GA_\infty \in \Bb$ (for the $\Bb$ topology). 
+
+As we have assumed that the  norms $\|\cdot\|_H$ and $\|\cdot\|_{H(\GA)}$ are equivalent on every bounded ball of $\Bb$, for $k$ large enough, the condition \eqref{strictdirection} implies :
+$$\dotp{ 
+ 		\frac{\nabla_{H}E (\GA_{k})}{\|\nabla_{H} E(\Ga_{k})\|_H}
+	}{ 
+		\frac{\nabla_{R_{\GA_{k}}}E(\GA_{k})}{\|\nabla_{R_{\GA_{k}}}E(\Ga_{k})\|_H} 
+	}_{H} \geq (1 - \rho)M >0\,
+$$
+with $M>0$. 
+This follows by the fact that 
+$$ \langle \nabla_{H}E (\GA_{k}), 
+\nabla_{R_{\GA_{k}}} E \rangle_H = DE(\GA_{k})
+(\nabla_{R_{\GA_{k}}}E) = \langle \nabla_{H(\GA)}E 
+(\GA_{k}), \nabla_{R_{\GA_{k}}}E\rangle_{H(\GA)}$$
+and the equivalence of the norms applied to  \eqref{cond-constraints}.
+
+Therefore, we have in particular
+$$\sum_{k=0}^{\infty}  \, \|\nabla_{H} E(\Ga_{k})\|_{H}^2\, < \, \infty\,,$$
+and the result ensues.
+\end{proof}
+
+\begin{rem} 
+[{\bf On the Zoutendijk theorem}] In the  previous proof we applied the Zoutendijk theorem in infinite dimensions which is not the case in ~\cite{Nocedal}. However, their proof can be straightforwardly generalized to the case of infinite dimensional  Hilbert spaces.
+ \end{rem}
+ 
+ 
+Note that the sequence defined by the Finsler descent method could diverge (for instance if $\nabla_H E(\GA)\rightarrow 0$ as $\|\GA\|_{\Bb}\rightarrow  +\infty$). However, if $E$ is coercive, its level sets are compact with respect to some weaker topology $\tau$ of $\Bb$, and the $H$-gradient is continuous with respect to such a  weak topology, then  the previous theorem guarantees  the convergence of the  Finsler descent  method toward a stationary point of the energy. In fact, as $E$ is coercive, we  have that $\{\GA_k\}$ is uniformly bounded in $\Bb$. Then, as   the level sets of $E$ are $\tau$-weakly compact,  $\{\GA_k\}$ $\tau$-weakly converges (up to a subsequence)
+ to an element of $\Bb$. Because of the continuity property of $E$, such a point is a stationary point of $E$.
+
+
+ 
+ 
+ 
+ \begin{rem}\label{grad_flow}An interesting problem would be to show that the Finsler gradient descent scheme admits a limit flow when the step size tends to zero, or to show that the machinery of gradient flows over metric spaces (see \cite{AGS}) can be adapted to our setting. We believe this is however not trivial and decided to leave this for future work. 
+ \end{rem}

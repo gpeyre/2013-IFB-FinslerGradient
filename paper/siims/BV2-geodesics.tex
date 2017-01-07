@@ -1,0 +1,946 @@
+% !TEX root = ../Geodesics_BV2.tex
+
+\section{Geodesics in the Space of $BV^2$-Curves}\label{BV2}
+
+In this section we define  the set of parameterized $BV^2$-immersed curves and we prove several useful properties. In particular, in Section \ref{repa}, we discuss the properties of reparameterizations of $BV^2$-curves.
+
+The space of parameterized $BV^2$-immersed curves can be  modeled as a Finsler manifold as presented in Section \ref{tangent}.  Then, we can define  a geodesic Finsler distance and prove the existence of a geodesic between two $BV^2$-curves  (Sections~\ref{existence_geod}). Finally, we define the space of geometric curves (i.e., up to reparameterization) and we prove similar results (Section~\ref{13}).
+We point out that, in both the parametric and the geometric case,  the geodesic is not unique in general.
+Through  this paper we identify the circle $\Circ$ with $[0,1] / \{0 \sim 1\}$.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{The Space of $BV^2$-Immersed Curves}
+\label{11}
+ 
+Let us first recall some needed defintions.
+\begin{defn}[{\bf $BV^2$-functions}]
+We say that $f\in L^1(\Circ,\RR^2)$ is a function of bounded variation if its first variation $|D f|(\Circ)$ is finite:
+$$	 |D f|(\Circ) = \sup \enscond{
+		\int_{\Circ}f(s)\cdot g'(s)\, \d s 
+	}{
+		g\in \mathrm{C}^\infty(\Circ, \R^2),\|g\|_{L^\infty(\Circ,\R)}\leq 1
+	} <\infty\,.
+$$
+ Several times in the following, we use  the fact that the space of functions of bounded variation is a Banach algebra and a chain rule holds. We refer to \cite[Theorem 3.96, p. 189]{AFP} for a proof of these results.
+
+We say that $f\in \BV^2(\Circ,\R^2)$ if $f\in W^{1,1}(\Circ,\R^2)$ and its second variation $|D^2 f|(\Circ)$  is finite:
+
+$$	 |D^2 f|(\Circ) = \sup \enscond{
+		\int_{\Circ}f(s)\cdot g''(s)\, \d s 
+	}{
+		g\in \mathrm{C}^\infty(\Circ, \R^2),\|g\|_{L^\infty(\Circ,\R)}\leq 1
+	} <\infty\,.
+$$
+For a sake of clarity we point out that, as $W^{1,1}\subset BV$, for every $BV^2$-function, the  first variation  coincides  with the $L^1$-norm of the derivative. Moreover, by integration by parts, it holds
+$$|D^2 f|(\Circ)=|D f'|(\Circ)\,.$$
+\end{defn}
+
+
+The $BV^2$-norm is defined as
+$$\|f\|_{\BVd} = \|f\|_{W^{1,1}(\Circ,\R^2)} + |D^2 f|(\Circ)\,.$$
+
+The space $BV^2(\Circ,\R^2)$ can also be equipped with the following types of convergence, both weaker than the norm convergence:
+
+\begin{itemize}
+\item[1.] {\em  Weak* topology}. Let $\{f_h\}\subset BV^2(\Circ,\R^2)$ and $f\in BV^2(\Circ,\R^2)$. We say that $\{f_h\}$  weakly* converges in $BV^2(\Circ,\R^2)$ to $f$ if
+$$f_h \overset{W^{1,1}(\Circ,\R^2)}{\longrightarrow} f \quad\mbox{and}\quad D^2 f_h \overset{*}{\rightharpoonup}D^2 f\,, \quad\mbox{as}\quad h \rightarrow \infty\,,$$
+where $\overset{*}{\rightharpoonup}$ denotes the weak* convergence  of measures.
+\item[2.] {\em Strict topology}. Let $\{f_h\}\subset BV^2(\Circ,\R^2)$ and $f\in BV^2(\Circ,\R^2)$. We say that $\{f_h\}$  strictly converges to $f$ in $BV^2(\Circ,\R^2)$ if
+$$f_h \overset{W^{1,1}(\Circ,\R^2)}{\longrightarrow} f \quad\mbox{and}\quad |D^2 f_h|(\Circ) \longrightarrow |D^2 f|(\Circ)\,,\quad\mbox{as}\quad h \rightarrow \infty.$$
+\par Note that the following distance 
+$$d(f,g) = \|f-g\|_{L^1(\Circ,\R^2)} +||D^2f|(\Circ)-|D^2g|(\Circ)|$$
+is a distance in $BV^2(\Circ,\R^2)$ inducing the strict convergence. 
+\end{itemize}
+
+The following results can be deduced by the theory of functions of  bounded variation \cite{AFP, EG}.
+
+\begin{prop}[{\bf weak* convergence}]
+Let $\{f_h\}\subset BV^2(\Circ,\R^2)$. Then $\{f_h\}$  weakly* converges  to $f$ in $BV^2(\Circ,\R^2)$ if and only if  $\{f_h\}$ is bounded in $BV^2(\Circ,\R^2)$ and strongly converges to $f$  in $W^{1,1}(\Circ,\R^2)$.
+\end{prop}
+
+\begin{prop}[{\bf embedding}]
+The following continuous embeddings hold:
+$$\BVd \hookrightarrow W^{1,\infty}(\Circ,\R^2)\;,\quad \quad \BVd \hookrightarrow C^0(\Circ,\R^2)\,.$$
+In particular (see Claim 3 p.218 in~\cite{EG}) we have 
+\begin{equation}\label{embedding}
+	\foralls f\in BV(\Circ,\R^2), \quad
+	\norm{f}_{L^\infty(\Circ,\R^2)}\leq   \norm{f}_{BV(\Circ,\R^2)}.
+\end{equation}
+\end{prop}
+We refer to  \cite{Maitine-BV2} for a deeper analysis of   $BV^2$-functions. \newline \\
+
+We can now define the set of $BV^2$-immersed curves and prove that it is a manifold modeled on $\BVd$. In the following we denote by $\gm$ a generic $BV^2$-curve and by $\gm'$ its derivative.
+Recall also that, as $\gm'$ is a $BV$-function of one variable, it admits a left and right limit at every point of $\Circ$ and it is continuous everywhere except on a (at most) countable set of  points of $\Circ$.
+The space of smooth immersion of $\Circ$ is defined by
+\begin{equation}\label{immersion-smooth}
+	\Imm(\Circ,\R^2)\, = \,
+	\enscond{ \gm \in C^{\infty}(\Circ,\R^2)  }{
+		\gm'(s) \neq 0 \quad \foralls \, s \in \Circ }\,.
+\end{equation} 
+The natural extension of this definition to $\BVd$-curves is 
+\begin{equation}\label{immersion-BV2}
+	\Imm_{\BVd}(\Circ,\R^2)\, = \,
+	\enscond{	\gm \in \BVd  }{
+		0 \notin [\lim_{t\to s^+} \gm'(t),\lim_{t\to s^-} \gm'(t)] \quad \foralls \, s \in \Circ }\,,
+\end{equation} 
+where $[\lim_{t\to s^+} \gm'(t),\lim_{t\to s^-} \gm'(t)]$ denotes the segment connecting the two points.
+This definition implies that $\gm$ is locally the graph of a $BV^2(\R,\R)$ function. However, in the rest of the paper, we relax this assumption and work on a larger space under the following definition.
+
+\begin{defn}
+[{\bf $BV^2$-immersed curves}]\label{BV2curves}
+A $BV^2$-immersed curve is any closed curve  $\gm \in BV^2( \Circ, \R^2)$ satisfying
+\begin{equation}\label{cond-derivative}
+	\underset{t\rightarrow s^{+(-)}}{\lim} \|\gm'(t)\| \neq 0	\quad \forall s\in\Circ\,.
+\end{equation}
+We denote by $\Bb$ the set of $BV^2$-immersed curves.  
+\end{defn}
+Although a bit confusing, we preferred to work with this definition of immersed curves, since it is a stable subset of $\BVd$ under reparameterizations.
+Note that this definition allows for cusp points and thus curves in $\Bb$ cannot be in general viewed as the graph of a $BV^2(\R,\R)$ function.
+Condition \eqref{cond-derivative} allows one to define a Fr\'enet frame for a.e.-$s\in \Circ$ by setting
+\begin{equation}\label{def-tangente}
+	{\bf t}_{\gm}(s) = \frac{\gm'(s)}{\|\gm'(s)\|}\,,\quad \quad \n_\gm(s)= {\bf t}_{\gm}(s)^\bot\,,
+\end{equation}
+\eq{
+	\qwhereq (x,y)^\bot= (-y,x)\quad \foralls (x,y)\in \RR^2.
+}
+Finally we denote by $\len(\gm)$  the length of $\gm$ defined as
+\begin{equation}\label{length-def}
+\len(\gm)=\int_{\Circ}\|\gm'(s)\|\d s\,.
+\end{equation}
+
+The next proposition proves a useful equivalent property of \eqref{cond-derivative}:
+\begin{prop}  Every  $\gm\in BV^2(\Circ,\RR^2)$ satisfies \eqref{cond-derivative} if and only if 
+\begin{equation}\label{cond-derivative-bis}
+\underset{s\in \Circ}{\mbox{essinf}} \,\|\gm'(s)\|\,>\,0\,.
+\end{equation}
+
+\end{prop}
+
+\begin{proof} As $\gm'\in BV(\Circ, \RR^2)$, it admits a left and right limit at every point of $\Circ$ so that we can define the following functions:
+$$\forall\,s\in \Circ\;,\quad \gm_l'(s) = \underset{t \rightarrow s^-}{\lim}\,\gm'(t)\;,\quad \quad  \gm_r'(s) = \underset{t \rightarrow s^+}{\lim}\,\gm'(t)\,,$$
+where $\gm'_l$ and $\gm'_r$ are continuous from the left and the right, respectively and satisfy 
+$$\underset{s\in \Circ}{\mbox{essinf}} \,\|\gm'(s)\|= \underset{s\in \Circ}{\mbox{essinf}} \,\|\gm_r'(s)\|= \underset{s\in \Circ}{\mbox{essinf}} \,\|\gm_l'(s)\|\,.$$
+
+Let us suppose that  $\gm'$ verifies \eqref{cond-derivative} and $\underset{s\in \Circ}{\mbox{essinf}} \,\|\gm'(s)\|\,=\,0$. Then we can define a sequence $\{s_n\}\subset \Circ$ such that $\gm'(s_n)\to 0$, and (up to a subsequence) we have $s_n\to s$ for some $s\in \Circ$. Now, up to a subsequence, the sequence $s_n$ is a left-convergent sequence (or a right-convergent sequence), which implies that $\gm'_l(s_n)\to \gm_l'(s) =0$. This is of course in contradiction with \eqref{cond-derivative}. The right-convergence case is similar.
+%If $s_n$ is a right-convergent sequence we get the result by the fact that $\gm'_r$ is continuous from the right.
+
+Now, let us suppose that $\gm'$ satisfies \eqref{cond-derivative-bis} so that $\gm'_r$ and $\gm'_l$ also satisfy \eqref{cond-derivative-bis}. 
+Then if $ \underset{t \rightarrow s^-}{\lim}\,\gm'(t) =0$ for some $s\in \Circ$, for  every $\varepsilon <  \underset{s\in \Circ}{\mbox{essinf}} \,\|\gm_l'(s)\|$ there exists $\delta$ such that $]s-\delta,s]\subset \{\|\gm'_l\|<\varepsilon\}$, which is in contradiction  with $\underset{s\in \Circ}{\mbox{essinf}} \,\|\gm_l'(s)\|>0$. This proves that the left limit is positive at every point. By using $\gm'_r$ we can similarly show that the right limit is also positive, which proves \eqref{cond-derivative}.
+\end{proof}
+We can now show that $\Bb$ is  a manifold modeled on $\BVd$ since it is open in $\BVd$.
+
+
+\begin{prop}\label{openB0}   
+$\Ba$ is an open set  of $\BVd$. %Moreover, $\Bb$ is a differentiable manifold on $\BVd$.
+\end{prop}
+
+\begin{proof}
+
+Let $\gm_0\in \Ba$. We prove that 
+\begin{equation}\label{ball}
+U_{\gm_0} =		\enscond{ \gm\in \BVd 
+		}{
+			\norm{\gm - \gm_0}_{BV^2(\Circ,\RR^2)} \leq \frac{1}{2} \underset{s\in\Circ}{\mbox{essinf}}\,\|\gm'(s)\|
+		}
+		\subset \Ba\,.
+\end{equation}
+In fact, by~\eqref{embedding}, we have $\norm{\gm'}_{L^\infty(\Circ,\R^2)}\leq  \norm{\gm'}_{\BV(\Circ,\R^2)}$,  so that  every curve $\gm\in BV^2(\Circ,\R^2)$ such that  
+$$\|\gm - \gm_0\|_{BV^2(\Circ,\R^2)}\leq\frac{1}{2} \underset{s\in\Circ}{\mbox{essinf}}\,\|\gm'(s)\|\;$$
+satisfies~\eqref{cond-derivative-bis}.  
+
+%In order to prove that $\Bb$ is a differentiable manifold it suffices to consider the following charts
+%$$\varphi_{\gm_0}^{-1} : \gm\in U_{\gm_0} \subset \BVd \mapsto  \gm\in U_{\gm_0} \subset \Bb\,.$$
+\end{proof}
+
+
+\begin{rem}[{\bf immersions, embeddings, and orientation}]\label{properties}
+
+We point out that condition \eqref{cond-derivative} does not guarantee that curves belonging to  $\Bb$ are injective. 
+This implies in particular that every element of  $\Bb$ needs not  be  an embedding (see Figure~\ref{not-emb}).
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=.4\linewidth, angle=270]{no-emb.pdf}
+%
+\caption{\label{not-emb} Non-injective $BV^2$-immersed curve positively oriented with respect to $p$.}
+\end{figure}
+
+
+
+
+Moreover, as $BV^2$-immersed curves can have some self-intersections,  the standard notion of orientation (clockwise or counterclockwise) defined for Jordan's curves cannot be used in our case. The interior of a $BV^2$-immersed curve can be disconnected and the different branches of the curve can be parameterized with incompatible orientations. For example, there is no  standard counterclockwise parameterization of the curve in Fig.\ref{not-emb}.
+
+In order to define a suitable notion of orientation, we introduce the notion of orientation with respect to an extremal point. For every $\gm\in \Bb$ and $p\in \gm(\Circ)$ we say that $p$ is an extremal point for $\gm$ if $\gm(\Circ)$ lies  entirely in a closed half-plane bounded by a line
+through $p$. 
+
+We also suppose that the Fr\'{e}net frame denoted $({\bf t}_p, {\bf n}_p)$ is well defined at $p$, where ${\bf n}_p$ denotes here the unit outward normal vector. Then, we say that $\gm$ is positively oriented with respect to $p$ if  the ordered pair $({\bf n}_p, {\bf t}_p)$ gives the
+counterclockwise orientation of $\R^2$. 
+For example the curve in  Fig.\ref{not-emb} is positively oriented with respect to the point $p$ but negatively oriented with respect to $q$.
+
+\end{rem}
+
+
+%%%%%%%%%%%%%%%%%%%%%
+\subsection{Reparameterization of $BV^2$-Immersed Curves}\label{repa}
+
+In this section we introduce the set of reparameterizations adapted to  our setting. We prove in particular that it is always possible to define a constant speed reparameterization.
+
+Moreover, we point out  several properties describing the relationship between the convergence of parameterizations and the convergence of the reparameterized curves.
+On one hand, in Remark \ref{disc-metric} we underline that the reparameterization operation is not continuous with respect to the $BV^2$-norm. On the other hand, Lemma \ref{conv-w11} proves that  the convergence of the curves implies the convergence of the respective constant speed parameterizations.
+
+\begin{defn}[{\bf reparameterizations}]\label{reparam}
+We denote by 	${\rm Diff}^{BV^2}(\Circ)$  the set of homeomorphisms  $\varphi\in BV^2(\Circ,\Circ)$ such that $\varphi^{-1} \in BV^2(\Circ,\Circ)$. The elements of  ${\rm Diff}^{BV^2}(\Circ)$ are called reparameterizations.
+Note that any $\varphi \in {\rm Diff}^{BV^2}(\Circ)$ can be considered as an element of $BV_{loc}^2(\RR,\RR)$ by the lift operation (see \cite{ghys}). Moreover the usual topologies (strong, weak, weak*)
+on subsets of ${BV^2}(\Circ,\Circ)$ will be induced by the standard topologies on the corresponding subsets of ${BV^2_{loc}}(\RR,\RR)$.
+
+\end{defn}
+
+The behavior of $\BVd$ curves under reparameterizations is discontinuous due to the strong $BV$ topology as described below.
+\begin{rem}[{\bf discontinuity of the  reparameterization operation}]\label{disc-metric}
+
+In this remark we give a counterexample to the following conjecture: for every $\gm\in \Bb$ and for every  sequence of parameterizations $\{\varphi_h \}$ strongly converging  to $\varphi\in BV^2(\Circ, \Circ)$ we obtain that $\gm\circ\varphi_h$ strongly converges  to $\gm\circ\varphi$  in $BV^2(\Circ, \RR^2)$ .
+
+This actually proves  that the composition with a reparameterization is not a continuous function from the set of  reparameterizations to $\Bb$.
+
+We consider the curve $\gm$ drawn in Fig. \ref{corner} and we suppose that it is  counterclockwise oriented and that the corner point corresponds to the parameter $s=0$. Note also that the second variation of $\gm$ is represented by a Dirac delta measure $v\delta_0$ in a neighborhood of $s=0$, where $v$ is a vector such that $\|v\|> \alpha >0$.
+
+Then we consider the family of parameterizations defined by
+
+$$ \quad \varphi_h(s)=s+\frac 1 h\,,$$
+where the addition is considered modulo $1$. This 
+sequence of reparameterizations shifts the corner  point on $\Circ$ and converges $BV^2$-strongly to the identity reparameterization $\varphi(s)=s$. 
+
+Moreover, we have that 
+$\gm(\varphi_h(s))=\gm(s+1/h)$ for every $s\in\Circ$, which implies that $\gm\circ\varphi_h$ converges to $\gm\circ\varphi=\gm$ strongly in $W^{1,1}(\Circ,\RR^2)$.
+However, similarly to $\gm$,  the second variation  of $\gm\circ\varphi_h$  is represented by a Dirac delta measure in a neighborhood of the parameter corresponding to the corner.  Then 
+$$|D (\gm\circ\varphi_h-\gm)|(\Circ)\,>\,\alpha\;,\ \quad\quad\varepsilon \rightarrow +\infty\,,$$ which implies that  the reparameterized curves do not converge to the initial one with respect the $BV^2$-strong topology.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=.3\linewidth]{corner.pdf}
+\caption{\label{corner} Immersed $BV^2$-curve with a corner.}\vspace{1cm}
+\end{figure}
+
+\end{rem}  
+
+
+\begin{rem}[{\bf constant speed parameterization}]\label{arc-len} Property~\eqref{cond-derivative}  allows us to define the constant speed parameterization for every $\gm\in \Bb$. We start by setting
+$$s_\gm : \Circ \rightarrow \Circ\,,$$
+$$s_\gm(s) =\frac{1}{\len(\gm)} \int_{s_0}^s \,\|\gm'(t)\| \, \d t \;,\quad s_0\in \Circ\,$$
+where $\len(\gm)$ denotes the length of $\gm$ defined in \eqref{length-def} and where $s_0$ is a chosen basepoint belonging to $\Circ$. 
+Now, because of \eqref{cond-derivative}, we can define $\varphi_\gm =s_\gm^{-1}$ and  the constant speed parameterization of $\gm$ is given by $\gm\circ \varphi_\gm$. 
+In order to prove that $s_{\gm}$ is invertible we apply the result proved in \cite{Clarke}. In this paper the author gives a condition on the generalized derivative of a Lipschitz-continuous function in order to prove that it is invertible. We detail how to apply this result to our case.
+
+Because of Rademacher's theorem, as $s_{\gm}$ is Lipschitz-continuous, it is a.e. differentiable. Then we consider  the generalized derivative at $s\in \Circ$, which is defined as the convex hull of the elements $m$ of the form
+$$m\,=\, \underset{i\rightarrow +\infty}{\lim} s_{\gm}'(s_i)\,,$$
+where $s_i\rightarrow s$ as $i\rightarrow +\infty$ and  $s_{\gm}$ is differentiable at every $s_i$.
+Such a set is denoted by $\partial s_{\gm}(s)$ and it is a non-empty compact convex set of $\R$. Now, in \cite{Clarke} it is proved that if $0\notin \partial s_{\gm}(s)$ then $s_{\gm}$ is locally invertible at $s$. We remark that, in our setting, such a condition is satisfied because of \eqref{cond-derivative} so that the constant speed parameterization is well defined for every $\gm\in \Bb$.
+
+Finally we remark that $s_{\gm}, \varphi_\gm\in BV^2(\Circ, \Circ)$. For a rigorous proof of this fact we refer to Lemma~\ref{bound-rep-bv}.
+\end{rem}
+
+
+The next two lemmas prove some useful properties of the constant speed parameterization.
+
+\begin{lem}\label{bound-rep-bv}
+If $\gm \in \Bb$ is such that $\underset{s\in \Circ}{\mbox{essinf}}\,\| \gm'(s) \| \geq \varepsilon >0$ and $\| \gm \|_{BV^2(\Circ,\R^2)} \leq M$, then  there exists a positive constant $D = D(\varepsilon,M)$ such that 
+$ \| \phi_\gm \|_{BV^2(\Circ,\Circ)} \leq D$. 
+\end{lem}
+
+\begin{proof}
+Recall that the reparameterization $\phi_\gm$ is the inverse of  $s_\gm(s) =\frac{1}{\len(\gm)} \int_{s_0}^s \,\|\gm'(t)\| \, \d t$,
+where $s_0$ is a chosen basepoint belonging to $\Circ$. Then in particular we have  
+$$ \underset{s\in \Circ}{\mbox{essinf}}\,s_\gm'(s) \geq \frac{\varepsilon }{ \len(\gm)} \,.$$ Moreover, because of \eqref{embedding}, $\| \gm' \|$ is bounded by $M$. In particular we have $\| s_\gm \|_{L^\infty(\Circ, \Circ)}\leq 1$ and $\| s_\gm' \|_{L^1(\Circ, \Circ)}=1$, and, by the chain rule for $BV$-functions, we also get $|D s_\gm'|(\Circ)\leq \beta M$ with $\beta=\beta(\varepsilon, \len(\gamma))$. 
+We finally have
+$$\| s_\gm \|_{BV^2(\Circ, \Circ)}\leq 2(1+\beta M).$$
+Then, by a straightforward calculation and the chain rule, we get that 
+
+$$\| \varphi_\gm \|_{L^1(\Circ, \Circ)}\leq 1 \;, \quad \| \varphi_\gm' \|_{L^{\infty}(\Circ, \Circ)}\leq  \frac{\len(\gm)}{\varepsilon} \;, \quad  |D\varphi_\gm'|(\Circ)\leq \frac{\len(\gm)^2}{\varepsilon^2}|Ds_\gm'|(\Circ)\,,$$
+which proves the lemma.
+\end{proof}
+
+\begin{lem}\label{conv-w11}
+Let $\{\gm_h\}\subset \Ba$ be a sequence satisfying  
+\begin{equation}\label{hyp-conv}
+0<\underset{h}{\inf}\,\underset{s\in \Circ}{\mbox{essinf}}\,\| \gm_h'(s) \| < \underset{h}{\sup}\,\| \gm_h' \|_{L^\infty(\Circ,\R^2)} < \infty \,,\quad \underset{h}{\inf}\,\len( \gm_h) > 0\,,
+\end{equation}
+and  converging to $\gm \in \Ba$ in $W^{1,1}(\Circ,\RR^2)$. Then $\varphi_{\gm_h}\rightarrow \varphi_{\gm}$ in $W^{1,1}(\Circ, \Circ)$.
+\end{lem}
+
+\begin{proof}
+By \eqref{hyp-conv} and the dominated convergence theorem we can prove that    $s_{\gm_h}\rightarrow s_\gm$ in $W^{1,1}(\Circ, \Circ)$.
+Moreover, because of Lemma \ref{bound-rep-bv},  $\varphi_\gm \in BV^2(\Circ, \Circ)$, so it is continuous. 
+Now, by performing the change of variable $s= s_{\gm_h}(t)$, we get 
+$$\int_{\Circ} \|\varphi_{\gm_{h}}(s)-\varphi_{\gm}(s)\| \d s\,=\, \int_{\Circ} \|t-\varphi_{\gm}(s_{\gm_h}(t))\|\,\| s_{\gm_h}'(t)\| \d t\,,$$
+$$\int_{\Circ} \|\varphi_{\gm_{h}}'(s)-\varphi_{\gm}'(s)\| \d s\,=\, \int_{\Circ} \left\|\frac{1}{s_{\gm_h}'(t)}-\frac{1}{s_\gm'(\varphi_{\gm}(s_{\gm_h}(t)))}\right\|\,\| s_{\gm_h}'(t)\| \d t\,.$$
+Then, as $\varphi_\gm$ is continuous and  $s_{\gm_h}\rightarrow s_\gm$ in $W^{1,1}(\Circ, \Circ)$, we get the result by \eqref{hyp-conv} and  the dominated convergence theorem. 
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{The Norm on the Tangent Space}\label{tangent}
+
+We can now define the norm on the tangent space to $\Bb$ at $\gm\in \Bb$, which is used to define the length of a path. We first recall the main definitions and properties of functional spaces equipped with the measure $\d \gm$.
+ 
+\begin{defn}[\bf functional spaces w.r.t. $\d \gm$]\label{dgm}
+
+Let $\gm\in\Bb$ and $f:\Circ\rightarrow \RR^2$. 
+We consider the following  measure $\d\gm$ defined as 
+$$
+\d \gm(A)=\int_A \|\gm'(s)\| \d s \; \quad \forall \, A\subset \Circ\,.
+$$
+Note that, as 
+$\int_A \d s =0 \;\; \Leftrightarrow \;\; \int_A \d\gm(s)=0$
+for every open set $A$ of the circle, we get 
+\begin{equation}\label{eq-equi-norm-linf}
+	\norm{f}_{L^\infty(S^1,\RR^2)} = \norm{f}_{L^\infty(\gm)}\,,
+\end{equation} 
+where 
+$$\norm{f}_{L^\infty(\gm)} = \inf\,\{a\,:\, f(x)<a\quad d\gm-a.e.\}\,. $$
+Moreover, the derivative and the $L^1$-norm with respect to such a measure are given by
+$$\frac{\d f}{\d \gm}(s)\,=\, \underset{\varepsilon \rightarrow 0}{\lim} \, \frac{f(s+\varepsilon)-f(s)}{\d \gm((s-\varepsilon, s+\varepsilon))} =\frac{f'(s)}{\|\gm'(s)\|} \,,\quad \|f\|_{L^1(\gm)} = \int_{\Circ} \|f(s)\|\|\gm'(s)\|\, \d s\,. $$
+Note that, as $\gm\in \Ba$, the above derivative is well defined almost everywhere.
+Similarly, the $W^{1,1}(\gm)$-norm is defined by
+\begin{equation}\label{w11-rel}
+\|f\|_{W^{1,1}(\gm)}= \|f\|_{L^1(\gm)}  +  \left\| \frac{\d f}{\d \gm}\right\|_{L^1(\gm)}\,.
+%\quad \|f'\|_{\leb{1}} =\left\| \frac{\d f}{\d \gm}\right\|_{L^1(\gm)}\,.
+\end{equation}
+Moreover,  the first and  second variations of $f$ with respect to the measure $\d \gm$ are defined respectively by 
+\begin{equation}\label{TV}	
+	 TV_\gm\left(f\right) = \sup \enscond{
+		\int_{\Circ}f(s)\cdot \frac{\d g}{\d \gm(s)}(s)\, \d\gm(s) 
+	}{
+		g\in \mathrm{C}^{\infty}(\Circ,\RR^2),\|g\|_{L^\infty(\Circ,\R^2)}\leq 1
+	} \,
+\end{equation}
+ and
+\begin{equation}\label{TV2}
+	 TV_\gm^2\left(f\right) = \sup \enscond{
+		\int_{\Circ}f(s)\cdot \frac{\d^2 g}{\d \gm(s)^2}(s)\, \d\gm(s) 
+	}{
+		g\in \mathrm{C}^{\infty}(\Circ,\RR^2),\|g\|_{L^\infty(\Circ,\R^2)}\leq 1
+	} \,.
+\end{equation}
+Finally, $BV(\gm)$ is the space of functions belonging to $L^1(\gm)$ with finite first variation $TV_\gm$. Analogously $BV^2(\gm)$ is the set of functions $W^{1,1}(\gm)$ with finite second variation $TV_\gm^2$.
+
+\end{defn}
+
+The next lemma points out some useful relationships between the quantities previously introduced.
+
+\begin{lem}\label{equiv} For very $f \in BV^2(\gm)$ the following identities hold:
+
+\begin{itemize}
+\item[(i)] $TV_\gm^2\left(f\right)=TV_\gm\left(\frac{\d f}{\d \gm}\right)\,$;
+
+\item[(ii)] $TV_\gm(f)=|Df|(\Circ)\,$;
+
+\item[(iii)] $TV_\gm\left(f\right)=\left\| \frac{\d f}{\d \gm}\right\|_{L^1(\gm)}=\|f'\|_{L^1(\Circ,\RR^2)}\,$.
+
+\end{itemize}
+
+\end{lem}
+
+\begin{proof} $(i)$ follows by integrating by parts. $(ii)$ follows from the definition of the derivative with respect to $\d \gm$ and \eqref{TV}. $(iii)$ follows from $(ii)$ and the definition of the derivative $\d/\d\gm$.
+\end{proof}
+
+
+Moreover, analogously  to Lemma 2.13 in \cite{Bruveris}, we have the following Poincar\'e inequality. The proof is similar to Lemma 2.13 in \cite{Bruveris}. 
+
+\begin{lem} For every $f\in BV(\gm)$ it holds
+\begin{equation}\label{embedding-gm}	
+ \norm{f}_{L^\infty(\Circ,\R^2)} \leq  \frac{1}{\len(\gm)}\int_{\Circ} f\,\d \gm  + TV_\gm\left(  \frac{\d f}{\d \gm} \right)\,.
+\end{equation}
+\end{lem}
+
+We can now define the norm on the tangent space to $\Ba$.
+
+\begin{defn}[{\bf norm on the tangent space}] 
+
+For every $\gm\in \Bb$, the tangent space at $\gm$ to $\Bb$, which is equal to $\BVd$ is endowed with the (equivalent) norm of the space
+ $$BV^2(\gm)\,=\,BV^2(\Circ,\R^2;\d\gm)$$
+introduced in Definition \ref{dgm}. 
+More precisely, the $BV^2(\gm)$-norm is defined by
+$$\|f\|_{BV^2(\gm)} = \int_{\Circ}\|f\|\|\gm'\|\,\d s + \int_{\Circ}\|f'\|\,\d s +  TV_\gm^2\left(f\right) \quad\forall\, f\in BV^2(\gm)\,.$$
+Finally, we recall that 
+\begin{equation}\label{change-arc}
+\|f\|_{BV^2(\gm)}= \|f\circ\phi_\gm\|_{BV^2(\Circ, \R^2)}^{\gm}\,,
+\end{equation}
+where
+$$
+ \displaystyle{\|f\|_{BV^2(\Circ, \R^2)}^{\gm} = \len(\gm)\|f\|_{L^1(\Circ, \R^2)}+ \|f'\|_{L^1(\Circ, \R^2)}+\frac{1}{\len(\gm)}|D f|(\Circ) \quad \forall f\in BV^2(\Circ, \R^2)} \,.
+ $$
+
+
+
+\end{defn}
+
+
+
+
+
+\begin{rem}[{\bf weighted norms}] Similarly to \cite{Bruveris}, we could consider some weighted $BV^2$-norms, defined as
+$$\|f\|_{\BVd} = a_0\|f\|_{L^1(\Circ,\R^2)} +a_1\|f'\|_{L^1(\Circ,\R^2)} + a_2|D^2 f|(\Circ)\,,$$
+where $a_i>0$ for $i=1,2,3$.
+We can define the norm on the tangent space by the same constants.
+
+One can easily satisfy that our results can be generalized to such a framework. In fact, this weighted norm is equivalent to the classical one and  the positive constants do not affect the bounds and the convergence properties that we prove in this work.
+\end{rem}
+
+The following proposition proves that $BV^2(\gm)$ and $\BVd$ represent the same space of functions with equivalent norms. 
+
+\begin{prop}\label{equiv-norms}
+Let $\gm \in \Ba$. 
+The sets $BV^2(\gm)$ and $BV^2(\Circ,\R^2)$ coincide and their norms are equivalent.
+More precisely, there exist two positive constants $M_\gm, m_\gm$  such that, for all $f \in BV^2(\Circ,\R^2)$
+\eql{\label{eq-equi-norm}
+	m_\gm \norm{f}_{BV^2(S^1,\RR^2)} \leq  \norm{f}_{BV^2(\gm)} \leq M_\gm\norm{f}_{BV^2(S^1,\RR^2)} \,.
+}
+\end{prop}
+
+
+\begin{proof}
+We suppose that $f$ is not equal to zero. For the $L^1$-norms of $f$, the result follows from~\eqref{cond-derivative-bis} and the  constants are given respectively by 
+$$M_\gm^0 = \|\gm'\|_{L^\infty(\Circ,\RR^2)}\;, \quad m_\gm^0=\underset{s\in\Circ}{\mbox{essinf}}\,\|\gm'(s)\|.$$
+Moreover, by Lemma \ref{equiv} $(iii)$, the $L^1(\gm)$ and $L^1(\Circ,\RR^2)$-norms of the respective first derivative coincide. So it is sufficient to obtain the result for the second variation  of $f \in BV^2(\gm)$.
+
+By integration by parts, we have
+$$	
+	\int_{\Circ} f\cdot \frac{\d^2 g}{\d \gm^2}(s)\, \d\gm = 
+	\int_{\Circ} \frac{f'}{\|\gm'\|}g'\, \d s  \,
+$$
+where we used the fact that $\frac{\d g}{\d \gm}=\frac{g'}{\|\gm'\|}$. 
+This  implies in particular that 
+\begin{equation}\label{Smoothness}TV^2_\gm(f) = \left|D \frac{f'}{\|\gm'\|}\right|(\Circ)\,.\end{equation}
+Since $\frac{1}{\|\gm'\|} \in BV(\Circ,\RR^2)$ and $BV(\Circ,\RR^2)$ is 
+a Banach algebra, we get 
+$$
+	\left|D \frac{f'}{\|\gm'\|}\right|(\Circ) \leq 
+	|D f'|(\Circ) \left|D \frac{1}{\|\gm'\|} \right|(\Circ).
+$$ 
+Now, as $|Df'|(\Circ) =  |D^2f|(\Circ)$, applying the chain rule for $BV$-functions to $\left|D \frac{1}{\|\gm'\|}\right|(\Circ)$, we can set 
+$$
+	M_\gm^2=   \|\gm'\|_{BV(\Circ,\RR^2)}/\underset{s\in\Circ}{\mbox{essinf}}\,\|\gm'(s)\|^2\,.
+$$
+On the other hand, we have
+$$
+	\int_{\Circ} f'g'\, \d s  = 
+	\int_{\Circ}\frac{\d f}{\d \gm} \frac{\d g}{\d \gm}\,\|\gm'\| \d\gm   \,
+$$
+so that
+$$
+	|D f'|(\Circ) = TV_\gm\left(\frac{\d f}{\d \gm} \|\gm'\| \right)\,,
+$$
+and, because of Lemma \ref{equiv}$(i)$, we get
+\begin{equation}\label{m_GA}
+	|D^2 f|(\Circ)\leq TV_\gm(\|\gm'\|)TV^2_\gm(f) \,.
+\end{equation}
+Therefore, by the chain rule for $BV$-functions, the result is proved by taking the constant
+$$
+m_\gm^2= \frac{1}{\|\gm'\|_{BV(\Circ,\RR^2)}} \, \cdot
+$$
+The lemma ensues setting
+\begin{equation}\label{equiv-down}
+\begin{array}{lll}
+	M_\gm & = &\max \,\{M_\gm^0,M_\gm^2\}   
+	=  \max \,\left\{\|\gm'\|_{L^\infty(\Circ,\RR^2)}\,,\;  
+	\|\gm'\|_{BV(\Circ,\RR^2)}/\underset{s\in\Circ}{\mbox{essinf}}\,\|\gm'(s)\|^2\right\}\,,\\
+ m_\gm & = & \min \,\{m_\gm^0,m_\gm^2\}  =  \min \,\left\{\underset{s\in\Circ}{\mbox{essinf}}\,\|\gm'(s)\|\,,\;1/\|\gm'\|_{BV(\Circ,\RR^2)}\right\}\,.
+ \end{array}
+\end{equation}
+
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Paths Between $BV^2$-Immersed Curves and Existence of Geodesics}
+\label{existence_geod}
+
+In this section, we define the set of admissible paths between two $BV^2$-immersed curves and  a $BV^2$ Finsler metric on $\Bb$. In particular we prove that a minimizing geodesics for the defined Finsler metric exists for any given couple of curves.
+
+
+\begin{defn}[{\bf paths in $\Ba$}]
+For every $\gm_0,\gm_1\in \Ba$, we define a path in $\Ba$ joining  $\gm_0$ and $\gm_1$ as a function 
+$$
+	\GA: t\in [0,1] \mapsto \GA(t) \in \Ba \quad \forall t\in [0,1]
+$$
+such that
+\begin{equation}\label{initial_conditions} 
+ 	\GA(0) = \gm_0\quad \GA(1) = \gm_1\,.
+\end{equation}
+For every $\gm_0,\gm_1\in \Ba$, we denote $\mathcal{P}(\gm_0,\gm_1)$ the class of all paths joining $\gm_0$ and $\gm_1$, belonging to $H^1([0,1],\BVd)$, and such that $\GA(t)\in\Bb$ for every $t\in [0,1]$. 
+
+We recall that $H^1([0,1],\BVd)$ represents the set of $\BVd$-valued functions whose derivative belongs to $L^2([0,1],\BVd)$. We refer to \cite{Iounesco} for more details about Bochner space of Banach-valued functions. It holds in particular  
+\begin{equation}\label{flow}
+	\forall \, s\in \Circ, \quad
+	\int_0^1 \GA_t(t)(s) \d t = \gm_1(s)-\gm_0(s)\,,
+\end{equation}
+where $\GA_t$ denotes the derivative of $\GA$ with respect to $t$. In the following $\GA'(t)$ denotes the derivative of the curve $\GA(t)\in \BVd$ with respect to $s$. Finally, for every $t$ and for every $s$, it holds
+\begin{equation}\label{t-curve-der}
+\GA(t)(s) = \int_0^t \GA_\tau(\tau)(s) \d \tau +\gm_0(s)
+\,,\quad \quad
+\GA'(t)(s) = \int_0^t \GA_\tau'(\tau)(s) \d \tau +\gm_0'(s)\,.
+\end{equation}
+\end{defn}
+
+\begin{defn}[{\bf geodesic paths in $\Ba$}]\label{defn-geodesic-paths}
+ For every path $\GA$ we consider the following energy 
+\begin{equation}\label{energy-bv2}
+	E(\GA)=\int_0^1 \|\GA_t(t)\|_{BV^2(\GA(t))}^2\,\d t.
+\end{equation}
+The geodesic distance between $\gm_0$ and $ \gm_1$ is denoted by $d(\gm_0,\gm_1)$ and defined by 
+\begin{equation}\label{problem}
+	d^2(\gm_0,\gm_1) = {\rm inf}\enscond{ E(\GA) }{ 
+		\GA\in \mathcal{P}(\gm_0,\gm_1) 
+	}\,.
+\end{equation}
+A geodesic between $\gm_0$ and $\gm_1$ is a path $\tilde{\GA}\in \mathcal{P}(\gm_0,\gm_1)$ such that
+$$	
+	E(\tilde{\GA}) = d^2(\gm_0,\gm_1).
+$$
+\end{defn}
+
+Note that because of the lack of smoothness of the $BV^2$-norm over the tangent space, it is not possible to define an exponential map. Geodesics should thus be understood as paths of minimal length. Recall that the existence of (minimizing) geodesics is not guaranteed in infinite dimensions. 
+
+\begin{rem}[{\bf time reparameterization and geodesic energy}]\label{time-param} 
+We point out that, as in  Remark~\ref{arc-len}, we can reparameterize  every non-trivial  homotopy $\GA$ (i.e. satisfying $E(\GA) \neq 0$) with respect to the time-constant speed parameterization, defined as the inverse of the following parameter:
+$$t_\GA : [0,1] \rightarrow [0,1]$$
+$$\foralls t\in [0,1], \quad 
+	t_\GA(t) =\frac{1}{E_1(\GA)} \int_{0}^t \,\|\GA_\tau(\tau)\|_{BV^2(\GA(\tau))} \, \d\tau\,,$$
+	where 
+	$$E_1(\GA)=\int_{0}^1 \,\|\GA_\tau(\tau)\|_{BV^2(\GA(\tau))} \, \d\tau\,. $$
+In the following we show the link between the $L^1$ and $L^2$ geodesic energies via a time reparameterization.
+
+Note that, we can suppose that there is no interval $I\subset [0,1]$ such that 	$\|\GA_t(t)\|_{BV^2(\GA(t))}= 0$ a.e. on $I$. Otherwise,  we can always consider, by a  reparameterization,  the homotopy $\tilde{\GA}$ such that $\tilde{\GA}([0,1]) =\GA_{|[0,1]\setminus I}([0,1])$, which  is such that  $E(\GA)=E(\tilde{\GA})$ and $t_{\tilde{\GA}}$ is strictly increasing. 
+
+Then, up to such a reparameterization, we assume that  $t_\GA$ is a strictly monotone (increasing) continuous function from $[0,1]$ onto $[0,1]$ so it is invertible and  we can define the time-constant speed parameterization $t_\GA^{-1}$. Now, if the homotopy is parameterized  with respect to such a  parameter then it satisfies
+\begin{equation}\label{time-vel}
+	\|\GA_t(t)\|_{BV^2(\GA(t))} = E_1(\GA)\quad \foralls t\in [0,1]\,.
+\end{equation} 
+In particular, for a generic homotopy $\GA$,  we have 
+$$(E_1(\GA))^2= E(\GA\circ t_{\GA}^{-1})\,.$$
+This implies  that the minimizers of $E$ satisfy \eqref{time-vel} and coincide with the time-constant speed reparameterizations of the  minimizers of $E_1$.
+ This  justifies  the definition of the geodesic energy by $E$ instead of $E_1$ that formally represents the length of the path.
+We refer to  \cite[Theorem 8.18  and Corollary 8.19, p.175]{Younes-book}  for more details.
+\end{rem}
+
+We prove now that the constants  $m_{\GA(t)}$ and $M_{\GA(t)}$ defined in \eqref{equiv-down} are uniformly bounded on minimizing paths.
+To this end we need the following lemma.
+
+\begin{lem}\label{no-collapse}
+Let $\GA\in \mathcal{P}(\gm_0,\gm_1)$. Then the following properties hold:
+\begin{enumerate}
+\item The function
+$$t\mapsto g(t)= \|\GA'(t)\|_{L^\infty(\Circ,\RR^2)}$$
+belongs to $C([0,1], \R)$, so, in particular, it admits a  maximum and a positive minimum on $[0,1]$. Similarly,  the  functions $t\mapsto \len(\GA(t))$ and $t\mapsto \|\GA'(t)(s)\|$ (for a.e. $s\in \Circ$) are also  continuous. 
+%Moreover \begin{equation}\label{bound-der}\underset{t\in[0,1]}{\rm{essinf}}\,\underset{s\in \Circ}{\rm{essinf}}\, \|\GA'(t)(s)\|\, >0\,. \end{equation}
+\item For every $t\in [0,1]$ we have
+\begin{equation}\label{length}
+\len(\gm_0)e^{ -E(\GA)} \leq \len(\GA(t)) \leq \len(\gm_0)e^{E(\GA)}\,,
+\end{equation}
+and for a.e. $s\in \Circ$ and  for every $t\in [0,1]$, we have \begin{equation}\label{length2}	(\underset{s\in \Circ}{\rm{essinf}}\,\|\gm_0'(s)\|)e^{-  E(\GA)}	\leq \|\GA'(t)(s)\|\leq 	\|\gm_0'\|_{\leb{\infty}}e^{  E(\GA)}\,.\end{equation}
+
+\end{enumerate}
+\end{lem}
+
+
+\begin{proof}
+%%%%
+1. By Definition~\ref{defn-geodesic-paths}, every $\GA\in \mathcal{P}(\gm_0,\gm_1)$ belongs  to $H^1([0,1],\BVd)$ so, in particular, to $C([0,1],\BVd)$. Now, as $\BVd$ is embedded in $L^\infty(\Circ,\RR^2)$, we get the continuity of $g$. By a similar argument we get the continuity of the   functions $t\mapsto \len(\GA(t))$ and $t\mapsto \|\GA'(t)(s)\|$ (for a.e. $s\in \Circ$).
+
+% Moreover, from~\eqref{cond-derivative}, it follows that $$\underset{s\in\Circ}{\rm{essinf}}\,\|\GA'(t)(s)\|>0,  \quad \forall\, t \in [0,1]$$which implies \eqref{bound-der}.
+
+
+
+
+ 
+\medskip
+%%%%
+2. We recall that $\GA(t)\in \Bb$ for every $t$ so that $\GA'(t)$ satisfies \eqref{cond-derivative} for every $t$. In particular the derivative $\GA'(t)$ is well defined a.e. on $\Circ$. By Remark~\ref{time-param} we can suppose that the time velocity satisfies \eqref{time-vel}. We have 
+$$\frac{\partial \len(\GA(t))}{\partial t} = 
+\int_{\Circ} \left\langle\frac{\GA_t'(t)}{\|\GA'(t)\|}, \GA'(t)\right\rangle\, \d s
+\leq\left\|\frac{\d \GA_t(t)}{\d \GA(t)}\right\|_{L^\infty(\GA(t))}\len(\GA(t))\,,$$
+and, as $\frac{\d \GA_t(t)}{\d \GA(t)}$ has null average, by \eqref{embedding-gm}, we have 
+$$\left\|\frac{\d \GA_t(t)}{\d \GA(t)}\right\|_{L^\infty(\Circ,\RR^2)}\leq E(\GA)\,.$$
+This implies
+$$ \frac{\partial \log( \len(\GA(t)))}{\partial t}\leq E(\GA) \quad \forall \, t\in [0,1],$$
+and, by integrating between $0$ and $t$, we get 
+$$\len(\gm_0)e^{ -E(\GA)} \leq \len(\GA(t)) \leq \len(\gm_0)e^{ E(\GA)}\,. $$ 
+For the second inequality we remark that, because of \eqref{t-curve-der}, $\|\GA'(t)(s)\|$ is differentiable with respect to $t$ for a.e. $s$. Then   $$\frac{\partial \|\GA'(t)(s)\|}{\partial t} = \left\langle\frac{\GA_t'(t)(s)}{\|\GA'(t)(s)\|}, \GA'(t)(s) \right\rangle \leq\left\|\frac{\d \GA_t(t)(s)}{\d \GA(t)}\right\|_{L^\infty(\Circ,\RR^2)}\|\GA'(t)(s)\|\,$$and, as above, we get  $$ \frac{\partial \log( \|\GA'(t)(s)\|)}{\partial t}\leq E(\GA) \quad 	\forall\,\mbox{a.e.}\; s\in \Circ\,\quad  \forall \, t\in [0,1].$$The result follows by integrating with respect to $t$. 
+\end{proof}
+
+
+
+\begin{prop}\label{global_bound_Mm} 
+Let $\gm_0,\gm_1\in \Ba$. Then, for every  $\GA\in \mathcal{P}(\gm_0,\gm)$, there exist  two positive constants $C_1,C_2$  depending on $\gm_0$  (see \eqref{C1C2}) such that
+\begin{equation}\label{constantsMm}
+C_1e^{-2E(\GA)}\leq m_{\GA(t)}\leq  M_{\GA(t)}\leq C_2e^{2E(\GA)} \quad \forall \, t \in [0,1]\,,
+\end{equation}
+where  the constants $m_{\GA(t)}$ and $M_{\GA(t)}$ are defined in \eqref{equiv-down}.
+
+% satisfy \begin{equation}\label{contantsMm}C_1e^{-C_0 r^2}\leq m_{\gm}\leq  M_{\gm}\leq C_2e^{C_0 r^2} \quad \forall \, \gm\in B_d(\gm_0,r)\end{equation}. 
+\end{prop}
+
+\begin{proof}
+% Then, for every $\gm\in B_d(\gm_0,r)$, the result follows from previous inequality by considering a path $\GA \in \mathcal{P}(\gm_0,\gm)$ such that $E(\GA)\leq r^2$ and setting $t=1$.
+ 
+Up to a time reparameterization, we can suppose that the homotopy satisfies \eqref{time-vel}. Because of \eqref{length2}, we have 
+\begin{equation}\label{global_length}
+\begin{array}{ll}
+	(\underset{s\in \Circ}{\rm{essinf}}\,\|\gm_0'(s)\|)e^{-E(\GA)} 
+	\leq \underset{s\in\Circ}{\rm{essinf}}\,\|\GA'(t)(s)\| \,,\vspace{0.2cm}\\
+	 \|\GA'(t)\|_{L^\infty(\Circ,\RR^2)} \leq 
+	\|\gm_0'\|_{\leb{\infty}} e^{ E(\GA)}
+\end{array}
+\end{equation}
+for every $t\in [0,1]$. By setting  $f(t) =\GA_t(t)$ in \eqref{m_GA}, we get 
+
+\begin{equation}\label{m_GA_2}
+	|D^2 \GA_t(t)|(\Circ)\leq TV_{\GA(t)}(\|\GA'(t)\|)E(\GA)\,.
+\end{equation}
+
+Thus
+$$
+\|\GA'(t)-\gm_0'\|_{BV(\Circ,\RR)}\, \leq  \,\int_0^t \,\|\GA'_{\tau}(\tau)\|_{BV(\Circ,\RR)} \d \tau \,=\, \int_0^t[\|\GA'_{\tau}(\tau)\|_{\leb{1}} + |D^2 \GA_{\tau}(\tau)|(\Circ) ] \d \tau $$
+and, by \eqref{w11-rel}, 
+\eqref{m_GA_2}, and \eqref{time-vel}, we have 
+$$\|\GA'(t)-\gm_0'\|_{BV(\Circ,\RR)} \,\leq \, E(\GA) +   \int_0^t TV_{\GA(t)}(\|\GA'(t)\|)E(\GA) \d \tau \,.
+$$
+In particular, by the chain rule for $BV$-functions, we have
+$$ TV_{\GA(t)}(\|\GA'(t)\|)\leq\, \|\GA'(t)\|_{BV(\Circ,\RR)}\,.$$
+
+Then
+$$\|\GA'(t)\|_{BV(\Circ,\RR)}\leq  \|\gm_0'\|_{BV(\Circ,\RR)}+E(\GA) +   \int_0^t \|\GA'(t)\|_{BV(\Circ,\RR)}E(\GA) \d \tau$$
+and, by  Gronwall's inequality, we get 
+\begin{equation}\label{bound-BV}
+\|\GA'(t)\|_{BV(\Circ,\RR)}\leq (\|\gm_0'\|_{BV(\Circ,\RR)}+E(\GA))e^{E(\GA)}\,.
+\end{equation} 
+From \eqref{global_length} and \eqref{bound-BV}, it follows  that 
+\begin{equation}\label{global_length_2}
+\begin{array}{ll}
+\displaystyle{\frac{e^{-E(\GA) }}{ (\|\gm_0'\|_{BV(\Circ,\RR)}+E(\GA))}	\leq \frac{1}{\|\GA'(t)\|_{BV(\Circ,\RR^2)}}}\,, \vspace{0.2cm}\\
+\displaystyle{\frac{\|\GA'(t)\|_{BV(\Circ,\RR^2)}}{\underset{s\in\Circ}{\mbox{essinf}}\,\|\GA'(t)(s)\|^2} \leq 	\frac{(\|\gm_0'\|_{BV(\Circ,\RR)}+E(\GA))}{\underset{s\in \Circ}{\rm{essinf}}\,\|\gm_0'(s)\|^2}}e^{2E(\GA)}\,.
+\end{array}
+\end{equation}
+The result follows from \eqref{global_length} and \eqref{global_length_2} by setting
+\begin{equation}\label{C1C2}
+\begin{array}{ll}
+C_1= &\displaystyle{ \min\, \left\{ \underset{s\in \Circ}{\rm{essinf}}\,\|\gm_0'(s)\|\,,\,\frac{1}{ (\|\gm_0'\|_{BV(\Circ,\RR)}+E(\GA))}\right\} }\,,\vspace{0.2cm}\\
+
+C_2=& \displaystyle{
+\max \, 
+\left\{ \|\gm_0'\|_{\leb{\infty}}\, ,\, \frac{(\|\gm_0'\|_{BV(\Circ,\RR)}+E(\GA))}{\underset{s\in \Circ}{\rm{essinf}}\,\|\gm_0'(s)\|^2} 
+\right\}}\,.
+
+\end{array}
+\end{equation}
+\end{proof}
+
+
+
+\begin{rem}[{\bf weak topologies in Bochner spaces}]\label{topology-bochner}
+Proposition \eqref{equiv-norms} proves the local equivalence between the Finsler metric $BV^2(\gm)$ and the ambient metric $BV^2([0,1], \RR^2)$. This implies in particular that every minimizing sequence $\{\Gamma^h\}$ of $E$ is bounded in $H^1([0,1],BV^2([0,1],\RR^2))$. In fact, because of \eqref{constantsMm}, we have
+$$
+\int_0^1 \|\GA_t^h(t)\|^2_{BV^2([0,1],\RR^2)}\,\d t\,\leq \,\int_0^1 \frac{\|\GA_t^h(t)\|^2_{BV^2(\GA^h(t))}}{m_{\GA^h(t)}^2} \,\d t \,\leq \, \frac{1}{m^2}E(\GA)\, \quad m=\underset{h}{\inf}\,\underset{t\in [0,1]}{\rm{essinf}}\,m_{\GA^h(t)}\,.
+$$
+Then, we could  use some compactness results for the Bochner space $H^1([0,1],BV^2([0,1],\RR^2))$ with respect to some weak topology. 
+Now, to our knowledge, the usual  weak and weak* topologies on the Bochner space $H^1([0,1],BV^2([0,1],\RR^2))$ can not be suitably characterized, so that, working with these topologies, prevents us from describing the behavior of the minimizing sequence. 
+For instance, the question of the convergence of the curves $\{\Gamma^h(t)\}$ at time $t\in [0,1]$ cannot be answered if we do not have a precise characterization of the topology used to get  compactness. 
+
+We recall in this remark the main issues linked to the characterization of the weak topologies for the Bochner space of $BV^2$-valued functions.
+
+Firstly, we recall that, for every Banach space $B$, the dual space of the Bochner space $H^1([0,1],B)$  is represented by $H^1([0,1],B')$ if and only if the dual space $B'$ has the Radon-Nicodym property (RNP) \cite{Bochner_dual, Bochner_dual_2}. 
+
+This means that, for every measure $\mu: \mathcal{M}([0,1])\rightarrow B$ which has bounded variation and is absolutely continuous with respect to $\lambda$ ($\mathcal{M}([0,1])$ denotes the class of Lebesgue-measurable sets of $[0,1]$ and $\lambda$ the one dimensional Lebesgue measure),  there exists a (unique) function $f\in L^1([0,1], B)$ such that 
+\begin{equation}\label{rnp}\mu(A)=\int_A f(t) \,\d \lambda(t) \quad \quad \forall\, A\in \mathcal{M}([0,1])\,.
+\end{equation}
+This essentially means that the Radon-Nicodym theorem holds for $B$-valued measures. More precisely the Radon-Nicodym derivative $\mu/\lambda$ is represented by a $B$-valued function.
+Spaces having the RNP are, for instance,  separable dual spaces and reflexive spaces, so, in particular, Hilbert spaces. However, $L^1(K)$, $L^\infty(K)$, and $C(K)$, where $K$ is a compact set of $\RR$, do not have the RNP.
+
+
+Now, in order to apply to our case such a result, we should be able to completely characterize the dual of $BV^2([0,1],\RR)$, which represents at the moment an open problem \cite{MZ, Pauw}. Therefore we cannot characterize the weak topology of our initial space.
+
+Another possibility to apply the previous duality result is to consider $BV^2([0,1],\R)$ as the dual  of a Banach space $B$. Then, by proving that it has the RNP and applying the duality result, we could  characterize the weak* topology of $BV^2([0,1],\R)$.  
+
+In fact, according to the characterization of the dual of  Bochner spaces cited above, we could write $H^1([0,1],BV^2([0,1],\R))$ as the dual of $H^1([0,1],B)$.
+Unfortunately, $BV^2([0,1],\R)$ does not have the RNP as  is shown  by the following example. 
+
+We consider the following $BV^2([0,1],\RR)$-valued measure
+$$\mu(A)\,=\,(\,x\mapsto \varphi_A(x)=\lambda(A\cap (0,x))\,)\quad \quad\forall\, A\in \mathcal{M}([0,1])\,.$$
+We can easily satisfy that, for every $A$, $\varphi_A\in BV^2([0,1],\R)$ and $\varphi_A'=\mathbbm{1}_A$. Moreover, if $A$ is Lebesgue negligible we have $|\mu|(A)=0$, which means that $|\mu|$ is absolutely continuous with respect to the Lebesgue measure $\lambda$. 
+
+However, if there exists a function $f\in L^1([0,1],BV^2([0,1],\RR))$ satisfying \eqref{rnp}, then,   we should have in particular 
+$$\lambda(A\cap (0,x))\,=\,\int_A f(t)(x)\, \d \lambda(t)\,,$$
+where, for every $t$,  $f(t)(x)$ denotes the value of $f(t)$ at $x$. Then, for every $B\subset [0,1]$, we obtain 
+$$\int_B\lambda(A\cap (0,x))\,\d \lambda(x)\,=\,\int_B\int_A f(t)(x)\,d \lambda(t)\d \lambda(x)\,$$
+which implies that $f(t)(x)=1$ a.e. if $t<x$ and $f(t)(x)=0$ a.e. if $t\geq x$. This is of course in contradiction with the fact   $f(t)$ has to be continuous because it is a $BV^2$-function.
+Previous examples and considerations show that, in our case, the weak and weak* topologies are not suitably characterized in order to give meaningful information on the limit.
+
+
+In order to prove the existence of a geodesic we use a new proof strategy, which is  inspired to the technique proposed in \cite{MN} and is detailed in the proof of the next theorem. We also point out that 
+this actually defines  a suitable topology, which allows  us to get semicontinuity and compactness in our framework (see Definition \ref{sigma}).
+\end{rem}
+
+We can now prove an existence result for geodesics. 
+
+\begin{thm}[{\bf existence of geodesics}]\label{local_existence}
+Let $\gm_0, \gm_1 \in \Ba$ such that $d(\gm_0,\gm_1)< \infty$.
+Then, there exists a geodesic between $\gm_0$ and $\gm_1$.
+\end{thm}
+
+\begin{proof}
+Let $\{\GA^h\} \subset \mathcal{P}(\gm_0,\gm_1)$ be a minimizing sequence for $E$ so that $E(\GA^h)\rightarrow \inf\,E$. Without loss of generality we can suppose $\sup_h \; E(\GA^h)< +\infty$.  We also remark that, from the previous lemma, it follows that
+$$0 \,<\, \underset{h}{\inf}\,\underset{t\in [0,1]}{\mbox{essinf}}\, m_{\GA^h(t)}\, <\,\underset{h}{\sup}\,\underset{t\in [0,1]}{\mbox{esssup}}\, M_{\GA^h(t)}\, <\,+\infty\,.
+$$
+Moreover, we can suppose (up to a time reparameterization) that every homotopy is parameterized with respect to the time-constant speed parameterization. Then, we can assume that  $\{\GA^h_t(t)\}$  satisfies \eqref{time-vel} for every $h$. 
+%is uniformly  bounded in $BV^2(\Circ,\RR^2)$  $t$ (see Remark \ref{time-param}). This implies in particular that 
+
+
+%%%%%%%%
+\medskip
+\noindent{\em Step 1: Definition of  a limit path.} For every $n>1$ we consider the dyadic decomposition of $[0,1]$ given by the intervals  
+\eql{\label{eq-dyadic}
+	I_{n,k} = [\frac{k}{2^n},\frac{k+1}{2^n}[
+	\qforq k \in [0,2^n-1]
+}
+and, for every $t\in [0,1]$  we define 
+$$f_{n}^h(t)=2^n \int_{I_{n,k}} \GA^h_\tau(\tau)\, \d \tau, $$
+where $I_{n,k}$ is the interval containing $t$. Remark that, for every $n$ and $h$, $f_{n}^h: [0,1]\rightarrow BV^2(\Circ,\RR^2)$  is  piecewise constant with respect to the family $\{I_{n,k}\}$, and
+\begin{equation}\label{dom-conv}
+\int_0^1 f_n^h(t)\, \d t = \int_0^1 \GA^h_t(t)\, \d t = \GA(1)-\GA(0)\,.
+\end{equation}  
+Now, setting
+$m = \underset{h}{\inf}\,\underset{t\in [0,1]}{\mbox{essinf}}\, m_{\GA^h(t)}\, >\,0
+$, by Jensen's inequality and \eqref{eq-equi-norm}, we get 
+\begin{equation}\label{bound0}
+\|f^h_n(t)\|^2_{BV^2(\Circ,\RR^2)}\leq 2^n\int_{I_{n,k}} \frac{\|\GA_t^h(t)\|^2_{BV^2(\GA(t))}}{m_{\GA^h(t)}^2}\,\d t \,\leq \, \frac{2^n}{m^2}E(\GA^h)\quad \foralls \, t\in [0,1]\,.
+ \end{equation}
+So, by $2^n$ successive extractions, we can take
+a subsequence (not relabeled) and  a  piecewise constant (with respect to the family $\{I_{n,k}\}$) function $f_{n}^\infty: [0,1]\rightarrow BV^2(\Circ,\RR^2)$  such that 
+$$\foralls n, \quad f^h_n(t) \overset{*-BV^2}{\rightharpoonup} f^\infty_n(t) \quad \foralls t\in [0,1]\,,$$
+and
+\begin{equation}\label{conv} \int_0^1\|f_n^\infty(t)\|^2_{BV^2(\Circ,\RR^2)} \d t \leq \underset{h\rightarrow \infty}{\liminf} \;\; \int_0^1\|f^h_n(t)\|^2_{BV^2(\Circ,\RR^2)}\d t\,.
+\end{equation}
+Moreover we can write 
+$I_{n,k}=[k2^{-n}, (2k+1)2^{-n-1}[\cup [(2k+1)2^{-n-1}, (k+1)2^{-n}[$
+and 
+$$f^h_{n+1}(t) = 2^{n+1}\int_{I_{n+1,2k}} \GA^h_t(t) \d t \quad \foralls t\in [k2^{-n}, (2k+1)2^{-n-1}[\,,$$
+$$f^h_{n+1}(t) = 2^{n+1}\int_{I_{n+1,2k+1}}\GA^h_t(t) \d t  \quad \foralls t\in [(2k+1)2^{-n-1}, (k+1)2^{-n}[\,,$$
+and therefore
+$$\int_{I_{n,k}}f^h_{n+1}(t) \d t =  \int_{I_{n,k}}\GA^h_t(t) \d t\,,$$
+$$f^h_n(t) = 2^n \int_{I_{n,k}}f^h_{n+1}(t)\d t \quad \foralls t\in I_{n,k}.$$
+Then, by the dominated convergence theorem, we get
+\begin{equation}\label{marti}
+ f_n^\infty(t) = 2^n \int_{I_{n,k}}f_{n+1}^\infty(t) \d t\,,
+\end{equation}
+which implies that $\{f^\infty_n\}$ is a $BV^2(\Circ,\RR^2)$-valued martingale \cite{Durett, Chatterji}. We note that $\{f^\infty_n\}$ is a martingale with respect to the probability space $[0,1]$ equipped with Lebesgue measure and that the filtration is defined by the increasing sequence of $\sigma$-algebras generated (at every time $n$) by the intervals $\{I_{n,0},...,I_{n,2^n-1}\}$.
+
+Moreover, by \eqref{conv}, Fatou's lemma, and,~\eqref{bound0},  we get
+$$
+\begin{array}{ll}
+\displaystyle{ \int_0^1\|f_n^\infty(t)\|^2_{BV^2(\Circ,\RR^2)} \d t }&\displaystyle{\leq \underset{h\rightarrow \infty}{\liminf} \;\; \int_0^1\|f^h_n(t)\|^2_{BV^2(\Circ,\RR^2)}\d t}\\
+ & \displaystyle{\leq \underset{h\rightarrow \infty}{\liminf} \;\; \frac{E(\GA^h)}{m^2}}\,.
+ \end{array}
+$$
+\par Now, as $BV^2(\Circ,\RR^2)$ is embedded in $H^1(\Circ,\RR^2)$, this implies that $\{f^\infty_n\}$ is a bounded  martingale in $L^2([0,1],H^1(\Circ,\RR^2))$ so, by the convergence theorem for martingales \cite[Theorem 4]{Chatterji},  $f^\infty_n(t)\rightarrow f(t)$ in $H^1(\Circ,\RR^2)$ for almost every $t$. 
+Note also that, as $f^\infty_n\in BV^2(\Circ,\RR^2)$ and the second variation is lower semicontinuous with respect to the $W^{1,1}(\Circ,\RR^2)$-convergence, we actually get $f\in L^2([0,1],BV^2(\Circ,\RR^2))$.
+
+We can now define a candidate to be a minimum  of $E$ by setting
+\begin{equation}\label{formula}
+\GA^\infty(t)= \int_0^t f(\tau)\, \d \tau +\GA(0) \quad \foralls \; t\in [0,1]\,.
+\end{equation}
+
+\medskip
+\noindent
+{\em Step 2: $\GA^\infty$ is a geodesic path.}
+\, 
+We can easily satisfy that  $\GA^\infty\in H^1([0,1],BV^2(\Circ,\RR^2))$ and that $\GA^\infty$ satisfies~\eqref{flow}. In fact, by the dominated convergence theorem and~\eqref{dom-conv}, we have
+$$\int_0^1 f(\tau)\, \d \tau = \underset{n\rightarrow \infty}{\lim} \, \int_0^1 f_n^\infty(\tau)\, \d \tau = \underset{n\rightarrow \infty}{\lim}\underset{h\rightarrow \infty}{\lim}\int_0^1 f_n^h(\tau)\, \d \tau = \GA(1)-\GA(0)\,.$$
+This implies in particular that $\GA^\infty$ satisfies~\eqref{initial_conditions}. In order to prove that  $\GA^\infty\in \mathcal{P}(\gm_0,\gm_1)$ we have to show that $\GA^\infty(t)\in \Bb$  for every $t$. 
+
+%%%%%%%%
+Below, we prove that $ \GA^h(t) \rightarrow \GA^\infty(t)$ in ${W^{1,1}(\Circ,\RR^2)}$ for every $t$. This implies (up to a subsequence) the a.e. convergence and, because of \eqref{length2}, we get
+$$(\underset{s\in \Circ}{\rm{essinf}}\,\|\gm_0'(s)\|)e^{-  \inf E}	\leq \|(\GA^\infty)'(t)(s)\|$$
+for every $t$ and for a.e.-$s$. This proves in particular that $\GA^\infty(t)$ satisfies \eqref{cond-derivative-bis} for every $t$ so that   $\GA^\infty\in \mathcal{P}(\gm_0,\gm_1)$.
+
+We denote by $\GA_n^\infty$ and $\GA_n^h$ the paths defined by $f_n^\infty$ and $f_n^h$  through~\eqref{formula}, respectively. 
+Now, as  $\{\GA^h_t(t)\}$  satisfies \eqref{time-vel} for every $h$ the norms  $\|\GA^h_t(t)\|_{L^\infty(\Circ,\RR^2)}$ are uniformly bounded. Then, by the definition of $f^h_n$ and a straightforward computation, we get that 
+$\| \GA^h(t) -\GA^h_n(t)\|_{W^{1,1}(\Circ, \RR^2)}$
+is small for $n$ large enough.  
+
+ Moreover, as  $f^h_n(t) \overset{*-BV^2}{\rightharpoonup} f^\infty_n(t)$ for every $t$, from the dominated convergence theorem, it follows that $\| \GA^\infty_n(t) -\GA^h_n(t)\|_{{W^{1,1}(\Circ,\RR^2)}}\rightarrow 0$ for every $t$ as  $h\rightarrow \infty$ for every $n$.
+Similarly, as  $f^\infty_n\rightarrow f$ in $H^1(\Circ,\RR^2)$, 
+$\| \GA^\infty_n(t) -\GA^\infty(t)\|_{W^{1,1}(\Circ,\RR^2)}$ is small for $n$ large enough.
+
+Finally, this implies that 
+\begin{equation}\label{cons-length}
+\|\GA^h(t) -\GA^\infty(t)\|_{{W^{1,1}(\Circ,\RR^2)}}\rightarrow 0\,\quad \mbox{as}\; h\rightarrow 0\,\quad \forall\,t\in [0,1]\,.
+\end{equation}
+By the same arguments we can show that
+\begin{equation}\label{conv-v}
+\| \GA^h_t(t) -\GA^\infty_t(t)\|_{W^{1,1}(\Circ,\RR^2)}\rightarrow 0\,\quad \mbox{as}\; h\rightarrow 0\,\quad \forall\,t\in [0,1]\,.
+\end{equation}
+We prove now that $\GA^\infty$ is a minimizer of $E$.  
+We recall that we have supposed (up to a time reparameterization) that   $\{\GA^h_t(t)\}$ is bounded in $BV^2(\Circ,\RR^2)$ for every $t$. 
+\par Because of \eqref{length}, \eqref{length2}, and, Lemma \ref{conv-w11}, as   $\GA^h(t)$ converges in $W^{1,1}(\Circ,\RR^2)$ towards $\GA^\infty(t)$,  the constant speed parameterizations at time $t$, denoted respectively by  $\phi_{\GA^h(t)}$ and $\phi_{\GA^\infty(t)}$, also converge in $W^{1,1}(\Circ, \Circ)$. Moreover, according to \eqref{change-arc}, for a fixed time $t$, we have
+$$ \|\GA^{h}_t(t)\|_{BV_2(\GA^h(t))} =  \|\GA^{h}_t \circ \phi_{\GA^h(t)}\|^{\GA^h(t)}_{BV^2(\Circ,\RR^2)}\,.$$
+Since $\{\GA^h_t(t)\}$ is bounded in $BV^2(\Circ,\RR^2)$ and  the two terms involved in the composition  converge in $W^{1,1}(\Circ,\RR^2)$, we have
+$$\|\GA^{h}_t \circ \phi_{\GA^h(t)} - \GA^{h}_t \circ \phi_{\GA^\infty(t)}\|_{W^{1,1}(\Circ,\RR^2)}\leq \|\GA^h_t\|_{BV^2(\Circ,\RR^2)}\| \phi_{\GA^h(t)} - \phi_{\GA^\infty(t)}\|_{W^{1,1}(\Circ,\RR^2)}\,,$$
+$$\|\GA^{h}_t \circ \phi_{\GA^\infty(t)} -	 \GA^{\infty}_t \circ \phi_{\GA^\infty(t)}\|_{W^{1,1}(\Circ,\RR^2)}\leq C\|\GA^{h}_t  -	 \GA^{\infty}_t\|_{W^{1,1}(\Circ,\RR^2)}\,,$$
+where the constant 
+$$C=\max\,\{1, \|(\varphi_{\GA^\infty(t)}^{-1})'\|_{L^\infty(\Circ,\RR^2)}\}\,$$
+is bounded because of Lemma \ref{bound-rep-bv}.
+This implies in particular that 
+\begin{equation}\label{sci2}
+\GA^{h}_t \circ \phi^h(t)  \overset{W^{1,1}(\Circ,\RR^2)}{\rightarrow} \GA^{\infty}_t \circ \phi^\infty(t)\,.
+\end{equation}
+Now, we note that, because of the $W^{1,1}$-convergence, we have $\len(\GA^h(t))\rightarrow \len(\GA(t))$. Moreover,  the second variation is lower semicontinuous with respect to the  $W^{1,1}$-convergence. 
+
+Then, by \eqref{change-arc}, for every  $t$ we get
+
+\begin{multline}\label{sci}
+	\| \GA^{\infty}_t(t)\|_{BV^2(\GA^\infty(t))}
+	=  \| \GA^\infty_t \circ \phi_{\GA^\infty(t)} \|^{\GA^{\infty}(t)}_{BV^2(\Circ,\RR^2)} \vspace{0.3cm}\\
+	\leq \underset{h\rightarrow \infty}{\liminf} \, \| \GA^h_t \circ \phi_{\GA^h (t)}\|^{\GA^h(t)}_{BV^2(\Circ,\RR^2)}
+	= \underset{h\rightarrow \infty}{\liminf} \,\|\GA^{h}_t(t)\|_{BV^2(\GA^h(t))}\,.
+\end{multline}
+
+By integrating the previous inequality and using Fatou's lemma we get that $\GA^\infty$ minimizes $E$, which ends the proof.
+\end{proof}
+
+\begin{rem} In order to get the semicontinuity's inequality~\eqref{sci}, we actually just would need the convergence in~\eqref{sci2} with respect to the $BV^2$-weak topology. We recall that we do not know a characterization of the dual space of $BV$, which explains the choice of the weak-* topology (i.e. we look at $\BVd$ as a dual Banach space) in the previous proof. 
+
+Moreover,  the martingale approach allows one to get strong convergence in  $W^{1,1}$ without applying any strong-compactness criterion for Sobolev spaces. This is a key point of the proof because the $BV^2$-norm  is semicontinuous with respect to the strong $W^{1,1}$-topology. 
+\end{rem}
+
+Inspired by the previous proof we can define the following topology on $H^1([0,1],\Bb)$:
+
+\begin{defn}[{\bf $\sigma$-topology}]\label{sigma} Let $\{\GA^h\}\subset H^1([0,1],\BVd)$ and $\GA\in H^1([0,1],\BVd)$. Let $\{I_{n,k}\}_{n,k}$ be the collection of the intervals giving the dyadic decomposition of $[0,1]$ defined in~\eqref{eq-dyadic}. We say that $\GA_h$ converges to $\GA$ with respect to the $\sigma$-topology (denoted by $\GA^h\overset{\sigma}{\rightarrow}\GA$) if, for every $n$,  there exists a sequence of piecewise constant functions $\{f_n^\infty\}$ on  $\{I_{n,k}\}_{n,k}$  such that the following hold.
+\begin{itemize}
+\item[(i)] ({\em $BV^2$-* weak convergence}).  The sequence $$f_{n}^h(t)=2^n \int_{I_{n,k}} \GA^h_\tau(\tau)\, \d \tau  \,$$
+satisfies
+$$\foralls (n,k) \quad f^h_n(t) \overset{*-BV^2}{\rightharpoonup} f^\infty_n(t) \quad \foralls t\in [0,1]$$
+as $h\rightarrow \infty$; 
+\item[(ii)] ({\em Martingale convergence}). We have
+$$\underset{n\rightarrow \infty}{\lim}\|f_n^\infty - \GA_t\|_{L^2([0,1],H^1(\Circ,\RR^2))}=0\,.$$
+\end{itemize}
+\end{defn}
+
+Then, the proof of Theorem~\ref{local_existence} gives actually the following result:
+
+
+\begin{thm}\label{comp-sigma} For every  $\gm_0,\gm_1\in\Bb$, the following properties hold.
+\begin{itemize}
+\item[(i)] Every bounded set of $\mathcal{P}(\gm_0,\gm_1)$ is sequentially compact with respect to $\sigma$-topology and the $\sigma$-convergence implies the strong convergence in $H^1([0,1], W^{1,1}(\Circ,\RR^2))$.
+\item[(ii)] The energy $E$ is lower semicontinuous with respect to the $\sigma$-topology.
+\end{itemize}
+\end{thm}
+
+
+\begin{rem}\label{existence-sigma}
+The result of existence proved by Theorem \ref{local_existence} can  now be presented as follows. We can suppose that  $\{\GA^h\} \subset\mathcal{P}(\gm_0,\gm_1) $ with  $\underset{h}{\sup}\, E(\GA^h)< \infty$. 
+Then $\{\GA^h\}$ is uniformly bounded in  $\mathcal{P}(\gm_0,\gm_1)$ and, by points $(i)$ and $(ii)$ of the previous theorem, energy $E$ reaches its minimum on  $\mathcal{P}(\gm_0,\gm_1)$.
+\end{rem}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Geodesic Distance Between Geometric Curves}
+\label{13}
+
+Theorem~\ref{local_existence} shows the existence of a geodesic between any two parameterized curves in $\Ba$. We are interested now in defining a geometric distance between geometric curves (i.e., up to reparameterization). To this end we consider the set of curves belonging to $\Bb$ that are globally injective and oriented counter-clockwise . Such a set is denoted by $\Bb^i$.
+
+ The space of geometric curves is defined as $\Bb^i \, / \, {\rm Diff}^{BV^2}(\Circ)$. We remind that in this section ${\rm Diff}^{BV^2}(\Circ)$ denotes the set defined in Definition \ref{reparam}. For every $\gm\in \Ba^i$ its equivalence class (called also  geometric curve) is denoted by $[\gm]$.
+
+\begin{simplified}
+\begin{rem}[{\bf Reparameterization and $BV^2$-norm}]
+ Remark that  for every $\gm\in \Ba$ and $\varphi \in \rm{Diff}^{BV^2}(\Circ)$ we have 
+$$
+\|(\gm\circ \varphi)'\|_{BV(x)}=\|\gm'\|_{BV(x)} \,.
+$$
+Moreover, 
+ $$\|\gm\circ \varphi\|_{L^1(\Circ,\RR^2)}\leq \|\gm\circ\varphi\|_{L^\infty(\Circ,\RR^2)} = \|\gm\|_{L^\infty(\Circ,\RR^2)}\,,$$ 
+ so by~\eqref{embedding}, we get
+\begin{equation}\label{reparamet}
+\|\gm\circ \varphi\|_{BV^2(x)}\leq 2\|\gm\|_{BV^2(x)} \,.
+\end{equation}
+\end{rem}
+\end{simplified}
+
+The next proposition defines a distance on the set of curves belonging to $\Ba^i$  up to reparameterization. 
+ 
+\begin{prop}\label{distance-geom}
+ The Procrustean dissimilarity measure defined by
+\begin{equation}
+\mathcal{D}([\gm_0] , [\gm_1]) = \inf\, \{ d(\gm_0 \circ \phi, \gm_1 \circ \psi ) \,: \,\phi,\psi \in {\rm{Diff}}^{BV^2}(\Circ)\}
+\end{equation}
+is a distance on the set of $\Ba^i$-curves up to reparameterization.
+\end{prop}
+
+\begin{proof}
+Clearly, the function $\mathcal{D}$ is symmetric, nonnegative, and it is equal to zero if $[\gm_0] = [\gm_1]$. 
+\par Note also  that, the distance $d$ is invariant under reparameterization, so that   
+\begin{equation}\label{invariance-2}
+d(\gm_0,\gm_1) = d(\gm_0 \circ \phi,\gm_1\circ \phi), \quad \foralls \phi \in {\rm{Diff}}^{BV^2}(\Circ)\,.
+\end{equation}
+
+Then from the invariance~\eqref{invariance-2} it follows
+that for every $\varphi_1, \varphi_2,\varphi_3 \in  {\rm{Diff}}^{BV^2}(\Circ)$ and $\gm_1, \gm_2, \gm_3 \in \Ba$ we have 
+$$
+\begin{array}{ll}
+d(\gm_1\circ\varphi_1,\gm_2\circ\varphi_2) & \leq d(\gm_1\circ\varphi_1,\gm_3\circ\varphi_3) + d(\gm_3\circ\varphi_3,\gm_2\circ\varphi_2)\\
+& =  d(\gm_1\circ\varphi_1\circ\varphi_3^{-1},\gm_3) + d(\gm_3,\gm_2\circ\varphi_2\circ\varphi_3^{-1})
+\end{array}
+$$
+which implies that the  triangle inequality is satisfied for $\mathcal{D}$. 
+\par We prove now that $\mathcal{D}([\gm_0] , [\gm_1]) = 0$ implies that $[\gm_0] = [\gm_1]$. We assume that $\gm_0$ is parameterized by the constant speed parameterization (this  is possible because of the invariance of $d$ under reparameterization).
+So there exists a sequence $\{\phi_h\}$ of reparameterizations such that 
+$$d(\gm_0,\gm_1 \circ \phi_h) \leq \frac 1 h\,.$$
+Then we can consider the sequence $\{\GA^h\}$ of  minimal geodesics joining $\gm_0$ and $\gm_1 \circ \phi_h$. 
+Similarly to \eqref{bound0}, by setting $m = \inf_h \inf_t m_{\GA^h(t)} > 0$, from \eqref{flow}, it follows 
+\begin{equation}\label{bound}\| \gm_0 - \gm_1  \circ \phi_h \|^2_{BV^2(\Circ,\RR^2)} \leq \int_0^1 \|\GA_t^h \|^2_{BV^2(\Circ,\RR^2)}(t) \d t \leq  \frac{1}{m^2h^2}\,.
+\end{equation}
+Now,  because of Lemma \ref{bound-rep-bv} the sequence $\{\varphi_h\}$ is bounded in $\BV^2(\Circ, \Circ)$ so it converges (up to a subsequence) to some $\varphi$ with respect to the weak-* topology. Thus, by taking the limit, we get  $\gm_0 = \gm_1 \circ \phi$.
+
+\end{proof}
+
+The next theorem proves an existence result for geodesics.
+
+
+\begin{thm}[{\bf geometric existence}]\label{localbv2}
+Let $\gm_0\, \gm_1 \in \Ba^i$ such that $\mathcal{D}([\gm_0] , [\gm_1])<\infty$. Then there exists a minimizer  of $\mathcal{D}([\gm_0] , [\gm_1])$. More precisely, there exists $\tilde{\gm} \in [\gm_1]$ and $\GA\in \mathcal{P}(\gm_0,\tilde{\gm})$ such that $E(\GA)=d^2(\gm_0,\tilde{\gm}) = \mathcal{D}^2([\gm_0] , [\gm_1])$.	
+\end{thm}
+
+\begin{proof} In the following we denote by $\gm_0$ and $\gm_1$ the parameterizations by the constant speed parameterization.
+Because of the invariance~\eqref{invariance-2} we can write 
+$$\mathcal{D}([\gm_0] , [\gm_1]) = \inf\, \{ d(\gm_0, \gm_1 \circ \psi ) \,: \,\psi \in {\rm{Diff}}^{BV^2}(\Circ)\}.$$
+We consider a sequence $\{\psi_h\} \subset {\rm{Diff}}^{BV^2}(\Circ)$ such that $ d(\gm_0, \gm_1 \circ \psi_h )\rightarrow \mathcal{D}([\gm_0] , [\gm_1])$ and we suppose that $\sup_h d(\gm_0, \gm_1 \circ \psi_h ) < \infty$.  By Theorem \ref{local_existence}, for every $h$, there exists a geodesic  $\GA^h$  between  $\gm_0$ and $\gm_1\circ \psi_h$  such that $d^2(\gm_0, \gm_1 \circ \psi_h ) =E(\GA^h)$. 
+We show that there exists  $\psi_\infty \in {\rm{Diff}}^{BV^2}(\Circ)$ such that $ \mathcal{D}([\gm_0] , [\gm_1]) = d(\gm_0, \gm_1 \circ \psi_\infty)$. 
+\par By the same arguments used in the proof of Theorem~\ref{local_existence}, we can define (see Step 1) a path $\GA^\infty\in H^1([0,1],\Bb)$ such that 
+\begin{equation}\label{convergence-path}\int_0^1 \GA^h_t(t)(s) \d t \rightarrow \int_0^1 \GA^\infty_t(t)(s) \d t\,\end{equation}
+and (see Step 2)
+\begin{equation}\label{convergence-path20}
+\GA^h(t) \overset{W^{1,1}(\Circ,\RR^2)}{\longrightarrow} \GA^\infty(t) \quad \forall\,t\in [0,1]\,,
+\end{equation}
+\begin{equation}\label{convergence-path2}
+\GA^h_t(t) \overset{W^{1,1}(\Circ,\RR^2)}{\longrightarrow} \GA^\infty_t(t) \quad \forall\,t\in [0,1].
+\end{equation}
+Remark that, because of \eqref{flow},  we have 
+\begin{equation}\label{flow-path}
+\int_0^1 \GA_t^h(t)(s)\d t = \gm_1\circ \psi_h(s)-\gm_0(s)\quad\quad  \forall \, s\in \Circ\,.
+\end{equation}
+Now, analogously to \eqref{bound}, this guarantees a bound on $\{\gm_1\circ \psi_h\}$ and, because of Lemma \ref{bound-rep-bv}, the sequence $\{\psi_h\}$ is bounded in $\BV^2(\Circ, \Circ)$ so it converges (up to a subsequence) to some $\psi_\infty$ with respect to the weak-* topology. Thus, we have  
+
+ $$\gm_1\circ\psi_h\overset{W^{1,1}(\Circ,\RR^2)}{\rightharpoonup}\gm_1\circ\psi_\infty\,.$$
+\par Now, as $\GA^h(0)=\gm_0$ and $\GA^h(1)= \gm_1\circ \psi_h$, from \eqref{convergence-path20}, it follows 
+ $$\GA^\infty(0) = \gm_0\,,\quad \GA^\infty(1) = \gm_1\circ\psi_\infty\,$$
+%and, from~\eqref{convergence-path} and~\eqref{flow-path}, it follows that $$\int_0^1 \GA_t^\infty(t)(s)\d t = \gm_0-\gm_1\circ \psi_\infty(s)$$
+which imply that $\GA^\infty\in \mathcal{P}(\gm_0,\gm_1\circ\psi_\infty)$. Moreover,  denoting  by $\varphi_{\GA^h(t)}$ and $ \varphi_{\GA^\infty(t)}$ the constant speed parameterization of $\GA^h(t)$ and $\GA^\infty(t)$ respectively, by~\eqref{convergence-path20} and Lemma \ref{conv-w11}, $\varphi_{\GA^h(t)}$ converges to $ \varphi_{\GA^\infty(t)}$ in $W^{1,1}(\Circ,\Circ)$. Then, similarly to \eqref{sci}, we get  
+$$\| \GA^{\infty}_t(t)\|_{BV^2(\GA^\infty(t))} 
+%=  \| (\GA^\infty \circ \phi_{\GA^\infty})_t(t) \|^2_{BV^2(\Circ,\RR^2)} \vspace{0.2cm}\\\leq \underset{h\rightarrow \infty}{\liminf}  \| (\GA^h \circ \phi_{\GA^h})_t (t)\|^2_{BV^2(\Circ,\RR^2)}
+\leq \underset{h\rightarrow \infty}{\liminf} \, \|\GA^{h}_t(t)\|_{BV^2(\GA^h(t))}\,.
+$$
+By integrating the previous inequality and using Fatou's lemma we get 
+$$E(\GA^\infty)\leq \lim_{h\rightarrow \infty} E(\GA^h)=\lim_{h\rightarrow \infty} d^2(\gm_0,\gm_1\circ\psi_h)=\mathcal{D}^2([\gm_0] , [\gm_1]) \,,$$
+which implies that $\mathcal{D}^2([\gm_0] , [\gm_1]) = d^2(\gm_0, \gm_1 \circ \psi_\infty)=E(\GA^\infty)$.
+\par 
+\end{proof}
+
+

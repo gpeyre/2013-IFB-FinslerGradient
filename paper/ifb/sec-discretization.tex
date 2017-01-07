@@ -1,0 +1,531 @@
+\section{Discretization}
+\label{discretization}
+
+This section discretizes Problem~\eqref{grad-rigid} using finite elements in order to calculate numerically the Finsler gradient flow. We define a $n$-dimensional sub-space $\Bb_n \subset \Bb$ of piecewise linear curves. The embedding $\Bb_n \subset \Bb$ defines a natural finite dimensional Riemannian and Finsler structure on $\Bb_n$ inherited from the ones of $\Bb$. This allows us to apply our Finsler gradient flow in finite dimension to approximate the original infinite dimensional Finsler flow. 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Finite Elements Spaces}
+
+%%%
+\paragraph{Notations.}
+
+In the following, to ease the notation, we identify $\RR^2$ with $\CC$ and $\Circ$ with $[0,1]$ using periodic boundary conditions.  
+The canonical inner produced on $\CC^n$ is
+\begin{equation}\label{scalarC}
+	\dotp{\tilde{f}}{\tilde{g}}_{\mathbb{C}^n} = 
+	\sum_{i=1}^n \dotp{\tilde{f}_i}{\tilde{g}_i}
+	=
+	\sum_{i=1}^n {\rm Real}(\tilde{f}_i \,\overline{\tilde{g}_i}), 
+	\,\quad \foralls \tilde{f}, \tilde{g} \in\CC^n \,,
+\end{equation}
+where we denote by $\overline{\tilde{g}_i}$ the conjugate of $\tilde{g}_i$.
+
+%%%
+\paragraph{Piecewise affine finite elements.}
+
+We consider the  space $\PP_{1,n}$ of the finite elements on $[0,1]$ (with periodic boundary conditions) of order one with $n$ equispaced nodes. 
+A basis of $\PP_{1,n}$ is defined as 
+\begin{align*}
+	\xi_i(s) &= \max\left\{0, 1- n\left| s- \frac{i}{n} \right|\right\} \quad  s\in [0,1],\;  \foralls i= 1, ..., n-1 \\
+	\xi_n(s) &= \max\left\{0, 1- n\left|s \right|\right\} + \;\max\left\{0, 1- n\left| s- 1 \right|\right\},  \quad s\in [0,1].
+\end{align*}
+Every  $f\in \PP_{1,n}$ can be written as 
+\begin{equation}\label{tangent-discrete}
+	f=\sum_{i=1}^n\tilde{ f}_i \, \xi_i\,,\quad \tilde{f}_i\in\CC\,
+\end{equation}
+with $\tilde{f}_i=f(i/n)\in\CC$ for every $i$. We denote by $\tilde{f}=(\tilde{f}_1,..., \tilde{f}_n)\in \CC^n$ the coordinates of $f$ with respect to  the basis $\{\xi_i\}_{i=1,...,n}$. 
+Remark that there exists a bijection between $\PP_{1,n}$ and $\CC^n$, defined by the following operator
+\begin{equation}\label{bijection}
+	P_1\; : \tilde{f}=(\tilde{f}_1,..., \tilde{f}_n)\in \CC^n 
+	\;\;\mapsto\;\; 
+	P_1(\tilde{f})=  \; f\in \PP_{1,n} \mbox{\;\;s.t.\;\;} f=\sum_{i=1}^n\tilde{f}_i \, \xi_i\,.
+\end{equation}
+The forward and backward finite differences operators are defined as
+\begin{equation}\label{delta}
+\begin{array}{ll}
+	\Delta^+: \CC^n\rightarrow  \CC^n \;,& \quad \Delta^+( \tilde{f})_i = n(\tilde{f}_{i+1}-\tilde{f}_i)\,,\\
+	\Delta^-: \CC^n\rightarrow  \CC^n \;, &\quad \Delta^-( \tilde{f})_i = n(\tilde{f}_i -\tilde{f}_{i-1})\,,
+\end{array}
+\end{equation} 
+
+%%%
+\paragraph{Piecewise constant finite elements.}
+
+% \newcommand{\myI}{\mathbbm{1}}
+\newcommand{\myI}{\mathbb{I}}
+
+For every $f\in \PP_{1,n}$,~\eqref{tangent-discrete} implies that  first derivative $\frac{\d f}{\d s}$ belongs to $\PP_{0,n} \subset  BV([0,1], \RR^2)$, where $\PP_{0,n}$ is the class of the piecewise constant functions with $n$ equispaced  nodes. A basis of $\PP_{0,n}$ is defined by 
+\begin{align*}
+\zeta_i(s) =\myI{}_{[\frac{i}{n},\frac{i+1}{n}]}(s) \quad  \foralls i= 1, ..., n-1 \,,\quad 
+\zeta_n(s) =\myI{}_{[0,\frac{1}{n}]}(s) \,,
+\end{align*}
+where $\myI_A$ is the characteristic function of a set $A$, and with $s\in [0,1]$. Then, the first derivative of $f$ can be written as 
+\begin{equation}\label{first-derivative-approx}
+\frac{\d f}{\d s} = \sum_{i=1}^n \Delta^+(\tilde{f})_i\zeta_i\,.
+\end{equation}
+We finally define the following bijection between $\PP_{0,n}$ and $\CC^n$:
+\begin{equation}\label{bijection2}
+P_0\; : \; \tilde{f}=(\tilde{f}_1,..., \tilde{f}_n)\in \CC^n\;\;\mapsto\;\; P_0(\tilde{f})= f\in \PP_{0,n}   \mbox{\;\;s.t.\;\;} f=\sum_{i=1}^n\tilde{ f}_i\zeta_i\,.
+\end{equation}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Finite Element Spaces of Curves} 
+
+%%%
+\paragraph{Discretized curves.} 
+
+The discrete space of curves is defined as $\Bb_n= \PP_{1,n} \subset \Bb$ and every curve $\GA\in\Bb_n$ can be written as
+\begin{equation}\label{gamma-coord}
+	\GA=\sum_{i=1}^n \tGa_i\xi_i\,,\quad \tGa_i=\GA(i/n)\in \CC\,
+\end{equation}
+where the vector $\tGa=P_1^{-1}(\GA) = (\tGa_1, ..., \tGa_n)\in \CC^n$ contains the coefficients of $\GA$ in the finite element basis. By~\eqref{first-derivative-approx} the tangent and normal vectors~\eqref{def-tangente} to $\GA\in \Bb_n$ are computed as 
+\begin{equation}\label{tan-norm}
+\tgam= \sum_{i=1}^n\frac{\Delta^+ (\tGa)_i}{|\Delta^+ (\tGa)_i|}\zeta_i  \;,\;\; \ngam(i)= \rot{\tgam(i)}~,
+\end{equation}
+where $\rot{(x,y)}=(-y,x)$ for all $(x,y) \in \RR^2$.
+In particular we have 
+\begin{equation}\label{arc-length}
+	\frac{\d\GA}{\d s} = \sum_{i=1}^n \Delta^+(\tGa)_i\zeta_i\,.
+\end{equation}
+
+
+%%%
+\paragraph{Discretized tangent spaces.}  
+
+For every  $\GA\in\Bb_n$, the discrete tangent space to $\Bb_n$ at $\GA$ is defined as  $T_{\GA} \Bb_n = \Bb_n$ equipped with the  inner product $\dotp{\cdot}{\cdot}_{H^1(\GA)}$. Every vector field $\Phi\in T_\GA \Bb_n$ can be written as
+\begin{equation}\label{representation-phi}
+\Phi=\sum_{i=1}^n \tPhi_i\xi_i\,,\quad \tPhi_i=\Phi(i/n)\in \CC\,
+\end{equation}
+where $\tPhi=(\tPhi_1, ..., \tPhi_n)\in \CC^n$ are the coordinates of $\Phi$ with respect to the basis of $\PP_{1,n}$. 
+
+By identifying every vector field $\Phi \in T_\GA\Bb_n$ with its coordinates $\tPhi$, the tangent space can be identified with  $\CC^n$. 
+In particular we have 
+\begin{equation}\label{arc-length-2}
+	\frac{\d\Phi}{\d \Gamma} = \sum_{i=1}^n \frac{\Delta^+(\tilde{\Phi})_i}{|\Delta^+(\tilde{\GA})_i|}\zeta_i\,.
+\end{equation}
+Moreover, $\CC^n$ can be equipped with the following Riemannian metric:
+ \begin{defn}[\BoxTitle{Discrete inner product}]
+ We define $\ell^2(\tilde{\GA})$ and  $h^1(\tilde{\GA})$ as the set $\CC^n$ equipped with the following inner products respectively
+ \begin{equation}\label{scal-prod-coord} 
+	\dotp{\tPhi}{\tilde{ \Psi}}_{\ell^2(\tilde{\GA})} = 
+	\dotp{P_1(\tPhi)}{P_1(\tPsi)}_{L^2(\GA)}  \,,
+\end{equation} 
+\begin{equation}\label{scal-prod-coord-sob} 
+	\dotp{\tPhi}{\tilde{ \Psi}}_{h^1(\tilde{\GA})} = 
+	\dotp{P_1(\tPhi)}{P_1(\tPsi)}_{H^1(\GA)}  \,. 
+\end{equation} 
+ \end{defn}
+
+We now give the explicit formulas for the products~\eqref{scal-prod-coord} and \eqref{scal-prod-coord-sob}, which are  useful for computational purposes. 
+
+Proposition~\eqref{prod-scla-cont} details the relationship between the product~\eqref{scal-prod-coord} and the canonical inner product on $\CC^n$ defined by~\eqref{scalarC}. For this purpose, we define  the mass matrix $M_{\tGa} \in \RR^{n \times n}$  as
+\begin{equation}\label{rigidity}
+	M_{\tGa} = \sum_{i=1}^n |\Delta^+(\tGa)_i| M^i\,
+	\qwhereq
+	M^i_{h,j}=\int_{i/n}^{(i+1)/n}\xi_h\xi_j\,.
+\end{equation} 
+The elements of the matrices $M^i \in \RR^{n \times n}$ for $i=1,...,n$ are equal to zero excepted for the following block:  
+\eq{
+\begin{pmatrix}
+
+M^i_{i,i}& M^i_{i,i+1}\\
+M^i_{i+1,i}& M^i_{i+1,i+1}\\
+\end{pmatrix}
+=
+\frac{1}{6n}
+\begin{pmatrix}
+2&1\\
+1&2\\
+
+\end{pmatrix}, 
+}
+where the indices $i-1$ and $i+1$ should be understood modulo $n$. 
+ 
+ 
+\begin{prop}\label{prod-scla-cont} For all $\tPsi, \tPhi$ in $\CC^n$, one has
+\begin{equation}\label{discreteprod}
+ 	\dotp{\tPhi}{\tPsi}_{\ell^2(\tilde{\GA})}
+	= 
+	\dotp{\tPhi}{M_{\tGa}\tPsi}_{\mathbb{C}^n}, 
+\end{equation}
+where $M_{\tGa}$ is the mass matrix defined in~\eqref{rigidity}.
+\end{prop}
+
+\begin{proof}  Denoting $\Phi=P_1(\tPhi)$ and $\Psi=P_1(\tPsi)$,
+\eqref{representation-phi} and~\eqref{arc-length} imply that
+\eq{
+	\dotp{\Phi}{\Psi}_{L^2(\GA)}=\int_0^1 \,\Phi\cdot \Psi d\,\GA(s) 
+	= 
+	\sum_{i=1}^n |\Delta^+(\tGa)_i|\int_{i/n}^{(i+1)/n} 
+	\left( \,\sum_{j=1}^n \tPhi_j \xi_j \cdot\sum_{h=1}^n \tPsi_h\xi_h\right) \d s\,.
+}
+Then, since \eqref{scal-prod-coord}, we have 
+\begin{equation}
+	\dotp{\tPhi}{\tPsi}_{\ell^2(\tilde{\GA})} 
+	= 
+	\sum_{i=1}^n |\Delta^+( \tGa)_i| \dotp{\tPhi}{M^i\tPsi}_{\mathbb{C}^n}
+	= 
+	\dotp{\tPhi}{M_{\tGa} \tPsi}_{\mathbb{C}^n}
+\end{equation}
+where $M_{\tGa}$ is the  mass matrix~\eqref{rigidity}.
+\end{proof}
+
+The next proposition  details the relationship between the product~\eqref{scal-prod-coord-sob} and the canonical inner product on $\CC^n$. To this end, we introduce  the  matrix $N_{\tGa} \in \RR^{n \times n}$  defined by
+\begin{equation}\label{rigidity-2}
+	N_{\tGa} = \sum_{i=1}^n |\Delta^+(\tGa)_i| N^i\,
+	\qwhereq
+	N^i_{h,j}=\frac{1}{|\Delta^+(\tGa)_j||\Delta^+(\tGa)_h|}\int_{i/n}^{(i+1)/n}\frac{\d\xi_h}{\d s}\cdot\frac{\d\xi_j}{\d s}\,.
+\end{equation} 
+The elements of the matrices $N^i \in \RR^{n \times n}$ for $i=1,...,n$ are equal to zero except for the following block:  
+\eq{
+\begin{pmatrix}
+
+N^i_{i,i}& N^i_{i,i+1}\\
+N^i_{i+1,i}& N^i_{i+1,i+1}\\
+\end{pmatrix}
+=
+n
+\begin{pmatrix}
+\displaystyle{\frac{1}{|\Delta^+(\tGa)_i|^2}}&\displaystyle{-\frac{1}{|\Delta^+(\tGa)_i||\Delta^+(\tGa)_{i+1}|}}\\
+\displaystyle{-\frac{1}{|\Delta^+(\tGa)_i||\Delta^+(\tGa)_{i+1}|}}&\displaystyle{\frac{1}{|\Delta^+(\tGa)_{i+1}|^2}}\\
+
+\end{pmatrix}\,.
+}
+%In the following, we denote by $Q_{\tGa}$ the following matrix 
+ 
+%\begin{equation}\label{matrix-Q}
+%Q_{\tGa}=\,\mbox{diag}\left(\frac{1}{|\Delta^+(\tGa)_1|},\,...\,, \frac{1}{|\Delta^+(\tGa)_n|}\right)
+%\end{equation}
+
+
+\begin{prop}\label{prod-scla-cont-sob} For all $\tPsi, \tPhi$ in $\CC^n$, one has
+\begin{equation}\label{discreteprod-sob}
+ 	\dotp{\tPhi}{\tPsi}_{h^1(\tilde{\GA})}
+	= 
+	\dotp{\tPhi}{U_{\tGa}\tPsi}_{\mathbb{C}^n}, 
+\end{equation}
+where $U_{\tGa}$ is the matrix defined by 
+\begin{equation}\label{rigidity-mass-h1}
+U_{\tGa} = M_{\tGa} +  N_{\tGa} \,,
+\end{equation}
+where $M_{\tGa}$, $N_{\tGa}$  are the   matrix \eqref{rigidity} and \eqref{rigidity-2} respectively. 
+We point out that, since $U_{\tilde\Gamma}$ is a  matrix of an inner product in a basis,  it is always invertible.
+\end{prop}
+
+\begin{proof}  Denoting $\Phi=P_1(\tPhi)$ and $\Psi=P_1(\tPsi)$, \eqref{representation-phi} implies 
+\eq{
+	\langle \frac{\d \Phi}{\d \GA}, \frac{\d \Psi}{\d \GA}\rangle_{L^2(\GA)}=
+	%\int_0^1 \,\frac{\d \Phi}{\d s}\cdot \frac{\d \Psi}{\d s}d\,\GA(s) = 
+	\sum_{i=1}^n |\Delta^+(\tGa)_i|\int_{i/n}^{(i+1)/n} 
+	\left( \,\sum_{j=1}^n \frac{\tPhi_j}{|\Delta^+(\tGa)_j|} \frac{\d \zeta_j}{\d s} \cdot\sum_{h=1}^n \frac{\tPsi_h}{|\Delta^+(\tGa)_h|}\frac{\d \zeta_h}{\d s}\right) \d s\,.
+}
+Then, by previous proposition, we have 
+$$
+	\dotp{\tPhi}{\tPsi}_{h^1(\tilde{\GA})} 
+	= \dotp{\tPhi}{M_{\tGa} \tPsi}_{\mathbb{C}^n}	 
+	+ \dotp{\tPhi}{N_{\tGa}  \tPsi}_{\mathbb{C}^n}
+$$
+where $M_{\tGa}$, $N_{\tGa}$  are the   matrices \eqref{rigidity} and \eqref{rigidity-2} respectively. 
+%As $Q_{\tGa}$ is symmetric we get $$	\dotp{\tPhi}{\tPsi}_{h^1(\tilde{\GA})} 	= \dotp{\tPhi}{M_{\tGa} \tPsi}_{\mathbb{C}^n}	 	+ \dotp{ \tPhi}{Q_{\tGa}N_{\tGa} Q_{\tGa} \tPsi}_{\mathbb{C}^n}$$which proves the result.
+ 
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Discrete Finsler Flow}
+
+The initial optimization~\eqref{initial-eq} is discretized by restricting the minimization to the space $\Bb_n$, which corresponds to the following finite dimensional optimization
+\eql{\label{eq-min-discr}
+	\umin{\tGa \in \CC^n} \tE(\tGa)~,
+}
+where $\tilde E(\tGa)$ approximates $E(P_1(\tGa))$.
+
+The discrete Finsler gradient is obtained in a similar way by restricting the optimization~\eqref{defgrad} to $\Bb_n$
+\eql{\label{eq-finsler-grad-discr}
+	\nabla_{\tR_{\tGa}} \tE(\tGa) \in 
+	\uargmin{\tPhi \in \tilde\Ll_{\tGa}} \tR_{\tGa}(\tPhi)~, 
+}
+where the discrete penalty  reads
+\eql{\label{defL-discrete}
+	\tR_{\tGa}(\tPhi) = R_{P_1(\tGa)}(P_1(\tPhi))
+%	\qandq
+%	\tilde\Ll_{\tGa} = \enscond{\tilde\Phi \in \CC^n}{ P_1(\tPhi) \in \Ll_\Ga }
+}
+and, as discrete constraint, we set 
+\eql{
+	\label{eq-expression-Ll}
+	\tilde{\Ll}_{\tGa} = \enscond{ \tPhi \in \CC^n }{
+				\normbig{\tPi_{\tGa}( \nabla_{h^1(\tilde{\GA})} \tE(\tilde{\ga}) -\tPhi) }_{h^1(\tilde{\ga})} 
+				\leq 
+				\rho \normbig{\tPi_{\tGa}( \nabla_{h^1(\tGa)} \tE(\tilde{\ga})) }_{h^1(\tilde{\ga})} 
+			} 
+\,.}
+The Finsler flow discretizing the original one~\eqref{subsec-finsler-descent} reads
+\eql{\label{eq-finsler-flow-discr}
+	\tGa_{k+1} = \tGa_k - \tau_k \nabla_{\tR_{\tGa_k}} \tE(\tGa_k).
+}
+where $\tau_k>0$ is chosen following the Wolfe rule~\eqref{Wolfe}.
+
+The following sections detail how to compute this flow for the particular case of the curve matching energy introduced in Section~\ref{CM}. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Discrete Energy} 
+
+%%%
+\paragraph{Exact energy for piecewise affine curves. }
+
+For curves $\GA=P_1(\tGa)$ and $\La=P_1(\tLa)$ in $\Bb_n$, the energy $E(\GA)$ defined in~\eqref{energy} can be computed as
+\eq{
+	E(\GA) = 
+		\frac{1}{2}\Zz(\GA,\GA) - 
+		\Zz(\Ga,\La) + 
+		\frac{1}{2}\Zz(\La,\La)
+}
+where
+\eq{
+	\Zz(\Ga, \La) =
+ 	\sum_{i=1}^n \sum_{j=1}^n \dotp{ \Delta^+(\tGa)_i }{ \Delta^+( \tLa)_j } 
+	T(\tGa,\tLa)_{i,j}
+}
+\eq{
+	\qwhereq
+	T(\tGa,\tLa)_{i,j} = \int_{\frac{i-1}{n}}^{ \frac{i}{n}} \int_{\frac{j-1}{n}}^{\frac{j}{n}} k(\GA(s), \La(t))\, \d \GA(s) \d \La(t)\,.
+}
+
+%%%
+\paragraph{Approximate energy for piecewise affine curves. }
+
+In general there is no closed form expression for the operator $T$, so that, to enable a direct computation of the energy and its gradient, we use a first order approximation with a trapezoidal quadrature formula
+\eq{
+	\tilde T(\tGa,\tLa)_{i,j} = 
+	\frac{1}{4} \big(
+		k(\tilde\GA_i,\tLa_j) + k(\tilde\GA_{i+1},\tLa_j) + 
+		k(\tilde\GA_i,\tLa_{j+1}) + k(\tilde\GA_{i+1},\tLa_{j+1})
+	\big)\,.
+}
+One thus has the approximation
+\eq{
+	\tilde T(\tGa,\tLa)_{i,j} =  T(\tGa,\tLa)_{i,j} + O(1/n^2). 
+}
+This defines the discrete energy $\tE$ on $\CC^n$ as 
+\eql{\label{eq-energy-matching-discr}
+	\tE(\tGa) = 
+	\frac{1}{2}\tilde{\Zz}(\tGa,\tGa) - 
+	\tilde{\Zz}(\tGa,\tLa) + 
+	\frac{1}{2}\tilde{\Zz}(\tLa,\tLa)
+}
+\eq{
+	\qwhereq
+	\tilde{\Zz}(\tGa,\tLa) =
+	\sum_{i=1}^n \sum_{j=1}^n \dotp{\Delta^+ (\tGa)_i }{ \Delta^+( \tLa)_j } \tilde T(\tGa,\tLa)_{i,j}
+}
+
+
+%%%
+\paragraph{Discrete $h^1$-gradient. }
+
+The following proposition gives the formula to calculate the gradient of $\tE$ with respect to inner product~\eqref{scal-prod-coord-sob}.
+\begin{prop}
+The gradient of $\tE$ at $\tGa$ with respect to the metric defined by the  inner product~\eqref{scal-prod-coord-sob} is
+\eq{
+	\nabla_{h^1(\tilde{\GA})} \tE(\tGa) = U_{\tGa}^{-1}\nabla \tE(\tGa)\,
+}
+where $U_{\tGa}$ is the  matrix~\eqref{rigidity-mass-h1} and $\nabla \tE$ the  gradient of $\tE$ for the canonical inner product of $\CC^{n}$~\eqref{scalarC}, which is given by
+
+\begin{equation}\label{discretegradient}
+\nabla \tE(\tGa)_i = \nabla \tilde{\Zz}(\tGa, \tGa)_i -\nabla \tilde{\Zz}(\tGa, \tLa)_i
+\end{equation}
+where 
+$$
+\begin{array}{ll}
+ \nabla \tilde{\Zz}(\tGa, \tLa)_i &\displaystyle{ = 
+ 	\frac{1}{4} \sum_{j=1}^n  (\tGa_{i+1}-\tGa_{i-1}) (\tLa_{j+1}-\tLa_j)[\nabla_1 k(\tGa_i,\tLa_j)+ \nabla_1 k(\tGa_i,\tLa_{j+1})]} \\
+		& \displaystyle{+ \sum_{j=1}^n  (\tLa_{j+1}-\tLa_j)[ T(\tGa,\tLa)_{i-1,j} - T(\tGa,\tLa)_{i,j} ]}\,.
+		\end{array}
+		$$
+
+\end{prop}
+
+\begin{proof}
+The  gradient~\eqref{discretegradient} of $\tE$ for the canonical inner product of $\CC^{n}$  can be computed by a straightforward calculation. For every $\tPhi\in  \CC^n$ we have the following expression for the derivative of $\tE$
+
+\eq{
+	D \tE (\tGa)(\tPhi)= \dotp{\tPhi}{\nabla_{h^1(\tilde{\GA})} \tE(\tGa)}_{h^1(\tilde{\GA})}
+	= 
+	\dotp{\tPhi}{\nabla\tE(\tGa)}_{\mathbb{C}^n}
+}
+and, by~\eqref{discreteprod}, we get 
+\eq{
+	\nabla_{h^1(\tilde{\GA})} \tE(\tGa) = U_{\tGa}^{-1}\nabla \tE(\tGa)\,.
+}
+\end{proof}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Discrete Piecewise-rigid Curve Matching}
+
+This section first describes in a general setting the discrete Finsler gradient over finite-element spaces, then specializes it to the piecewise rigid penalty for the matching problem, and lastly gives the explicit formula of the corresponding functionals to be minimized numerically. 
+
+%%%
+\paragraph{Discrete piecewise-rigid penalty.}
+
+To re-write conveniently the discrete Finsler gradient optimization~\eqref{eq-finsler-grad-discr}, we introduce the following finite-dimensional operators.
+
+\begin{defn}[\BoxTitle{Discrete operators}]\label{dfn-discr-op} For all $\Ga=P_1(\tGa), \Phi=P_1(\tPhi)$ we define
+	\begin{align*}
+		\tV_{\tGa}(\tPhi) &= TV_{\GA}\left(\frac{\d \Phi}{\d \GA}\cdot {\bf n}_{\Ga} \right), \qquad \tV_{\tGa}: \CC^n\rightarrow \RR   \\
+		% \tilde\Cc_{\tilde \Ga} &= \enscond{\tilde\Phi \in \CC^n}{ P_1(\tPhi) \in \Cc_\Ga } \\
+		\tL_{\tGa}(\tPhi) &=P_0^{-1}(L_{\GA}^+(\Phi)),  
+			\qquad \tL_{\tGa}: \CC^n\rightarrow \RR^n \\
+		\tPi_{\tGa}(\tPhi) &=P_0^{-1}(\Pi_{\GA}(\Phi)), 
+			\qquad \tPi_{\tGa}: \CC^n\rightarrow \CC^n
+	\end{align*}
+\end{defn}
+
+The following proposition uses these discrete operators to compute the discrete Finsler penalty and constraint defined in~\eqref{defL-discrete}. 
+
+\begin{prop}
+We set $\tR_{\tGa}(\tPhi)= R_{P_1(\Ga)}(P_1(\Phi))$. One has 
+\eql{\label{eq-discr-pr-penalty}
+	\tR_{\tGa}(\tPhi) = \tV_{\tGa}(\tPhi) + \iota_{\tilde\Cc_{\tGa}}(\tPhi)
+	\qwhereq
+	\tilde\Cc_{\tGa} = \enscond{ \tPhi \in \CC^n }{ \tL_{\tGa}(\tPhi)=0 }.
+}
+\end{prop}
+\begin{proof} 
+Denoting $\Ga=P_1(\tGa), \Phi=P_1(\tPhi)$, by~\eqref{defL-discrete}, we have	
+$$\tR_{\tGa}(\tPhi) = R_{\Ga}(\Phi)= TV_{\GA}\left(\frac{\d \Phi}{\d \GA}\cdot {\bf n}_{\Ga} \right)  + \iota_{\Cc_{\Ga}}(\Phi) = \tV_{\tGa}(\tPhi)  + \iota_{\tilde\Cc_{\tGa}}(\tPhi)$$
+where 
+$$\tilde\Cc_{\tGa}=\enscond{ \tPhi \in \CC^n }{ \tL_{\tGa}(\tPhi)=0 }.$$
+%Analogously, by the definition of the inner product~\eqref{discreteprod}, we get \textcolor{red}{quel est le lien entre le gradient de $\tE$ et le gradient de $E$ ? Il faudrait $\tilde{ \nabla_{H^1} E(\ga)} = \nabla_{h^1(\tilde{\GA})} \tE(\tilde{\ga}) $ ..}
+%$$
+%\begin{array}{lll}
+%\tilde{\Ll}_{\tGa}& =& \enscond{ \tPhi \in \CC^n }{
+%				\normbig{\Pi_{\Ga}( \nabla_{H^1} \tE(\ga) -\Phi) }_{H^1({\ga)} }
+%				\leq 
+	%			\rho \normbig{\Pi_{\Ga}( %\nabla_{H^1} \tE(\ga)) }_{H^1(\ga)}}\\
+%				&=& \enscond{ \tPhi \in \CC^n }{
+%				\normbig{\tPi_{\tGa}( \nabla_{h^1(\tilde{\GA})} \tE(\tilde{\ga}) -\tPhi) }_{h^1(\tilde{\GA})(\tilde{\ga})} 
+%				\leq 
+%				\rho \normbig{\tPi_{\tGa}( \nabla_{h^1(\tilde{\GA})} \tE(\tilde{\ga})) }_{h^1(\tilde{\GA})(\tilde{\ga})}} .
+%\end{array}				
+%$$
+
+\end{proof}
+
+The following proposition gives explicit formulae for the discrete operators introduced in Definition~\ref{dfn-discr-op}.
+
+
+\begin{prop}\label{constraints-discrete} For every $\tGa, \tPhi\in\CC^n$, we consider $\GA=P_1(\tGa)\in\Bb_n$, $\Phi=P_1(\tPhi)\in T_\GA \Bb_n$. One has 
+\begin{align}\label{eq-expression-tL}
+	\tL_{\tGa}(\tPhi)_i &= \dotp{\frac{\Delta^+(\tPhi)_i}{|\Delta^+(\tGa)_i|} }{ \frac{\Delta^+ (\tGa)_i}{|\Delta^+ (\tGa)_i|} }\, , \\
+	%%
+	\label{eq-expression-tPi}
+	\tPi_{\tGa}(\tPhi)(s) &= \sum_{i=1}^n \langle \tPhi_i\xi_i(s) + \tPhi_{i+1} \xi_{i
++1}(s),  (\tilde{\bf n}_\ga)_i \rangle(\tilde{\bf n}_\ga)_i \zeta_i(s) \, ,
+	  \\
+	%%
+	\label{eq-expression-tV}
+		\tV_{\tGa}(\tPhi) & 
+		% = \sum_{i=1}^n 
+		% \left|
+		%		\Delta^-\left(P_0^{-1}\left(  \frac{\d \Phi}{\d \GA}\cdot \ngam \right)\right)_i
+		% \right|\, , \\
+		% & 
+		= \norm{\Delta^- ( \tilde H_{\tGa}(\tPhi) ) }_{\ell^1} 
+		= 
+		\sum_{i=1}^n
+		\left| 
+			\tilde H_{\tGa}(\tPhi)_i
+			-
+			\tilde H_{\tGa}(\tPhi)_{i-1}
+		\right|\, , \\
+	%%
+	\mbox{where}\;\;\tilde H_{\tGa}(\tPhi)_i & := \dotp{ \frac{\Delta^+(\tPhi)_i}{|\Delta^+(\tGa)_i|} }{ (\tilde{\bf n}_\ga)_i }
+\end{align}
+and where $\tilde{\bf n}_\ga$ denotes the vector of the coordinates of ${\bf n}_\ga$ with respect to the basis of $\mathbb{P}_0$.
+% and  $N_{\tGa} \in \RR^{N \times N}$ is the matrix defined as 
+%\eql{\label{rigidity2}
+%	N_{\tGa} = \sum_{i=1}^n |\Delta^+(\tGa)_i| N^i
+%	\qwhereq
+	%N^i_{h,j}=\int_{i/n}^{(i+1)/n}\xi_h\zeta_j\,.
+%}
+\end{prop}
+
+\begin{proof} 
+%%% 1 %%%%
+\textbf{(Proof of~\eqref{eq-expression-tL})} Using~\eqref{first-derivative-approx}  the first derivative of $\Phi$ can be written (with respect to the basis of $\PP_{0,n}$) as 
+\eq{
+	\frac{\d \Phi}{\d \GA} = \sum_{i=1}^n \frac{\Delta^+(\tPhi)_i}{|\Delta^+(\tGa)_i|} \zeta_i\,
+}
+which implies that
+\eq{
+	L_{\GA}^+(\Phi)= \frac{\d \Phi}{\d \GA}\cdot \tgam = \sum_{i=1}^n \langle\frac{\Delta^+(\tPhi)_i}{|\Delta^+(\tGa)_i|} ,\frac{\Delta^+ (\tGa)_i}{|\Delta^+ (\tGa)_i|} \rangle\zeta_i\,.
+}
+Then, by the definitions of $L_{\GA}^{+(-)}$,  conditions $L_{\Ga}^{+(-)}(\Phi)=0$ become
+\eq{
+	\langle\frac{\Delta^+(\tPhi)_i}{|\Delta^+(\tGa)_i|} ,\frac{\Delta^+ (\tGa)_i}{|\Delta^+ (\tGa)_i|} \rangle=0 
+	\quad \quad \foralls i=1,...,n,
+}
+which is equivalent to $\tL_{\tGa}(\tPhi)=0$.\\
+%%% 2 %%%%
+\textbf{(Proof of~\eqref{eq-expression-tPi})} By~\eqref{representation-phi} and~\eqref{tan-norm}, we get 
+\eq{
+\begin{array}{ll}
+\Pi_\GA(\Phi)(s) & = \displaystyle{\langle \sum_{i=1}^n \tPhi_i\xi_i(s), \sum_{i=1}^n (\tilde{\bf n}_\ga)_i  \zeta_i(s) \rangle  \sum_{i=1}^n (\tilde{\bf n}_\ga)_i  \zeta_i(s)\,}\\
+& =\displaystyle{  \sum_{i=1}^n \langle \tPhi_i \xi_i(s) + \tPhi_{i+1} \xi_{i+1}(s) ,  (\tilde{\bf n}_\ga)_i \rangle(\tilde{\bf n}_\ga)_i \zeta_i(s)}
+\end{array}
+}
+which proves the result. \\
+%%% 3 %%%%
+\textbf{(Proof of~\eqref{eq-expression-tV})} By~\eqref{first-derivative-approx} and~\eqref{tan-norm}, we get
+\begin{align*}
+  TV_\GA\left( \frac{\d \Phi}{\d \GA}\cdot {\bf n}_\GA\right)
+  &=  
+  TV_\GA\left( \sum_{i=1}^n \langle\frac{\Delta^+(\tPhi)_i}{|\Delta^+(\tGa)_i|},(\tilde{\bf n}_\ga)_i \rangle\zeta_i \right)\\
+  &= \sum_{i=1}^n
+		\left| 
+			\tilde H_{\tGa}(\tPhi)_i
+			-
+			\tilde H_{\tGa}(\tPhi)_{i-1}
+		\right|
+\end{align*}
+where we used the fact that the  total variation for piecewise constant functions coincides with the sum of jumps sizes.
+\end{proof}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Calculation of the Discrete Finsler Gradient}
+\label{calculation-finsler}
+
+One can minimize the matching energy $\tE$ defined in~\eqref{eq-energy-matching-discr} using the Finsler flow $\{\tGa_k\}$ of~\eqref{eq-finsler-flow-discr}. This requires computing at each step $k$ the Finsler gradient~\eqref{eq-finsler-grad-discr} for the piecewise-rigid penalty $\tR_{\tGa}$ defined in~\eqref{eq-discr-pr-penalty}. Solving~\eqref{eq-finsler-grad-discr} at each step in turn requires the resolution of a finite dimensional convex problem, and the functional to be minimized is explicitly given with closed form formula in Proposition~\ref{constraints-discrete}.
+
+Several convex optimization algorithms can be used to solve~\eqref{eq-finsler-grad-discr}. A convenient method consists in recasting the problem into a second order cone program by introducing additional auxiliary variables $(\tilde{\Phi}, \tilde{S},\tilde{Y},\tilde{T})$ as follow
+\eq{
+	\underset{ (\tilde{\Phi}, \tilde{S},\tilde{Y},\tilde{T}) \in \CC^{2n}\times\RR^{2n} }{ {\rm Min} }
+		\dotp{\tilde{Y} }{ {\bf 1}}_{\mathbb{C}^n} 	
+		\qwhereq {\bf 1}=(1,...,1) \in \RR^n
+}
+where the minimum is taken under the following set of affine and conic constraints
+\begin{align*}
+	& -\tilde{Y}_i\leq \Delta^-( \tilde{H}_{\tilde \Gamma} (\tilde \Phi) )_i  \leq \tilde{Y}_i \;,\quad \quad  \foralls i=1,...,n \\
+	& \tL_{\tGa}(\tilde{\Phi}) =0 \\
+	& \tilde{S} =  U_{\tGa}^{1/2}(\tPi_{\tilde{\Ga}}(\tilde{\Phi}) - \tPi_{\tilde{\Ga}}(\nabla_{h^1(\tilde{\GA})} \tE(\tilde{\Ga}))) \\
+	& \langle \tilde{T}, {\bf 1}\rangle_{\mathbb{C}^n} \leq \rho^2 \normbig{\tPi_{\tGa}( \nabla_{h^1(\tilde{\GA})} \tE(\tilde{\ga})) }_{h^1(\tilde{\ga})}^2  \\
+	& (\tilde{S}_i,\tilde{T}_i) \in 
+		\enscond{ (s,t) \in \CC \times \RR }{ |s|^2 \leq t } ,\quad \foralls i=1,...,n.
+\end{align*}
+We point out that the variable $\tilde{S}$ is defined by the mass matrix $U_{\tGa}$ \eqref{rigidity-mass-h1} because of the relationship \eqref{discreteprod-sob}. For the numerical simulation, we use an interior point solver, see~\cite{convex-optimization}. These interior points algorithms are powerful methods to solve medium scale SOCP problems and work remarkably well for $n$ up to several thousands, which is typically the case for the curve matching problem.

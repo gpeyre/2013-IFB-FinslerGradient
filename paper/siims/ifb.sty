@@ -1,0 +1,49 @@
+
+\usepackage{amsmath,amsthm,amssymb, verbatim}
+\usepackage{times}
+\usepackage{enumerate}
+
+\pagestyle{myheadings}
+
+
+%% Numbered objects (text of theorems etc. is NOT italicized).
+%% The optional parameters indicate that all objects are numbered together, and "by section".
+%% However, you are welcome to use any other numbering system of your choice.
+
+\theoremstyle{definition}
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{defin}[thm]{Definition}
+\newtheorem{defn}[thm]{Definition} % our
+\newtheorem{rem}[thm]{Remark}
+\newtheorem{exa}[thm]{Example}
+\newtheorem{exmp}[thm]{Example} % our
+\newtheorem{prop}[thm]{Proposition}  % our
+
+%% A numbered theorem with a fancy name:
+\newtheorem{mainthm}[thm]{Main Theorem}
+%% An unnumbered remark:
+\newtheorem*{xrem}{Remark}
+
+
+%% Equations numbered by section:
+
+\numberwithin{equation}{section}
+
+
+%%%%%%%%%%% For IFB
+\frenchspacing
+
+\textwidth=167mm
+\textheight=23cm
+\parindent=16pt
+\oddsidemargin=-0.5cm
+\evensidemargin=-0.5cm
+\topmargin=-0.5cm
+
+\newcommand{\subjclass}[1]{\bigskip\noindent\emph{2010 Mathematics Subject Classification:}\enspace#1}
+\newcommand{\keywords}[1]{\noindent\emph{Keywords:}\enspace#1}
+
+%% style used for titles
+\newcommand{\BoxTitle}[1]{\textbf{#1}}

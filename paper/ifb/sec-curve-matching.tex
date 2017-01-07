@@ -1,0 +1,256 @@
+\section{Application to Curve Matching}\label{CM}
+	
+This section shows an application of the Finsler descent method  to the curve matching problem. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{The Curve Matching Problem}
+
+Given two curves $\Ga_0$ and $\La$ in $\Bb$, the curve matching problem (also known as the registration problem) seeks for an (exact or approximate) bijection between their geometric realizations $[\GA_0]$ and $[\La]$ (as defined in Section~\ref{repa}). One thus looks for a matching (or correspondence) $f : [\GA_0] \rightarrow \RR^2$ such that $f( [\Ga_0] )$ is equal or close to $[\La]$.
+
+There exist a variety of algorithms to compute a matching with desirable properties, that are reviewed in Section~\ref{sec-previous-works}. A simple class of methods consists in minimizing an intrinsic  energy $E(\GA)$ (i.e., $E$ only depends on $[\GA]$), and to track the points of the curve, thus establishing a matching  during the minimization flow. We suppose that $E(\GA)>0$ if $[\GA] \neq [\La]$ and $E(\La)=0$, so that the set of global minimizers of $E$ is exactly $[\La]$. This is for instance the case if $E(\GA)$ is a distance between $[\GA]$ and $[\La]$. A gradient descent method (such as~\eqref{sequence}) defines a set of iterates $\GA_k$, so that $\GA_0$ is the curve to be matched to $\La$. The iterates $\GA_k$ (or at least a sub-sequence) converge to $\Ga_\infty$, and the matching is simply defined as 
+\eq{
+	\foralls s \in \Circ, \quad f(\GA_0(s)) = \GA_\infty(s).
+}
+If the descent method succeeds in finding a global minimizer of $E$, then $f$ is an exact matching, 
+%i.e. $f([\GA_0]) \subset [\La]$. 
+i.e. $f([\GA_0]) = [\La]$. 
+This is however not always the case, and the iterates $\GA_k$ can converge to a local minimum. It is thus important to define a suitable notion of gradient to improve the performance of the method. The next sections describe the use of the Finsler gradient to produce piecewise rigid matching. 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Matching Energy}
+
+The matching accuracy  depends on  the energy and on the kind of descent used to define the flow. 
+In this paper we are interested in studying the Finsler descent method rather than designing novel energies. For the numerical examples, we consider an energy based on reproducing kernel Hilbert space (r.k.h.s.) theory~\cite{rkhs, rkhs2}.  These energies  have been introduced for curve matching in~\cite{currents-matching, Glaunes-matching}. For an overview on other types of energies we refer the reader to  the bibliography presented in Section~\ref{sec-previous-works}.
+
+We consider a positive-definite kernel $k$ in the sense of the r.k.h.s theory~\cite{rkhs,rkhs2}. Following~\cite{currents-matching}, we  define a distance between curves as
+\begin{equation}\label{DistDef}
+	{\rm dist}(\Ga,\La)^2 = Z(\Ga,\Ga) + Z(\La,\La) - 2 Z(\Ga,\La)\;, \quad 
+	\foralls \Ga, \La \in \Bb
+\end{equation}
+where 
+\begin{equation}\label{int-H}
+  	Z(\Ga,\La) =  \int_{\Circ} \int_{\Circ} \n_{\Ga}(s) \cdot \n_{\La}(t) \; 
+	k\left( \Ga(s) , \La(t) \right)\;\d \Ga(s) \d \La(t)\,.
+\end{equation}
+As the kernel $k$ is positive-definite in the sense of r.k.h.s. theory, it can be shown that $\rm{dist}$ defined in~\eqref{DistDef} is a distance between the geometric realizations $([\Ga], [\La])$ (up to change in orientation) of the curves. In our numerical tests, we define $k$ as a sum of two Gaussian kernels with standard deviation $\sigma>0$ and $\delta>0$
+\begin{equation}\label{kernel}
+	k(v, w) =  e^{-\frac{\norm{v-w}^2}{2\si^2}} + e^{-\frac{\norm{v-w}^2}{2\delta^2} }, 
+	\quad \quad \foralls v,\,w\in \RR^2, 
+\end{equation}
+which can be shown to be a positive-definite kernel. We use a sum of Gaussian kernels to better capture features at different scales in the curves to be matched. This has been shown to be quite efficient in practice in a different context in~\cite{FX-ref}.  This energy takes into account the orientation of   the normals along the shape in order to stress the difference between the interior and the exterior of closed shapes. Remark that, to obtain interesting numerical results, both $\GA$ and $\La$ have to be parameterized with the same orientation (clockwise or counter-clockwise). 
+
+%We also introduce the following functional that represents a varifold-type energy between curves:
+
+%\begin{equation}\label{var}
+  %	V(\Ga,\La) =  \int_{\Circ} \int_{\Circ} (1-\cos^2 \alpha(s)) \; 
+	%k\left( \Ga(s) , \La(t) \right)\;\d \Ga(s) \d \La(t)\,
+%\end{equation}
+%where $\alpha(s)$ denotes the angle between the respective tangent vectors $\Ga'(s)$ and $\La'(s)$.
+
+Given a target curve $\La\in \Bb$, we consider the following energy 
+\begin{equation}\label{energy}
+	E : \Bb \rightarrow \RR, \; \quad E(\GA) = \frac{1}{2} {\rm dist}(\GA,\La)^2 \,.%+ V(\Ga,\La).
+\end{equation} 
+Remark that, as $\rm{dist}$ is a distance then $[\La]$ is equal to the set of global minimizers of $E$.
+
+We consider $W^{1,2}(\Circ,\RR^2)$ as ambient space, so that  we have 
+\begin{equation}\label{grad-sob}
+\nabla_{W^{1,2}} E = K \nabla_{L^2} E\,,
+\end{equation}
+where  $K$ denotes the inverse of the isomorphism between $W^{1,2}$ and its dual. Then, it suffices to compute the $L^2 $-gradient.
+
+The gradient of $E$ at $\GA$ with respect to  $L^2(\GA)$-topology is given by the following proposition.
+
+\begin{prop}
+The gradient of $E$ at $\GA$ with respect to the $L^2(\GA)$ scalar product is given by
+\begin{equation}\label{gradient-cont-l2}
+	\nabla_{L^{2}(\Ga)} E(\GA)(s) = 
+	\n_\GA(s) \Big[\int_{\Circ} 
+		\n_\GA(t) \cdot \nabla_1 k(\GA(s),\GA(t)) \d \GA(t)  - \int_{\Circ} 
+		\n_{\La}(t) \cdot \nabla_1 k(\GA(s),\La(t)) 
+		\d \La(t) \Big] 
+\end{equation}
+for every $s\in \Circ$, where $\nabla_1 k$ represents the derivative with respect to the first variable.
+
+For every deformation $\Phi$, the $L^2$ gradient of $E$ at $\GA$ satisfies 
+\eq{
+\begin{array}{ll}
+ \langle \nabla_{L^2(\GA)} E(\GA), \Phi\rangle_{L^2(\GA)}= &\displaystyle{\int_{\Circ}  \n_\GA(s) \cdot \Phi(s) \int_{\Circ} \n_\GA(t) \cdot \nabla_1 k(\GA(s),\GA(t)) d\GA(t)\, d\GA(s)}\\
+ & \displaystyle{- \int_{\Circ}  \n_\GA(s) \cdot \Phi(s) \int_{\Circ} \n_{\La}(t) \cdot \nabla_1 k(\GA(s),\La(t)) \d \La(t)\,  \,d\GA(s)\, .}\\
+ \end{array}
+}
+
+
+\end{prop}
+
+\begin{proof} 
+In order to prove~\eqref{gradient-cont-l2} we calculate the gradient for $Z(\GA,\La)$ with respect to $\GA$. We rewrite $Z$ as 
+\eq{
+	Z(\GA,\La) =  \int_{\Circ} \int_{\Circ} \GA'(s) \cdot \La'(t) \; k\left( \GA(s) , \La(t) \right)\; \d t\; \d s\,,
+}
+and we consider a smooth variation of the curve $\GA$, denoted by $\delta \GA$. Then, for $h$ small, we have
+\eq{
+	\begin{array}{ll}
+	\displaystyle{I(h)=\frac{Z(\GA+ h\delta\GA, \La)- Z(\GA,\La)}{h}} = 
+	&\displaystyle{    \int_{\Circ}\int_{\Circ} (\GA'(s) \cdot  \La'(t))(\nabla_1 k(\GA(s),\La(t))\cdot \delta \GA(s)) \, \d t\,  \,\d s }\\
+	& \displaystyle{+ \int_{\Circ} \int_{\Circ} \delta\GA'(s) \cdot \La'(t) \; k\left( \GA(s) , \La(t) \right)\; \d t\; \d s\ + o(h)}\\
+	\end{array}
+}
+and integrating by parts we obtain
+\eq{
+	\begin{array}{ll}
+	\displaystyle{I(h)}&=\displaystyle{  \int_{\Circ}\int_{\Circ} (\GA'(s) \cdot  \La'(t))(\nabla_1 k(\GA(s),\La(t))\cdot \delta \GA(s)) \, \d t\,  \,\d s }\\
+	& \displaystyle{-\int_{\Circ}\int_{\Circ} (\delta\GA(s) \cdot  \La'(t))(\nabla_1 k(\GA(s),\La(t))\cdot  \GA'(s)) \, \d t\,  \,\d s + o(h)}\\
+	\end{array}
+}
+which can be written as
+\begin{equation}\label{final-derivation} 
+	I(h)=\displaystyle{\int_{\Circ}\int_{\Circ}[ \nabla_1 k(\GA(s),\La(t))^t(\delta\GA(s) \otimes  
+	\GA'(s) - \GA'(s)\otimes\delta\GA(s)  )  \La'(t) ]\, \d t\,  \,\d s + o(h)}
+\end{equation}
+
+\eq{
+	\qwhereq
+	v \otimes w= v w^t, \quad\quad\foralls v, w \in \RR^2.
+}
+Now, writing $\delta \GA(s)$ with respect to the basis $\{\tgam(s), \ngam(s)\}$ and reminding that $\GA'(s)=|\GA'(s)|\tgam(s)$, we can show that the matrix
+\eq{
+	M(s)=\delta\GA(s) \otimes  \GA'(s) -\GA'(s)\otimes\delta\GA(s) = |\GA'(s)|(\delta\GA(s)\cdot\ngam(s)) (\ngam(s) \otimes  \tgam(s) -\tgam\otimes\ngam(s)) \\
+}
+acts as 
+\begin{equation}\label{final-derivation2}
+	 M(s)(v) = - |\GA'(s)|(\delta\GA(s)\cdot\ngam(s)) \rot{v}, \quad \foralls v\in \RR^2.
+\end{equation}
+Then, by~\eqref{final-derivation} and~\eqref{final-derivation2}, we obtain
+\eq{
+\begin{array}{ll}
+\displaystyle{I(h)}&=\displaystyle{ - \int_{\Circ}\int_{\Circ} (\delta\GA(s)\cdot\ngam(s)) ( \nabla_1 k(\GA(s),\La(t))\cdot   \rot{\La'(t)})\, \d t\,  \,|\GA'(s)|\d s + o(h)}\\
+\end{array}.
+}
+Finally, as $h\rightarrow 0$, we obtain the $L^2(\GA)$-gradient of $Z(\GA,\La)$  which is given by
+\eq{
+	- \n_{\GA}(s)\int_{\Circ} \n_{\La}(t) \cdot \nabla_1 k(\GA(s),\La(t)) \d \La(t)
+}
+that represents  the second term in~\eqref{gradient-cont-l2}. For the first term we need to apply the same argument to calculate the gradient of $Z(\GA,\GA)$.
+\end{proof}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Matching Flow}
+In this section, we use $H = W^{1,2}(\Circ,\R^2)$.
+In order to minimize $E$ on $\Bb$ we consider the scheme~\eqref{sequence}, that defines $\{\GA_k\}$ for $k>0$ as 
+\begin{equation}\label{descent}
+	\GA_{k+1} = \GA_k - \tau_k \nabla_{R_{\GA_k}} E(\GA_k ) 
+\end{equation}
+where $\GA_0$ is the input curve to be matched to $\La$, 
+ $\nabla_{R_{\GA_k}} E$ is defined by~\eqref{grad-rigid} (using $H = W^{1,2}(\Circ,\R^2)$) and  $\tau_k > 0$ is a step size, that satisfies the Wolfe rule~\eqref{Wolfe}. According to Theorem \ref{convergence}, following proposition proves the convergence of the method:
+
+
+\begin{prop} 
+The $W^{1,2}-$gradient of the energy functional $E$ is $W^{1,2}-$ Lipschitz on every set of curves of bounded length.
+\end{prop}
+
+%\begin{proof} We prove that the hypothesis of Theorem~\ref{convergence} are verified. 
+%We first remind that, if $\GA_k\rightarrow \GA$ in $\BVDcirc$ then $\GA_k\rightarrow \GA$ in $W^{1,1}(\Circ,\RR^2)$. Moreover,  $\BVcirc$ and  $\BVDcirc$ are continuously embedded in $L^\infty(\Circ,\RR^2)$. Then we can suppose 
+%\begin{equation}\label{bound-w11}
+%	\underset{k}{\sup}\,\norm{\GA_k}_{W^{1,\infty}(\Circ,\RR^2)}\leq M
+%\end{equation}
+%for some constant $M>0$. We  rewrite $H$ as 
+%\eq{ 
+%	H(\GA,\La) =  \int_{\Circ} \int_{\Circ} \GA'(s) \cdot \La'(t) \; k\left( \GA(s) , \La(t) \right)\; \d s\; \d t\,.
+%}
+\begin{proof}
+We remark that we choose $W^{1,2}(\Circ,\RR^2)$ as ambient space and, moreover, we have 
+\begin{equation}\label{grad-sob}
+\nabla_{W^{1,2}} E = K \nabla_{L^2} E\,,
+\end{equation}
+where we have denoted $K$ the inverse of the isomorphism between $W^{1,2}$ and its dual. Then, it suffices to prove the proposition for the $L^2 $-gradient. For the sake of clarity, we separate the proof in several steps.
+
+{\bf Continuity of the energy and the gradient.} 
+By the dominated convergence theorem,  $E$ is continuous on  $W^{1,2}(\Circ,\R^2)$.
+Note that
+\begin{align*}
+	 \langle \nabla_{L^2(\GA)} E(\GA), \Phi\rangle_{L^2(\GA)} = &\int_{\Circ}  \rot{\GA'(s)} \cdot \Phi(s) \int_{\Circ}  \rot{\GA'(t)} \cdot \nabla_1 k(\GA(s),\GA(t)) \d t\, \d s\\
+	  - &\int_{\Circ} \rot{\GA'(s)} \cdot \Phi(s) \int_{\Circ}  \rot{\La'(t)} \cdot \nabla_1 k(\GA(s),\La(t)) \d t\,  \,\d s
+\end{align*}
+where $\rot{(x,y)}=(-y,x)$ for every $(x,y)\in \RR^2$. 
+
+
+Then $E$ is  non-negative  and $C^1$ with respect to the $W^{1,2}(\Circ, \RR^2)$-ambient topology.\vspace{0.2cm} 
+
+{\bf Condition \eqref{grad-lip}.} 
+We detail the proof for the term of the gradient depending on both $\GA$ and $\La$. For the other term the proof is similar. For every couple of curves $(\Ga,\La)$, we introduce the following function
+\eq{
+	\Ii(\GA,\La)(s) = \int_{\Circ} \n_{\La}(t) \cdot \nabla_1 k(\GA(s),\La(t))\; \d \La(t)=\int_{\Circ} \rot{\La'(t)} \cdot \nabla_1 k(\GA(s),\La(t))\; \d t\,.
+}
+
+It suffices just to prove that there exists $L>0$ such that
+\eq{
+	\norm{ \rot{\GA'_1} \Ii(\GA_1,\La) -  \rot{\GA'_2} \Ii(\GA_2,\La) }_{L^2(\Circ,\RR^2)} 
+	\leq L \norm{\GA_1-\GA_2}_{W^{1,2}(\Circ,\RR^2)} 
+}
+for every couple of curves $(\GA_1, \GA_2) \in BV^2(\Circ,\RR^2)$. We have
+\eq{
+	\norm{ \rot{\GA'_1} \Ii(\GA_1,\La) -  \rot{\GA'_2} \Ii(\GA_2,\La) }_{L^2(\Circ,\RR^2)} = 
+	\norm{ \GA'_1\Ii(\GA_1,\La) - \GA'_2\Ii(\GA_2,\La) }_{L^2(\Circ,\RR^2)}
+}
+and
+\begin{equation}\label{lip1}
+\begin{array}{ll}
+	\|\GA'_1\Ii(\GA_1,\La) - \GA'_2\Ii(\GA_2,\La)\|_{L^2(\Circ,\RR^2)} \leq &  \|\GA'_1\Ii(\GA_1,\La) - \GA'_1\Ii(\GA_2,\La)\|_{L^2(\Circ,\RR^2)}  \vspace{0.3cm}\\
+	 &+ \|\GA'_1\Ii(\GA_2,\La) - \GA'_2\Ii(\GA_2,\La)\|_{L^2(\Circ,\RR^2)}\,.
+	\end{array}
+\end{equation}
+
+
+Note that
+\begin{equation}\label{boundI}
+	\norm{\Ii(\GA,\La)}_{L^\infty(\Circ,\RR^2)}\leq  
+	\alpha \norm{\La'}_{L^1(\Circ,\RR^2)}\,,
+\end{equation}
+where $\alpha = \sup_{x,y \in \R^2} |\nabla_1 k(x,y)|$.
+% (C_0\|\La\|_{\BVDcirc} + \|\GA\|_{L^\infty(\Circ,\RR^2)}) where $C_0$ is the constant of the embedding of $\BVcirc$ in $L^\infty(\Circ,\RR^2)$ (i.e., $\|\GA\|_{L^\infty(\Circ,\RR^2)}\leq C_0 \|\GA\|_{\BVcirc}$). 
+Now, we have
+\begin{align*}
+	& \|\GA'_1[\Ii(\GA_1,\La)-\Ii(\GA_2,\La)]\|^2_{L^2(\Circ,\RR^2)} \leq \norm{\GA'_1}_{L^1(\Circ,\RR^2)}^2 \|\Ii(\GA_1,\La)-\Ii(\GA_2,\La)\|^2_{L^\infty(\Circ,\RR^2)}  \\
+	& \qquad \leq  \norm{\GA'_1}_{L^1(\Circ,\RR^2)}^2 \norm{\La'}^2_{L^1(\Circ,\RR^2)} \sup_{s\in \Circ}  \int_{\Circ}|\nabla_1k(\GA_1(s),\La(t))-\nabla_1k(\GA_2(s),\La(t))|^2\;  \d t \\
+	&\qquad \leq  \norm{\GA'_1}_{L^1(\Circ,\RR^2)}^2 \norm{\La'}^2_{L^1(\Circ,\RR^2)} \frac{\sigma^2+\delta^2}{\sigma^2\delta^2}\sup_{s\in \Circ} | \GA_1(s) - \GA_2(s)|^2\,,
+\end{align*}
+where we used  the fact that $r e^{-r^2}$ is 1-Lipschitz continuous (given by a straightforward derivative calculation). Then, as $W^{1,2}(\Circ,\RR^2)$ is continuously embedded in $L^\infty(\Circ,\RR^2)$, we get
+\begin{equation}\label{lip2}
+	\norm{ \GA'_1[\Ii(\GA_1,\La)-\Ii(\GA_2,\La)] }^2_{L^2(\Circ,\RR^2)} 
+	\leq 
+	C_1 \norm{\La'}^2_{L^1(\Circ,\RR^2)} \norm{\GA_1-\GA_2}^2_{W^{1,2}(\Circ,\RR^2)} 
+\end{equation}
+where $C_1 =  \norm{\GA'_1}_{L^1(\Circ,\RR^2)}^2 C_0^2/\sigma^2$ ($C_0$ denotes here  the constant of the embedding of $W^{1,2}(\Circ,\RR^2)$ in $L^\infty(\Circ,\RR^2)$ so that $\|\GA\|_{L^\infty(\Circ,\RR^2)}\leq C_0 \|\GA\|_{W^{1,2}(\Circ,\RR^2)}$). 
+
+Moreover, by~\eqref{boundI}, we have  
+$$\|\GA'_1\Ii(\GA_2,\La) - \GA'_2\Ii(\GA_2,\La)\|^2_{L^2(\Circ,\RR^2)}  
+ 	 \leq \alpha^2  \norm{\La'}_{L^1(\Circ,\RR^2)}^2 \|\GA'_1 - \GA'_2\|_{L^2(\Circ,\RR^2)}^2$$
+%& \qquad \leq  \|\La\|_{\BVDcirc}(C_0\|\La\|_{\BVDcirc} + M)\|\GA_1' - \GA_2'\|_{L^2(\Circ,\RR^2)}^2, 
+which implies 
+\begin{equation}\label{lip3}
+  \displaystyle{\|\GA'_1\Ii(\GA_2,\La) - \GA'_2\Ii(\GA_2,\La)\|^2_{L^2(\Circ,\RR^2)}\leq  C_2\|\GA_1 - \GA_2\|_{W^{1,2}(\Circ,\RR^2)}^2}
+\end{equation}
+where $C_2=\alpha^2  \norm{\La'}_{L^1(\Circ,\RR^2)}^2$. Then, by~\eqref{lip1},~\eqref{lip2} and~\eqref{lip3}, the $W^{1,2}$-gradient of the energy verifies \eqref{grad-lip} on every 
+%convex 
+set of curves of bounded length. This guarantees actually that the constant $C_1$ is uniformly bounded and we can define the Lipschitz constant. 
+\end{proof}
+
+Therefore, the application of Theorem \ref{convergence} gives
+\begin{cor} 
+Under the assumption that the lengths of $\GA_k$ are bounded, every accumulation point of $\{\GA_k\}$ in $\Bb = \BVDcirc$ is a  critical point of $E$.
+\end{cor}
+
+\begin{rem}
+We were not able to relax the boundedness assumption although this seems rather plausible under the assumptions that the initial and target curves are in $BV^2(\Circ,\R^2)$.
+The result of the corollary is however relatively weak in the sense that it is difficult to  check numerically the convergence in $BV^2(\Circ,\R^2)$.
+\end{rem}
+

@@ -1,0 +1,211 @@
+% !TEX root = ../Geodesics_BV2.tex
+
+\section{Geodesics in the Space of Sobolev Curves}\label{Hs}
+
+In this section, we study the geodesic boundary value problem in the class of curves belonging to $\hs$ with $k\geq 2$ integer.
+
+
+\begin{simplified}
+ We recall that, by identifying $\Circ$ with $[0,1]$,  $u\in H^k(\Circ,\R)$ if $u$ is 1-periodic and 
+$$\|u\|_{H^k(\Circ,\R)}^2 = \sum_{n\in \mathbb{Z}} (1+n^{2s})|\hat f(n)|^2 \,<\, \infty\,$$
+with 
+$$\hat f(n) = \int_{\Circ} f(s) e^{-\imath ns} \d s\,.$$
+Moreover, $\|u\|_{H^k(\Circ,\R)}$ defines a norm and $H^k(\Circ,\R)$ equipped with such a norm is a Hilbert space. 
+\end{simplified}
+We remind the continuous embedding 
+\begin{equation}\label{embedding1}
+H^k(\Circ,\RR^2) \hookrightarrow C^{1}(\Circ,\RR^2) \quad \foralls \, k\geq 2\,.
+\end{equation}
+
+%In our case, as $s>3/2$, every $H^k$-curve  is $C^1$. 
+%This implies in particular that the derivative is bounded which is the main hypothesis needed  to prove (analogously to Proposition~\ref{no-collapse}) a uniform bound on the length of the curves.
+% We refer to~\cite{frac-sobolev} for more details about fractional order Sobolev spaces.
+
+%We point out that (see~\cite{BV-Sob}) $\hs$ is not embedded in $\BV(\Circ,\RR^2)$ for $s\in(0,1)$.  
+
+%Moreover, if $k\geq 2$,  $\hs$ is embedded in $\BV(\Circ,\RR^2)$ but not in $\BV^2(\Circ,\RR^2)$. This implies that  the Sobolev case can not be seen as a special case of the $BV^2$ framework. 
+In this framework, the proof of  existence of geodesics is simpler because we can use the compactness properties of the Bochner space of paths with respect to the weak topology. 
+
+%In the following, we apply  the strategy presented in Section~\ref{BV2} to $H^k$-curves in order to prove the existence of a geodesics.
+%Since the proofs are very similar to those presented in the previous section, we do not give every detail, but we develop the key arguments particular to $H^k$ curves in order to retrieve the same results.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\subsection{The class of the parameterized $H^k$-curves}
+ 
+We define the class of the parameterized $H^k$-curves as follows. 
+
+\begin{defn}
+[{\bf $H^k$-curves}]\label{Hscurves}
+We define $\Ha$ as the class  of counterclockwise oriented curves belonging to $H^k( \Circ, \R^2)$ ($k\geq 2$ integer)  and such that for any $\gamma \in \Ha$, $\gamma'(s) \neq 0$ for all $s \in \Circ$. 
+For every $\gm\in \Ha$ the constant speed parameterization $\varphi_\gm$ can be defined as in Remark \ref{arc-len}. %Moreover, in this section we denote by ${\rm Diff}^0(\Circ)$  the set of homeomorphisms  $\varphi\in H^k(\Circ,\Circ)$ satisfying $\varphi(0) = 0$ such that $\varphi^{-1} \in H^k(\Circ,\Circ)$. Note that any $\varphi \in {\rm Diff}^0(\Circ)$ can be lifted  to a diffeomorphism $\tilde \varphi$ of $\R$ that can be written $\tilde \varphi = {\rm{Id}} + f$ with $f \in H^k$ a $1-$periodic function. Therefore, ${\rm Diff}^0(\Circ)$ can be interpreted as a subset of $H^k(\Circ)$.
+\end{defn}
+
+
+\begin{rem}[{\bf reparameterizations}]
+In this section, we denote by 	${\rm Diff}_0^k(\Circ)$ the connected component of identity of the Sobolev diffeomorphisms group  $\varphi\in H^k(\Circ,\Circ)$ such that $\varphi^{-1} \in H^k(\Circ,\Circ)$.
+As in the previous section, we will use weak topologies on the lifts of these diffeomorphisms and the following lemma. Finally, the chosen topology on ${\rm Diff}_0^k(\Circ)$ is the pullback topology of the Sobolev norm by the lift  $\varphi \mapsto \tilde{\varphi} - \Id \in H^k(\Circ,\R)$.
+\end{rem}
+
+\begin{lem}\label{BoundedReparametrizations}
+Let $\varepsilon$ and $M$ be two positive real numbers. There exists a positive constant $D = D(\varepsilon,M)$ such that 
+if $\gm \in B$ is such that $\| \gm'(s) \| \geq \varepsilon >0$ and $\| \gm \|_{H^k(\Circ,\R^2)} \leq M$, then the reparameterization $\phi_\gm$ satisfies
+$ \| \phi_\gm \|_{H^k(\Circ,\Circ)} \leq D$. 
+\end{lem}
+
+\begin{proof}
+Recall that the reparameterization $\phi_\gm$ is the inverse of $s_\gm$ defined  $s_\gm(s) =\frac{1}{\len(\gm)} \int_{s_0}^s \,|\gm'(t)| \,dt$,
+where $s_0 \in \Circ$ is a chosen basepoint. We thus have $s_\gm'(x) > \frac{\varepsilon }{ \len(\gm)} $.  Using \eqref{embedding-sob} below, $\| \gm' \|$ is bounded by 
+$C M$. Therefore, $x \in \R^2 \mapsto \| x \| \in \R$ being a smooth function on $B(0,\alpha M) \setminus B(0, \frac{\varepsilon }{ \len(\gm)} )$, there exists a constant $\beta$ such that $\| s_\gm \|_{H^k(\Circ,\Circ)} \leq \beta M$. 
+
+ In Lemma 2.8 in \cite{Inci2013}, it is proven that the inversion on $\mathcal{D}^s(\R^d)$ is continuous and a locally bounded map when $s>d/2 +1$. Their proof actually shows that if $\phi \in \mathcal{D}^s$ is bounded in $H^s(\R^d,\R^d)$, namely, $\| \Id - \phi \|_{H^s(\R^d,\R^d)} \leq M'$ and $\det D\phi > \varepsilon'$ then $\| \Id - \phi^{-1} \|_{H^s(\R^d,\R^d)} \leq D'(M',\varepsilon')$.  The same proof would be valid in our situation replacing $\R^d$ by $\Circ$, however, we present a simple argument to apply their result.
+Let $m:\R \to \R$ be a smooth map such that $m(x) = 1$ if $x \in [-2,2]$ and $m(x) = 0$ if $x \notin ]-3,3[$. Then the map $ \Psi:  {\rm Diff}_0(\Circ) \to \mathcal{D}^k(\R)$ defined by 
+$\Psi(\phi) = \Id + m(\tilde{\phi} - \Id)$ satisfies 
+\begin{equation}
+c \| \tilde{\phi} - \Id \|_{H^k(\Circ,\R)} \leq \|\Psi(\phi) - \Id  \|_{H^k(\R,\R)} \leq c' \| \tilde{\phi} - \Id \|_{H^k(\Circ,\R)} \,,
+\end{equation}
+where $c,c'$ are some positive constants. The first inequality is clear while the second is obtained because $H^k(\R)$ is a Hilbert algebra since $k>1/2$.
+Lemma 2.8 in \cite{Inci2013} implies that $\Psi(\phi)^{-1}$ is bounded in $\mathcal{D}^k$ and $\Psi(\phi)^{-1}$ is equal to $\Psi(\phi^{-1})$ on $[-2,2]$, which implies the result.
+\end{proof}
+
+From~\eqref{embedding1} it follows that  there exists a constant $C$ such that 
+\begin{equation}\label{embedding-sob}
+	\|\gm'\|_{L^\infty(\Circ,\R^2)}\leq   C\|\gm\|_{\hs} \quad \foralls \gm \in \Ha \,.
+\end{equation}
+Moreover, it is easy to verify that $\Ha$ is an open set of $\hs$. %In fact, similarly to the $BV^2$-case, for every $\gm_0\in \Ha$, which is parameterized by the constant speed  parameterization,~\eqref{embedding-sob} implies that
+%\begin{equation}\label{open-sob}
+%	\left\{\gm\in \Ha\,:\, \|\gm-\gm_0\|_{\hs}\leq \frac{\len(\gm_0)}{2C}\right\}\subset \Ha\,.
+%\end{equation}
+
+%We point out that local properties of reparameterization proved in Proposition~\ref{reparameterization} can be easily generalized to $H^k$-curves. 
+
+As in the previous section we define the Hilbert space $\hsg$ as the space $\hs$, where integration and derivation are performed with respect to the measure $\d \gm = |\gm'| \d s$. 
+The tangent space at $\gm \in \Ha$ is endowed with the corresponding norm and is denoted by $H^k(\gm)$.
+%Concerning the tangent space, for any $\gm \in \Ha$, we set $T_\gm \Ha =\,H^k(\gm)$. 
+More explicitely, we have, denoting $\langle \cdot, \cdot \rangle$ the usual scalar product on $\R^2$,
+\begin{equation}
+\| f \|_{\hsg}^2 = \int_{\Circ} \langle f, f\rangle \, \d\gm + \int_{\Circ} \left\langle \frac{\d^k}{\d\gm^k}f, \frac{\d^k}{\d\gm^k}f \right\rangle\, \d\gm\,.
+\end{equation}
+This defines a smooth Riemannian metric on $\hs$ (see \cite{Bruveris}).
+%A reparametrization of a curve $\gm$ is an element of the group $D^s(\Circ)$ which is a group with continuous  (but not smooth) composition and inverse maps.
+
+As in the previous section, for every $\gm_0,\gm_1\in \Ha$ we consider the class of paths $\GA \in H^1([0,1],\Ha)$ such that $\GA(0)=\gm_0$ and $\GA(1)=\gm_1$. The energy of a path is defined as  $$E(\GA)=\int_0^1 \|\GA_t(t)\|_{H^k(\GA(t))}^2\,\d t$$ and the geodesic distance $d(\gm_0,\gm_1)$ is defined accordingly (see Definition~\ref{defn-geodesic-paths}).
+
+Moreover, Lemma 5.1 in \cite{Bruveris} proves the equivalence of the norms of $\hs$ and $\hsg$. The result states that, for every $\gm_0\in \Ha$, there exists a constant $C=C(\gm_0, D) > 0$ such that 
+\begin{equation}\label{bound-sob-norms}
+\frac 1 C \| f \|_{\hs} \leq  \| f \|_{\hsg} \leq C \| f \|_{\hs}\,
+\end{equation}
+for every $\gm \in \Ha$ such that $d(\gm_0,\gm)< D$. This proves in particular that the constant $C$ is uniformly bounded on every geodesic ball. 
+
+Finally, in order to compare the $H^k$-norm after reparameterization, we remark that 
+\begin{equation}\label{change-sob}
+\begin{array}{c} 
+\displaystyle{ 
+\| f \|_{\hsg} = \| f\circ\varphi_\gm \|_{\hs}^{\gm}}\,, \vspace{0.3cm}\\
+\displaystyle{(\| f \|_{\hs}^{\gm})^2 = \len(\gm)\| f \|^2_{\leb{2}} +  \len(\gm)^{1 - 2k}\|f^{(k)}\|^2_{\leb{2}} \quad \quad \forall \, f\in \hs.}
+\end{array}
+\end{equation}
+
+We now prove an existence result for geodesics in the Sobolev framework.
+
+
+
+
+\begin{thm}[{\bf existence}]\label{existence_sobolev}
+Let $\gm_0, \gm_1 \in \Ha$ such that $d(\gm_0, \gm_1)<\infty$.
+Then, there exists a geodesic between $\gm_0$ and $\gm_1$.
+\end{thm}
+
+
+\begin{proof} 
+Let $\{\GA^h\}$ be a minimizing homotopy sequence such that $E(\GA^h) < D^2$, where $D >d(\gm_0,\gm_1) $. 
+Because of \eqref{bound-sob-norms} there exists a positive constant $M  = C(\gm_0,D)^2$ such that  
+\begin{equation}\label{lower-velocity0}
+\int_0^1 \|\GA_t^h(t)\|^2_{\hs}\,\d t\leq \int_0^1 M \|\GA_t^h(t)\|^2_{\hsgt}\,\d t \leq  M E(\GA)\,.
+\end{equation}
+This implies  that  $\GA^h_t$ is uniformly bounded in  $L^2([0,1],\hs)$ and, because of the boundary conditions, that  $\GA^h$ is uniformly bounded in  $H^1([0,1],H^k(\Circ,\R^2))$. 
+
+Therefore there exists a subsequence of $\{\GA^h\}$ that weakly converges in   $H^1([0,1],H^k(\Circ,\R^2))$.
+Since the embedding 
+\eq{
+	H^1([0,1],H^k(\Circ,\R^2))\subset C([0,1], H^{k-1}(\Circ,\R^2))
+}
+is compact, there exists another subsequence (not relabeled)  that converges to a path $\GA^\infty$ belonging to $L^2([0,1], C(\Circ, \R^2))$,
+$$\GA^h \rightarrow \GA^\infty \quad \mbox{in}\quad C([0,1],H^{k-1}(\Circ,\R^2))\,.$$
+This proves in particular that 
+$$ 
+	\GA^h(t) \overset{W^{1,1}(\Circ, \RR^2)}{\rightarrow} \GA^\infty(t) \; \foralls t\in [0,1] \,
+	\qandq
+ 	\GA^h_t(t) \overset{H^k(\Circ, \RR^2)}{\rightharpoonup} \GA^\infty_t(t) \; \foralls t\in [0,1] \,.
+$$
+Now, as   $\GA^h(t)$ converges in $W^{1,1}(\Circ, \RR^2)$ towards $\GA^\infty(t)$, the constant speed reparameterizations at time $t$, denoted respectively by  $\phi_{\GA^h(t)}$ and $\phi_{\GA^\infty(t)}$, also converge in $W^{1,1}(\Circ, \Circ)$.
+
+Using Lemma \ref{BoundedReparametrizations}, we have that $\phi_{\GA^h(t)}$ are (uniformly w.r.t. $t$ and $h$) bounded in $H^k(\Circ,\Circ)$ so that by a direct adaptation of Lemma 2.7 in \cite{Inci2013} (or the argument developed in Lemma \ref{BoundedReparametrizations}), the sequence $\Ga_t^h \circ \phi_{\GA^h(t)}$ is (uniformly) bounded in $H^k(\Circ,\R^2)$.
+Thus, by the same arguments used to prove~\eqref{sci2} we obtain weak convergence on a dense subset. Since the sequence is bounded, the weak convergence follows: 
+$$\GA^h_t\circ \phi_{\GA^h(t)}\overset{\hs}{\rightharpoonup}\GA^\infty_t\circ\phi_{\GA^\infty(t)} \quad \foralls \,t\in [0,1]\,.$$
+
+Now, because of \eqref{change-sob}, we have
+$ \|\GA^{h}_t(t)\|_{\hsgt}= \| \GA^h_t \circ \phi^h (t)\|^{\GA^h(t)}_{\hs}$. Recall that, because of the strong convergence in $W^{1,1}(\Circ, \Circ)$ of the  constant speed parameterizations we have $\len(\GA^h(t))\rightarrow \len(\GA^\infty(t))$ for every $t$. 
+Then, for every $t$, we get
+$$
+\begin{array}{lll}
+	\| \GA^{\infty}_t(t)\|_{\hsgt} &=  \| \GA^\infty_t \circ \phi^\infty(t) \|^{\GA^{\infty}(t)}_{\hs}   
+	&\leq \underset{h\rightarrow \infty}{\liminf}  \| \GA^h_t \circ \phi^h (t)\|^{\GA^h(t)}_{\hs}	\vspace{0.2cm} \\
+&=\underset{h\rightarrow \infty}{\liminf} \|\GA^{h}_t(t)\|_{\hsgt}\,.&\\
+\end{array}
+$$
+
+By integrating the previous inequality and using Fatou's lemma we get that $\GA^\infty$ minimizes $E$ and the theorem ensues.
+\end{proof}
+
+
+In ~\cite{Bruveris}, the authors prove (Theorem 1.1) that the space of immersed curves is geodesically complete with respect to the $H^k$-metrics ($k\geq 2$ integer). 
+Since $H^k$-metrics ($k\geq 2$ integer) are smooth Riemannian metrics, minimizing geodesics are given locally by the exponential map.
+Moreover, from Theorem \ref{existence_sobolev}, we have the existence of minimal geodesics (in our variational sense) between any two points. Therefore, the minimizing curve found by our variational approach coincides with an exponential ray. Thus, we have the following corollary.
+
+\begin{cor}[\bf surjectivity of the exponential map] 
+The exponential map on $\Ha$ for $k \geq 2$ integer is defined for all time and is surjective.
+\end{cor}
+
+
+The so-called Fr\'echet or K\"archer mean, often used in imaging \cite{Pennec}, is a particular case of minimizers of the distance to a closed subset. The surjectivity of the exponential map enables the use of~\cite[Theorem 3.5]{Azagra}, which proves that the projection onto a closed subset is unique on a dense subset.
+A direct theoretical consequence of this surjectivity result is the following result. 
+
+\begin{prop}
+Let $k\geq 2$ be an integer.
+For any integer $n\geq 1$, there exists a dense subset $D \subset \Ha^n$, such that the K\"archer mean associated with any $ (\gm_1,\ldots,\gm_n) \in D$, defined as a minimizer of 
+\begin{equation}
+	\min_{\gm \in \Ha} \;  \sum_{i=1}^n d(\gm , \gm_i)^2\,,
+\end{equation}
+is unique.
+\end{prop} 
+
+\begin{proof}
+Let $S$ be the diagonal in $\Ha^n$. The set $S$ is a closed subset of $ {\underbrace{\Ha \times \ldots \times \Ha}_{n \text{ times}}}$. In~\cite[Theorem 3.5]{Azagra} the authors prove that the set of minimizers of $\arg \min_{y\in S} d(x,y)$ is a singleton for a dense subset in~$\Ha^n$.
+\end{proof}
+
+We call the space of geometric curves the quotient space $\Ha^i \, / \, {\rm{Diff}_0^k(\Circ)}$, where $\Ha^i$ denotes the set of globally injective curves. The notation $[\gm]$ represents the class of $\gm$ in the quotient space.
+Analogously to the $BV^2$-case we can define a distance $\mathcal{D}$ between two geometric curves (see Proposition \ref{distance-geom}). The fact that the distance satisfies $d([\gm_0],[\gm_1]) = 0$ implies $[\gm_0]=[\gm_1]$ can be proven using Lemma \ref{BoundedReparametrizations}. This lemma actually implies the following proposition.
+\begin{prop}
+Let $\gm \in \Ha^i$ and $r>0$. Denoting the equivalence class of $\gm$ by $[\gm]$ and $B_d(\gm,r)$ the closed geodesic ball of radius $r$,
+ the set $[\gm] \cap B_d(\gm,r)$ is weakly compact. %Namely, if $\gm_n \in [\gm]$ and $d(\gm_n,\gm) \leq r$, there exists a subsequence that weakl
+ %
+ %$\gm_n \overset{\hs}{\rightharpoonup} \gm_\infty$ then $\gm_\infty \in [\gm]$.
+\end{prop}
+\begin{proof}
+Without loss of generality, we can assume that $\gm$ is parameterized by constant speed parameterization. 
+There exist $\varepsilon$ and $M$, two positive constants, such that for any $\gm_1 \in B(\gm)$, we have $\| \gm_1' \|\geq \varepsilon$ and $\| \gm_1 \|_{H^s(\Circ,\R^2)} \leq M$. Let $\gm_n \in [\gm] \cap B_d(\gm,r)$ be a sequence then
+using Lemma \ref{BoundedReparametrizations}, the reparameterizations $\phi_n$ are bounded in $H^k(\Circ,\Circ)$ and thus there exists a subsequence that weakly converges to $\phi_\infty \in H^k(\Circ,\Circ)$. It implies that $\phi_n'$ weakly converges to $\phi_\infty' \in H^{k-1}(\Circ,\R)$ and thus $\phi'_\infty  \geq \varepsilon$ since $k-1 >1/2$. Therefore $\phi_\infty$ belongs to ${\rm{Diff}}_0^k(\Circ)$. Using the same argument $\gm_n \circ \phi_n $ weakly converges to $\gm_\infty \circ \phi_\infty$. However, by definition we have $\gm_n \circ \phi_n = \gm$ so that $\gm_\infty \circ \phi_\infty = \gm$, which gives the result.
+\end{proof}
+
+By the same arguments used to prove Theorem \ref{localbv2} and the previous proposition, we easily get the following.
+
+\begin{thm}[{\bf geometric existence}]\label{geom-sob}
+Let $\gm_0\, ,\gm_1 \in \Ha^i$ such that $\mathcal{D}([\gm_0] , [\gm_1])<\infty$. Then there exists a minimizer  of $\mathcal{D}([\gm_0] , [\gm_1])$. More precisely, there exists $\gm_2 \in [\gm_1]$ such that $d(\gm_0,\gm_2) = \mathcal{D}([\gm_0] , [\gm_1])$.	
+\end{thm}
+
+
+
+
+
+

@@ -1,0 +1,72 @@
+\section{Introduction}
+
+This paper introduces a new descent method to minimize energies defined over Banach spaces. This descent makes use of a generalized gradient which corresponds to a descent direction for a Finsler geometry. We show applications of this method to the optimization over the space of curves, where this Finsler gradient allows one to construct piecewise regular curve evolutions.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Previous Works} 
+\label{sec-previous-works}
+
+%%%
+\paragraph{Energy minimization for curve evolution.}
+
+The main motivation for this work is the design of novel shape optimization methods, with an emphasis toward curves evolutions. Shape optimization is a central topic in computer vision, and has been introduced to solve various problems such as image segmentation or shape matching. These problems are often solved by introducing an energy which is minimized over the space of curves.  The first variational method proposed to perform image segmentation through curve evolution is the snake model~\cite{Kass88Snakes}. This initial proposal has been formalized using intrinsic energies depending only on the geometry of the curves. A first class of energies corresponds to a weighted length of the curve, where the weight acts as an edge detector~\cite{caselles-active-contours,malladi-shape-modeling}. A second class of segmentation energies, pioneered by the Mumford-Shah model~\cite{MumfordShah89}, integrates a penalization both inside and outside the curve, see for instance~\cite{CV-01}. Shape registration requires to compute a matching between curves, which in turn can be solved by minimizing energies between pairs of curves. An elegant framework to design such energies uses distances over a space of measures or currents, see~\cite{Glaunes-matching} for a detailed description and applications in medical imaging.
+
+Curve evolution for image processing is an intense area of research, and we refer for instance to the following recent works for applications in image segmentation~\cite{a,b,c,d} and matching~\cite{SotirasDP13,e,f}.
+
+%%%
+\paragraph{Shape spaces as Riemannian spaces.}
+
+Minimizing these energies requires to define a suitable space of shapes and a notion of gradient with respect to the geometry of this space. The  mathematical study of spaces of curves has been largely investigated in the last years, see for instance~\cite{Younes-elastic-distance,Mennucci-CIME}. 
+The set of curves is naturally modeled over a Riemannian manifold~\cite{MaMi}. This corresponds to using a Hilbertian metric on each tangent plane of the space of curves, i.e. the set of vector fields which deform infinitesimally a given curve. This Riemannian framework allows one to define geodesics which are shortest paths between two shapes~\cite{Younes-explicit-geodesic,Mennucci-Stiefel-manifolds}. Computing minimizing geodesics is useful to perform shape registration~\cite{Mennucci-filtering,Younes-04,2010.03.20}, tracking~\cite{Mennucci-filtering} and shape deformation~\cite{Kilian-shape-space}. The theoretical study of the existence of these geodesics depends on the Riemannian metric. For instance, a striking result~\cite{MaMi,Yezzi-Menn-2005b,Yezzi-Menn-2005a} is that the natural $L^2$-metric on the space of curves, that has been largely used in several applications in computer vision, is a degenerate Riemannian metric: any two  curves have distance equal to zero with respect to such a metric.
+
+Beside the computation of minimizing geodesics, Riemannian metrics are also useful to define descent directions for shape optimization. Several recent works~\cite{MaMi,charpiat-new-metrics,Yezzi-Menn-2005a,Yezzi-Menn-2005b} point out that  the choice of the metric, which the gradient depends on,  notably affects the results of a gradient descent algorithm. Carefully designing the metric is thus crucial to reach better local minima of the energy. Modifying the descent flow can also be important for shape matching applications. A typical example of such  Riemannian metrics are Sobolev-type metrics~\cite{sundaramoorthi-sobolev-active,sundaramoorthi-2006,sundaramoorthi-new-possibilities, Yezzi-H2} which lead to smooth curve evolutions. 
+
+
+%%%
+\paragraph{Shape spaces as Finslerian spaces.}
+
+It is possible to extend the Riemannian framework by considering more general metrics on the tangent planes of the space of curves. Finsler spaces make use of Banach norms instead of Hilbertian norms~\cite{RF-geometry}. A few recent works~\cite{Mennucci-CIME,Yezzi-Menn-2005a} have studied the theoretical properties of Finslerian spaces of curves. To the best of our knowledge, with the notable exception of~\cite{charpiat-generalized-gradient}, which is discussed in detail in Section~\ref{sec-relation-charpiat}, no previous work has used Finslerian metrics for curve evolution.   
+
+
+%%%
+\paragraph{Generalized gradient flow.}
+
+Beyond shape optimization, the use of non-Euclidean geometries is linked to the study of generalized gradient flows. Optimization on manifolds requires the use of Riemannian gradients and Riemannian Hessians, see for instance~\cite{Opt-manifolds}. Second order schemes on manifolds can be used to accelerate shape optimization over Riemannian spaces of curves, see~\cite{Ring-opti-manifolds}. Optimization over Banach spaces requires the use of convex duality to define the associated gradient flow~\cite{Ulbrich,prox-banach-1,prox-banach-2}. It is possible to generalize these flows for metric spaces using implicit descent steps, we refer to~\cite{AGS} for an overview of the theoretical properties of the resulting flows.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Motivation} 
+
+The metrics defined over the tangent planes of the space of curves (e.g. an Hilbertian norm in the Riemannian case and a Banach norm in the Finsler case) have a major impact on the trajectory of the associated gradient descent. This choice thus allows one to favor specific evolutions. A first reason for introducing a problem-dependent metric is to enhance the performances of the optimization method. Energies minimized for shape optimization are non-convex, so a careful choice of the metric is helpful to avoid being trapped in a poor local minimum. A typical example is the curve registration problem, where reaching a non-global minimum makes the matching fail. A second reason is that, in some applications, one is actually interested in the whole descent trajectory, and not only in the local minimum computed by the algorithm. For the curve registration problem, the matching between the curves is obtained by tracking the bijection between the curves during the evolution. Taking into account desirable physical properties of the shapes, such as global or piecewise rigidity, is crucial to achieve state of the art results, see for instance~\cite{citeulike,chang08articulated,Shelton-2000}. In this article, we explore the use of Finsler gradient flows to encode piecewise rigid deformations of the curves. 
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Contributions} 
+
+Our first contribution is the definition of a novel generalized gradient flow, that we call Finsler descent, and the study of the convergence properties of this flow. This Finsler gradient is obtained from the $W^{1,2}$-gradient through the resolution of a constrained convex optimization problem. Our second contribution is the instantiation of this general framework to define piecewise rigid curve evolutions, without knowing in advance the location of the articulations. This contribution includes the definition of novel Finsler penalties to encode piecewise rigid and piecewise similarity evolutions. It also includes the theoretical analysis of the convergence of the flow for $BV^2$-regular curves. Our last contribution is the application of these piecewise regular evolutions to the problem of curve registration. This includes the definition of a discretized flow using finite elements, and a comparison of the performances of Riemannian and Finsler flows for articulated shapes registration.  The Matlab code to reproduce the numerical results of this article is available online\footnote{\url{https://github.com/gpeyre/2013-IFB-FinslerGradient}}.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Relationship with~\cite{charpiat-generalized-gradient}}
+\label{sec-relation-charpiat}
+
+Our work is partly inspired by the generalized gradient flow originally defined in~\cite{charpiat-generalized-gradient}. We use a different formulation for our Finsler gradient, and in particular consider a convex constrained formulation, which allows us to prove convergence results. An application to piecewise rigid evolutions is also proposed in~\cite{charpiat-generalized-gradient}, but it differs significantly from our method. In~\cite{charpiat-generalized-gradient}, piecewise rigid flows are obtained using a non-convex penalty, which poses both theoretical difficulties (definition of a suitable functional space to make the descent method well-defined) and numerical difficulties (computation of descent direction as the global minimizer of a non-convex energy). In our work  we prove a characterization of piecewise rigid deformations that enables the definition of a penalty  depending on the deformation (instead of instantaneous parameters as done in~\cite{charpiat-generalized-gradient}). Then, we generalize this penalty to the $BV^2$-framework obtaining a convex penalty for $BV^2$-piecewise rigid deformations. 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Paper Organization}
+
+Section~\ref{F} defines the Finsler gradient and the associated steepest descent in Banach spaces, for which we prove a convergence theorem. Section~\ref{SC} introduces the space of $BV^2$-curves and studies its main properties, in particular its stability to reparametrization.
+Section~\ref{PWR} characterizes $C^2$-piecewise rigid motions and defines a penalty in the case of  $BV^2$-regular motions. We apply this method in Section~\ref{CM} to the curve registration problem. We minimize a matching energy using the Finsler descent method for $BV^2$-piecewise rigid motions. Section~\ref{discretization} details the finite element discretization of the method. Section~\ref{examples} gives numerical illustrations of the Finsler descent method for curve matching. Section~\ref{similarity} refines the model introduced in Section~\ref{PWR} to improve the matching results by replacing piecewise rigid transforms with piecewise similarities.

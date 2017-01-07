@@ -1,0 +1,525 @@
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
+\section{Piecewise Rigidity}\label{PWR}
+
+This section defines a penalty $R_\GA$ that favors piecewise rigid $BV^2$ deformations of $\BVD$-curves.  For the sake of clarity we present the construction of this penalty in two steps. We first characterize in Section~\ref{GRD} $C^2$-global rigid deformations for  smooth curves. Then, in Section~\ref{BV2M}, we introduce a  penalty that favors  piecewise rigid $BV^2$ deformations for curves belonging to $\Bb$.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Rigid Curve Deformations}\label{GRD}
+
+A smooth curve evolution $\GA_t\in C^1(\RR, \Bb)$ reads
+\eql{\label{eq-continuous-flow}
+	\foralls t \in \RR, \quad \pd{\GA_t(s)}{t} = \Phi_t(s)
+	\qwhereq
+	\Phi_t \in T_{\GA(t)} \Bb\,.
+}
+ We further assume in this section that $\GA_t$ is a $C^2$ curve. This evolution is said to be globally rigid if it preserves the pairwise distances between points along the curves, i.e. 
+\eql{\label{eq-rigid-flow}
+	\foralls t \in \RR,\quad \foralls (s,s') \in \Circ \times \Circ, \quad
+	|\GA_t(s)-\GA_t(s')|=|\GA_0(s)-\GA_0(s')|.
+} 
+The following proposition shows that the set of instantaneous motions $\Phi_t$ giving rise to a rigid evolution  is, at each time, a linear sub-space of dimension 3 of $T_{\GA_t} \Bb$.
+
+\begin{prop}\label{rigid-ch}
+	The evolution~\eqref{eq-continuous-flow} satisfies~\eqref{eq-rigid-flow} if and only if $\Phi_t \in \Rr_{\GA_t}$ for all $t \in \RR$,  where  
+	\eql{\label{eq-rigid-vector-space}
+		\Rr_\GA = \enscond{ \Phi \in T_\Ga \Bb }{
+                        \exists a \in \RR, \exists b \in \R^2,\;\;
+			\foralls s \in \Circ, \; \Phi(s) =  a \, \rot{\GA(s)}  + b
+		}\,.
+	}
+\end{prop}
+\begin{proof}
+Recall that the group of distance preserving transformations on $\R^d$ is the Euclidean group $E(d) = \R^d \rtimes  O_d(\R)$ and that any element of $E(d)$ is uniquely defined by the image of $d+1$ points in $\R^d$ which are affinely independent. Therefore, provided that the curve $\GA$ has at least three non-collinear points, $\Phi_t$ is the restriction of $g_t \in E(d)$, a path on $E(d)$ which is uniquely defined. In addition, $g_t$ and $\Phi_t$ have the same smoothness. Thus the result follows from the fact that the Lie algebra of $\R^d \rtimes  O_d(\R)$ is $\R^d \rtimes A(d)$, where $A(d)$ denotes the set of antisymmetric matrices.
+The degenerate cases such as when the curve is contained in a line or a point are similar.
+%By the definition of evolution, we have\begin{equation}\label{second-rigid00}\GA_t(s)= \GA_0(s)+ \int_0^t \Phi_{\tau}(s)\d \tau \quad \forall s\in \Circ\,.\end{equation} If the evolution satisfies~\eqref{eq-rigid-flow}, then the application $m(t):\GA_0(\Circ)\rightarrow \GA_t(\Circ)$ defined as$$m(t)(\GA_0(s))=\GA_0(s)+ \int_0^t \Phi_{\tau}(s)\d \tau \quad \forall s\in \Circ\,$$ is an isometry between the supports of the curves $\GA_0$ and $\GA_t$. Now, by considering three non-collinear points of $\GA_0(\Circ)$ denoted by $\GA_0(s_i)$ ($i=1,2,3$), we can extend such an isometry $m(t)$ to an isometry of the plane. We define     $\tilde{m}(t): \RR^2 \rightarrow\RR^2$  as  follows: for every $x\in \RR^2$, $\tilde{m}(t)(x) $ is such that \begin{equation}\label{condition-isometry} |\tilde{m}(t)(x) -\GA_t(s_i)|=|x-\GA_0(s_i)|\quad i=1,2,3\,. \end{equation} The previous condition determines a unique isometry of the plane $\tilde{m}(t)$ such that $$\tilde{m}(t)(\GA_0(s))=m(t)(\GA_0(s))\quad \forall s\in \Circ\,.$$\par Now, by the characterization of the isometries,  $\tilde{m}(t)$ can be written as the composition of a rotation and a translation, so that\begin{equation}\tilde{m}(t)(x) = A(t)x + c(t)\quad \forall x\in \RR^2\end{equation}for some  vector $c(t)$ and matrix $A(t)$ defined by$$\begin{pmatrix}\cos\theta(t)&-\sin\theta(t)\\\sin\theta(t)&\cos\theta(t)\\\end{pmatrix} \,. $$Note that $A(t)$ and $c(t)$ are defined by  condition~\eqref{condition-isometry} as two differentiable functions with respect to $t$. Moreover, as $\tilde{m}(t)$ is continuous with respect to $t$, it is a direct isometry,  which justifies the previous definition of $A(t)$.  In particular, as $\tilde{m}(t)$ coincides with $m(t)$ on $\GA_0(\Circ)$, we have\begin{equation}\label{first-rigid0}\GA_t(s)= A(t)\GA_0(s) + c(t)\quad \forall s\in \Circ\,.\end{equation}By differentiating~\eqref{second-rigid00} and~\eqref{first-rigid0}  with respect to $t$, we get\begin{equation}\label{third-rigid0}\Phi_t(s)= A'(t)\GA_0(s) + c'(t) \quad \forall s\in \Circ, \end{equation}where $(\cdot)'$ denotes here the derivative with respect to $t$. Note that, by the definition of a rotation matrix in dimension two, we have \begin{equation}\label{four-rigid}	A'(t)A(t)^{-1}w= \theta'(t){w}^\bot\end{equation}for every $\rm{w}\in \RR^2$. Then by~\eqref{first-rigid0},~\eqref{third-rigid0}, and~\eqref{four-rigid} we get, for all $s\in \Circ$, $$\Phi_t(s)= A'(t)A(t)^{-1}\GA_t(s) + c'(t)- A'(t)A(t)^{-1}c(t) =\theta'(t)\GA_t(s)^\bot + c'(t)- A'(t)A(t)^{-1}c(t), $$which implies that $\Phi_t \in \Rr_{\GA_t}$ with $a=\theta'(t)$ and $b=c'(t)- A'(t)A(t)^{-1}c(t)$.\par On the other hand if $\Phi_t \in \Rr_{\GA_t}$ then $$\Phi_t(s)-\Phi_t(s')=a(\GA_t(s)-\GA_t(s'))^\bot \quad \forall(s,s')\in \Circ\times\Circ\,.$$Then$$\frac{\partial}{\partial t}\norm{\GA_t(s)-\GA_t(s')}^2=2(\Phi_t(s)-\Phi_t(s'))\cdot(\GA_t(s)-\GA_t(s'))=0 \quad \forall(s,s')\in \Circ\times\Circ$$which implies~\eqref{eq-rigid-flow}. 
+\end{proof}
+
+Note that for numerical simulations, one replaces the continuous PDE~\eqref{eq-continuous-flow} by a flow discretized at times $t_k = k \tau$ for some step size $\tau>0$ and $k \in \NN$, 
+\eq{
+	\GA_{k+1} = \GA_k + \tau \Phi_k
+	\qwhereq
+	\Phi_k \in T_{\GA_k} \Bb.
+} 
+This is for instance the case of a gradient flow such as~\eqref{sequence} where $\Phi_k = - \nabla_{R_{\GA_k}} E(\GA_k)$. In this discretized setting, imposing $\Phi_k \in \Rr_{\GA_k}$ only guarantees that rigidity~\eqref{eq-rigid-flow} holds approximately and for small enough times $t_k$. 
+
+The following proposition describes this set of tangent fields in an intrinsic manner (using only derivatives along the curve $\GA$), and is pivotal to extend $\Rr_\GA$ to piecewise-rigid tangent fields.
+
+\begin{prop}\label{charactrigid}
+	For a $C^2$-curve $\GA$, one has $\Phi \in \Rr_\GA$ if and only if $\Phi$ is $C^2$ and satisfies $L_\GA(\Phi) = 0$ and $H_\GA(\Phi) = 0$, where $L_\GA$ and $H_\GA$ are the following linear operators
+\begin{equation}\label{eqrigid}
+ 	L_\GA(\Phi) \;=\;   \frac{\d\Phi}{\dgs}\, \cdot\, \tgam  
+	\qandq  
+	H_\GA(\Phi) \;=\;  \frac{\d^2\Phi}{\dgs^2} \, \cdot\, \ngam \,.
+\end{equation}
+From a geometric point of view, $L_\GA(\Phi)$ takes into account the length changes and $H_\GA(\Phi)$ the curvature changes.
+\end{prop}
+
+\begin{proof}
+Using the parameterization of $\Ga$, any such deformation $\Phi$ satisfies 
+\begin{equation}
+	\label{eq:rigidg}
+	\exists\, !\; (a,b) \in \R\times\R^2, \quad \foralls s \in [0,1], \quad \Phi(s) \; = \;  a\rot{\Ga(s)}  + b \,.
+\end{equation}
+By differentiation with respect to \! $s$, this is equivalent to 
+\eq{ 
+	\exists\, !\; a \in \R,\quad \foralls s \in [0,1], \quad \frac{\d\Phi}{\d s}(s) \; = \; a|\GA'(s)|\; \ngam(s)
+}
+which can be rewritten as $\frac{\d\Phi}{\d\GA} (s) =  a \ngam(s) $ by differentiating with respect to \! the length element $\d\GA = \norg\,\d s$,
+or simply as $ \frac{\d\Phi}{\d s}(s)  = a \ngam(s) $ 
+by considering an arc-length parameterization. 
+This is equivalent to 
+\eq{
+	\exists\, !\; a \in \R,\quad \foralls s \in [0,1], \quad 
+	\begin{cases} 
+	\displaystyle \;\; \frac{\d\Phi}{\dgs}\, \cdot\, \tgam(s) \; = \; 0 \vspace{2mm} \\
+	\displaystyle \;\; \frac{\d\Phi}{\dgs}\, \cdot\, \ngam(s) \; = \; a
+	\end{cases}
+}
+which is  equivalent to
+\eq{
+	\begin{cases}
+		\displaystyle \;\; \frac{\d\Phi}{\dgs}\, \cdot\, \tgam \; = \; 0 \vspace{2mm} \\
+		\displaystyle \;\; \frac{\d}{\dgs} \left( \frac{\d\Phi}{\dgs} \, \cdot\, \ngam \right) \; =\; 0
+	\end{cases}
+}
+and, using that 
+\eq{ 
+	\frac{\d}{\dgs} \left( \frac{\d\Phi}{\dgs} \, \cdot\, \ngam \right) \; =\;  
+	\frac{\d^2\Phi}{\dgs^2} \, \cdot\, \ngam \; - \frac{\d\Phi}{\dgs} \, \cdot\, \kappa_\Ga \,\tgam , 
+}
+where $\kappa_\Ga$ is the curvature of $\GA$, we obtain the desired characterization.
+\end{proof} 
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Piecewise rigid $BV^2$ deformations }\label{BV2M}
+
+This section extends the globally rigid evolution considered in the previous section to piecewise-rigid evolution.
+\par In the smooth case considered in the previous section, this corresponds to imposing that an instantaneous deformation $\Phi \in T_\GA \Bb$  satisfies~\eqref{eqrigid} piecewisely for possibly different pairs $(a,b)$ on each piece.
+To generate a piecewise-smooth Finsler gradient $\Phi = \nabla_{R_\GA} E(\GA)$ (as defined in~\eqref{defgrad}) that is a piecewise rigid deformation, one should design a penalty $R_\GA$ that satisfies this property. This is equivalent to imposing  
+$L_\GA(\Phi) = 0$ and $H_\GA(\Phi) = 0$ for all $s \in [0,1]$ except for a finite number of points (the articulations between the pieces). In particular, note that $L_\GA(\Phi)$ is undefined at these points, while $H_\GA(\Phi)$ is the sum of Dirac measures concentrated at the  articulation points (due to the variations of $a$). This suggests that, in the smooth case, we can favor piecewise rigidity by minimizing $\left\| H_\GA(\Phi) \right\|_{L^1(\Ga)}$ under the constraint $L_\GA(\Phi) = 0 \;\; a.e.$, so that  we control the jumps of the second derivative without setting in advance the articulation points. Note also that the minimization of the $L^1$-norm favors sparsity and, in contrast to the $L^2$-norm, it enables the emergence of Dirac measures.
+\par In order to extend such an idea to the $BV^2$-framework we remind that 
+$$\left\| H_\GA(\Phi) \right\|_{L^1(\Ga)}=TV_\GA\left(\frac{\d \Phi}{\d\GA}\cdot \ngam\right)\quad \forall \,\Phi\in C^{2}(\Circ,\RR^2),\, \GA \in C^2(\Circ, \RR^2)$$
+which defines a suitable penalty in the $BV^2$-setting.
+Moreover, since we are interested in piecewise rigid motions, we  deal with curves that could be not  $C^1$ at some points $s$. It is useful to introduce the following operators
+\begin{align}\label{eq-operator-L}
+	L_\GA^+(\Phi)(s) &=	\underset{\underset{t\in(s,s+\epsilon)}{t\rightarrow s}}{\lim} 
+		\frac{\d\Phi}{\dgs}(t) \cdot\, \tgam(t)\,, \\
+	L_\GA^-(\Phi)(s) &=\underset{\underset{t\in(s-\epsilon,s)}{t\rightarrow s}}{\lim} 
+		\frac{\d\Phi}{\dgs}(t) \cdot\, \tgam(t)\,.
+\end{align}
+Of course if $\GA$ and $\Phi$ are $C^1$ at $s$ we have $L_\GA^+(\Phi)(s)=L_\GA^-(\Phi)(s)=L_\GA(\Phi)(s)$. 
+The next definition introduces a penalty for piecewise rigid evolution in $\Bb$.
+
+\begin{defn}[\BoxTitle{$\BVD$ Piecewise-rigid penalty}]\label{defn1}
+	For $\Ga \in \Bb$ and $\Phi \in T_\GA\Bb = \BVDga$, we define
+	\begin{equation}\label{eq-piecewise-rigid-penalty}	
+		R_\Ga(\Phi) =
+			TV_\GA\left(\frac{\d \Phi}{\d\GA}\cdot \ngam\right)
+			 + \iota_{\Cc_\Ga}(\Phi)
+	\end{equation}
+where $\iota_{\Cc_\Ga}$ is the indicator  function of $\Cc_\Ga$ 
+$$
+\displaystyle{\iota_{\Cc_\Ga}(\Phi)=
+\left\{
+\begin{array} {ll}
+0 &\text{if } \Phi \in \Cc_\Ga\\
++\infty &\text{otherwise }  
+\end{array}\right.}
+\,.$$
+Note that~\eqref{TV} is the total variation of $f$ with respect to the measure $\d\GA$. We remind  that $TV_\GA(f)=|Df|(\Circ)$ for every $f\in L^1(\Circ,\RR^2)$.
+\par The set $\Cc_\Ga$ is defined as follows
+\begin{equation}\label{eq-constr-C-Ga}
+	\Cc_\Ga = \enscond{\Phi\in T_\GA\Bb }{L^+_\GA(\Phi)=L^-_\GA(\Phi)=0 }\,.
+\end{equation}
+\end{defn}
+In order to define the Finsler gradient  we consider a constraint on the normal component of the deformation field.
+
+\begin{defn}[\BoxTitle{Deviation constraint}]\label{defn-dev-constr} For $\GA \in \Bb$, we define
+\eql{\label{eq-dev-constr}
+	\Ll_\GA =\enscond{
+		 \Phi\in T_\Ga\Bb
+	}{ 
+		\normbig{ \Pi_\GA( \nablad E(\Ga) -\Phi )}_{W^{1,2}(\Ga)} \leq \rho \normbig{\Pi_\GA(\nablad E(\Ga))  }_{W^{1,2}(\Ga)}
+	}\,.
+}
+\end{defn}
+
+Here, $\rho\in (0,1)$ is called the rigidification parameter, and controls the deviation of the Finsler gradient from the $W^{1,2}$ gradient. $\Pi_\GA$ is the projector introduced in equation~\eqref{normal-proj}.
+\par We point out that in the applications studied in this paper we consider an intrinsic energy $E$ (i.e., it does not depend on reparameterization). In this case  the $W^{1,2}$-gradient of $E$ is normal to the curve, so that  $\Ll_\GA$ satisfies condition~\eqref{cond-constraints} in the case of an intrinsic energy, and  it can be used to define a valid Finsler gradient. 
+
+
+
+
+ Using these specific instantiations for $R_\GA$ and $\Ll_\GA$, Definition~\ref{FinslerGrad} reads in this $\BVD$ framework as follows.
+
+\begin{defn}[\BoxTitle{$\BVD$ Piecewise-rigid Finsler gradient}] We define
+\begin{equation}\label{grad-rigid}
+	\nabla_{R_\GA} E(\GA) \in \uargmin{\Phi \in \Ll_\GA}\;  
+   R_\GA(\Phi).
+\end{equation}
+\end{defn}
+
+The following result  ensures the existence of a Finsler gradient. To prove  it we consider the space $\Bb$ equipped with the weak* toplogy.
+
+\begin{thm}\label{existence1} 
+	Problem~\eqref{grad-rigid}  admits at least a solution.
+	
+\end{thm}
+
+In order to prove the theorem, we need the following lemmas. They guarantee in particular the compactness of minimizing sequences with respect to the $BV^2$-weak* topology. The proof relies on the evaluation of a bilinear form which is degenerate if the curve is a circle, so we treat the case of the circle separately. 
+
+\begin{lem}\label{lem-compacity}
+Let  $\GA\in \mathcal{B}$ be an injective curve.  We suppose that $\GA$ is different from a circle. Then there exists a constant $C(\GA)$ depending on $\GA$ such that 
+\begin{equation}\label{compactnessR-1}
+	 	\norm{ \Phi }_{BV^{2}(\GA)} \leq 
+		C(\GA)\left( (1+\rho) \|\Pi_\GA(\nabla_{W^{1,2}(\Ga)}E(\GA))\|_{W^{1,2}(\Ga)} + R_\GA(\Phi) \right) \quad \forall\,\Phi \in \Ll_\GA \cap \Cc_\GA
+\end{equation}
+where $\Pi_\GA$ is the operator defined in \eqref{normal-proj}.	
+\end{lem}
+
+\begin{proof} 
+The proof is essentially based on   estimation~\eqref{bound-first-der} giving a bound for the $L^\infty$-norms of the deformation $\Phi$ and its first derivative. We also remark that, as $\Phi\in \Ll_\GA$, we have
+\begin{equation}\label{l1-bound}
+\norm{ \Pi_\GA(\Phi) }_{
+L^{2}(\Ga)} \leq (1+\rho)\|\Pi_\GA(\nabla_{W^{1,2}(\Ga)}E(\GA))\|_{W^{1,2}(\Ga)}\,.
+\end{equation}
+In the following we denote by $l(\GA)$ the length of the curve $\GA$. 
+
+{\bf Bound on the first derivative}. In this section  we prove the following   estimate for the $L^\infty$-norms of  $\frac{\d\Phi}{\d\GA}\cdot \ngam $ and $\Phi$:
+\begin{equation}\label{bound-first-der}
+	\mbox{max}\left\{
+		\left\|\Phi\right\|_{L^{\infty}(\GA)}\,;\,
+		\left\|\frac{\d \Phi}{\d\GA}\cdot\ngam\right\|_{L^{\infty}(\GA)}
+	\right\}
+	\leq C_0(\GA)\left((1+\rho)\|\Pi_\GA(\nabla_{W^{1,2}(\Ga)}E(\GA))\|_{W^{1,2}(\Ga)}+ R_\GA(\Phi)\right)\,
+\end{equation}
+where $C_0(\GA)$ depends on  $\GA$. 
+\par  Let $s_0\in \Circ$, we can write
+$$\frac{\d\Phi}{\d\GA}\cdot \ngam = u + a$$
+where $u\in BV(\GA)$ such that $u(s_0)=0$  and $a=\frac{\d\Phi}{\d\GA}(s_0)\cdot \ngam(s_0)\in \R$. As $\Phi\in\Cc_\GA$ we have $L_\GA^+(\Phi)=L_\GA^-(\Phi)=0$, which implies
+$$\frac{\d\Phi}{\d\GA}=\left(\frac{\d\Phi}{\d\GA}\cdot \ngam\right)\ngam$$
+and
+\begin{equation}\label{writing-phi}
+\Phi(s)= \Phi(s_0) + a[\GA(s)-\GA(s_0)]^\bot+ \int_{s_0}^s u\ngam \d \GA(s) \,\quad \forall \, s\in \Circ\,.
+\end{equation}
+Now, by projecting on the normal to $\GA$, we can write 
+\begin{equation}\label{decomp-xi}\Pi_\GA(\Phi)=\Pi_\GA(\Phi(s_0)+ a[\GA(s)-\GA(s_0)]^\bot)+\Pi_\GA\left(\int_{s_0}^s u\ngam \d \GA(s)\right)\,.
+\end{equation}
+In particular, by the properties of good representatives for  $BV$-functions of one variable (see~\cite{AFP} p. 19), we have 
+$$
+|u(s)|=|u(s)-u(s_0)|\leq TV_\GA(u)\quad \forall s\in \Circ
+$$
+which implies that
+\begin{equation}\label{first-bv0}
+\left\|\int_{s_0}^s u\ngam \d \GA(s)\right\|_{L^\infty(\GA)}\leq
+l(\GA) TV_\GA(u)= l(\GA) R_\GA(\Phi)\,
+ \end{equation}
+ and
+ \begin{equation}\label{first-bv0-l2}
+\left\|\int_{s_0}^s u\ngam \d \GA(s)\right\|_{L^2(\GA)}\leq
+l(\GA)^{3/2} R_\GA(\Phi)\,
+ \end{equation}
+Thus, by~\eqref{l1-bound},~\eqref{first-bv0-l2}, and~\eqref{decomp-xi} it follows that
+\begin{equation}\label{bound-xi}
+\|\Pi_\GA(\Phi(s_0)+ a[\GA(s)-\GA(s_0)]^\bot)\|_{L^2(\GA)}\leq (1+\rho)\|\Pi_\GA(\nabla_{W^{1,2}(\Ga)}E(\GA))\|_{W^{1,2}(\Ga)}+ l(\GA)^{3/2}R_\GA(\Phi)\,.
+\end{equation}
+\par We remark now that $\|\Pi_\GA(\Phi(s_0)+ a[\GA(s)-\GA(s_0)]^\bot)\|_{L^2(\GA)}^2$ can be written as   
+\begin{equation}\label{bilinear}
+\|\Pi_\GA(\Phi(s_0)+a[\GA(s)-\GA(s_0)]^\bot)\|_{L^2(\GA)}^2=(|\Phi(s_0)|, a)\cdot A\left(\frac{\Phi(s_0)}{|\Phi(s_0)|},s_0\right)
+\begin{pmatrix}
+|\Phi(s_0)|\\
+a\\
+\end{pmatrix}
+\end{equation}
+where, for any $e\in \Circ\subset \RR^2$ and $s_0\in \Circ$, the matrix $A(e,s_0)$ is defined by
+\begin{equation}
+\begin{pmatrix}
+\int_{\Circ} \left(e\cdot\ngam\right)^2\d \GA(s)&\int_{\Circ}\left([\GA(s)-\GA(s_0)]^\bot\cdot\ngam\right)\left(e\cdot\ngam\right) \d \GA(s)\\
+\int_{\Circ}\left([\GA(s)-\GA(s_0)]^\bot\cdot\ngam\right)\left(e\cdot\ngam\right) \d \GA(s)&\int_{\Circ} \left([\GA(s)-\GA(s_0)]^\bot\cdot\ngam\right)^2\d \GA(s)\\
+\end{pmatrix}
+.
+\end{equation}
+
+\par Note that the bilinear form defined by $A(e,s_0)$ is degenerate if and only if the determinant of $A(e,s_0)$ is zero which means that there exists  $\alpha\in\R$ such that 
+$(e- \alpha[\GA(s)-\GA(s_0)]^\bot)\cdot \ngam=0$ for every $s\in \Circ$. Note that this  implies that $\GA$ is either a circle or a line. Now, as we work with closed injective curves $\GA$ is different from a line. Then, because of the hypothesis on $\GA$, we get that for every $s_0\in \Circ$ the   bilinear form associated with $A(e,s_0)$  is not degenerate.
+
+\par In particular the determinant of $A$ is positive which means that the bilinear form  is positive-definite.  This implies  that its smallest eigenvalue is positive and in particular, by a straightforward calculation, it can be written as $\lambda\left(e,s_0\right)$ where   $\lambda:\Circ\rightarrow \R$ is a positive continuous function. Then, we have
+\begin{equation}\label{case1}
+\underset{e,s_0\in \Circ}{\inf}\,\lambda(e, s_0)(|\Phi(s_0)|^2+a^2) \leq \lambda\left(\frac{\Phi(s_0)}{|\Phi(s_0)|},s_0\right)(|\Phi(s_0)|^2+a^2)\leq \|\Pi_\GA(\Phi(s_0)+ a\GA(s)^\bot)\|_{L^2(\GA)}^2\,
+\end{equation}
+where the infimum of $\lambda$ on $\Circ\times\Circ$ is a positive constant depending only on $\GA$ and denoted by $\lambda_\GA$. 
+\par The previous relationship and~\eqref{bound-xi} prove that, for every $s_0\in \Circ$, we have 
+\begin{equation}\label{norme-infty}
+	\mbox{max}\left\{|\Phi(s_0)|,a\right\}
+	\leq C_0(\GA)\left((1+\rho)\|\Pi_\GA(\nabla_{W^{1,2}(\Ga)}E(\GA))\|_{W^{1,2}(\Ga)}+ R_\GA(\Phi)\right)\,
+\end{equation}
+where $C_0(\GA)=\mbox{max}\{1/\lambda_\GA, l(\GA)^{3/2}/\lambda_\GA\}$ depends only on $\GA$.
+
+Then, because of the arbitrary choice of $s_0$ and the definition of $a$ ($a=\frac{\d\Phi}{\d\GA}(s_0)\cdot \ngam(s_0)$),~\eqref{norme-infty}      implies~\eqref{bound-first-der}. In particular~\eqref{bound-first-der}  gives a bound for the $W^{1,1}(\GA)$-norm of $\Phi$. 
+
+{\bf Bound on the second variation}. 
+We have
+$$ TV^2_\GA(\Phi) = TV_\GA\left(\frac{\d\Phi}{\d\GA}\right)\,.$$ 
+Now,  $\frac{\d \Phi}{\d\GA}=\left(\frac{\d \Phi}{\d\GA}\cdot \ngam\right)\ngam\in BV(\GA)$ and, by the generalization of the  product rule  to  $BV$-functions (see Theorem 3.96, Example 3.97, and Remark 3.98 in~\cite{AFP}), we get 
+$$
+TV_\GA\left(\frac{\d \Phi}{\d\GA}\right)\leq 2\left(TV_\GA\left(\frac{\d \Phi}{\d\GA}\cdot \ngam\right) + \left\|\frac{\d \Phi}{\d\GA}\cdot\ngam\right\|_{L^\infty(\GA)}TV_\GA(\ngam)\right) \,.
+$$
+The constant 2 in the previous inequality comes from the calculation of the total variation on the intersection of the jump sets of $\left(\frac{\d \Phi}{\d\GA}\cdot \ngam\right)$ and $\ngam$ (see Example 3.97 in~\cite{AFP}).
+Note also that $TV_\GA(\ngam)=|D \ngam|(\Circ)$. 
+\par Then, by~\eqref{deriv-norm} and~\eqref{curvature}, we get 
+\begin{equation}\label{estimate-second-var0}
+\begin{array}{ll}
+\displaystyle{TV_\GA\left(\frac{\d \Phi}{\d\GA}\right)}&\displaystyle{\leq 2\left(TV_\GA\left(\frac{\d \Phi}{\d\GA}\cdot \ngam\right) + |\rm{curv}_\GA|(\Circ)\left\| \frac{\d \Phi}{\d\GA}\cdot\ngam\right\|_{L^\infty(\GA)}\right)}\\
+&\displaystyle{\leq  2\left(TV_\GA\left(\frac{\d \Phi}{\d\GA}\cdot \ngam\right) + |D^2\GA|(\Circ)\left\| \frac{\d \Phi}{\d\GA}\cdot\ngam\right\|_{L^\infty(\GA)}\right)}\,\\
+\end{array}
+\end{equation}
+which implies that 
+\begin{equation}\label{estimate-second-var}
+TV_\GA^2\left(\Phi\right)\leq C_1(\GA)\left(R_\GA(\Phi) + \left\|\frac{\d \Phi}{\d\GA}\cdot\ngam\right\|_{L^\infty(\GA)}\right)\,.\\
+\end{equation}
+where $C_1(\GA)$ is a constant depending on $\GA$.
+
+The Lemma follows from~\eqref{bound-first-der} and~\eqref{estimate-second-var}.
+\end{proof}
+
+The next lemma gives a similar result in the case where $\GA$ is a circle.
+
+\begin{lem}\label{lem-compacity-circle}
+Let  $\GA\in \mathcal{B}$ be a circle with radius $r$.  Then there exists a constant $C(r)$ depending on $r$ such that 
+	\begin{equation}\label{compactnessR}
+	 	\norm{ \Phi }_{BV^2(\GA)} \leq 
+		C(r)\left( (1+\rho) \|\Pi_\GA(\nabla_{W^{1,2}(\Ga)}E(\GA))\|_{W^{1,2}(\Ga)} +
+R_\GA(\Phi)\right)\, 
+	\end{equation}
+	for every $\Phi \in \Ll_\GA \cap \Cc_\GA$ such that $\Phi(s_0)\cdot\tgam(s_0) =0$ for some $s_0\in\Circ$.
+\end{lem}
+
+\begin{proof}
+ The proof is based on the same arguments used to prove the previous lemma. We denote by $r$ the radius of the circle.
+\par As $\Phi(s_0)\cdot\tgam(s_0)=0$, 
+by the properties of good representatives for  $BV$-functions of one variable (see~\cite{AFP} p. 19), we have 
+\begin{equation}\label{estim00}
+|\Phi\cdot\tgam|=|\Phi(s)\cdot\tgam(s)-\Phi(s_0)\cdot\tgam(s_0)|\leq TV_\GA(\Phi\cdot\tgam)\quad \forall s\in \Circ\,.
+\end{equation}
+Now, as $L_\GA^+(\Phi)=L_\GA^-(\Phi)=0$ and the curvature is equal to $1/r$ at each point, we get 
+$$\frac{\d (\Phi\cdot\tgam)}{\d\GA} = \Phi\cdot\frac{\ngam}{r}$$
+and from~\eqref{estim00} it follows 
+\begin{equation}\label{bound-tang} \|\Phi\cdot\tgam\|_{L^{\infty}(\GA)}\leq \frac{ \|\Phi\cdot\ngam\|_{L^{1}(\GA)}}{r}\,.
+\end{equation}
+\par Now, as $\Phi\in \Ll_\GA$, we have  
+\begin{equation}\label{bound-norm}
+\|\Phi\cdot\ngam\|_{L^{2}(\GA)}\leq (1+\rho) \|\Pi_\GA(\nabla_{W^{1,2}(\Ga)}E(\GA))\|_{W^{1,2}(\Ga)}
+\end{equation}
+and, from~\eqref{bound-tang} and~\eqref{bound-norm}, it follows
+\begin{equation}\label{estim0}
+ \|\Phi\|_{L^{1}(\GA)}\leq \sqrt{2\pi r}(2\pi +1)(1+\rho) \|\Pi_\GA(\nabla_{W^{1,2}(\Ga)}E(\GA))\|_{W^{1,2}(\Ga)}\,.
+ \end{equation}
+\par  Concerning the first derivative we remark that, as $\Phi$ is periodic, the mean value of its first derivative is equal to zero. Then, by Poincar\'e's inequality (see Theorem 3.44 in~\cite{AFP}), we have 
+\begin{equation}\label{estim1} \left\|\frac{\d \Phi}{\d\GA}\right\|_{L^{1}(\GA)}\leq C_0(r) TV_\GA\left(\frac{\d \Phi}{\d\GA}\right) 
+\end{equation}
+where $C_0(r)$ is a constant depending on $r$. Moreover, by integrating by parts the integrals of the definition of second variation, we get 
+\begin{equation}\label{estim2}
+TV^2_\GA(\Phi) =  TV_\GA\left(\frac{\d\Phi}{\d\GA}\right)\,.
+\end{equation}
+So, in order to prove the lemma it suffices to prove a bound for  $TV_\GA\left(\frac{\d\Phi}{\d\GA}\right)$. 
+\par Now, as $\frac{\d \Phi}{\d\GA}=\left(\frac{\d \Phi}{\d\GA}\cdot \ngam\right)\ngam$,  by the generalization of the  product rule  to  $BV$-functions (see Theorem 3.96, Example 3.97, and Remark 3.98 in~\cite{AFP}), we get 
+\begin{equation}\label{estim30}
+TV_\GA\left(\frac{\d \Phi}{\d\GA}\right)\leq \left(1+\frac{1}{r}\right) TV_\GA\left(\frac{\d \Phi}{\d\GA}\cdot \ngam\right)= \left(1+\frac{1}{r}\right) R_\GA(\Phi) \,,
+\end{equation}
+where we used the fact that $\ngam$ has no jumps (see Example 3.97 in~\cite{AFP}).
+
+The lemma follows from~\eqref{estim0},~\eqref{estim1},~\eqref{estim2}, and~\eqref{estim30}.
+\end{proof}
+
+We can now prove Theorem~\ref{existence1}.
+
+\begin{proof} The proof is based on Lemma~\ref{lem-compacity} and Lemma~\ref{lem-compacity-circle}, so we distinguish two cases: $\GA$ is a circle and it is not.
+\par We suppose that $\GA$ is different from a circle. Let $\{\Phi_h\}\subset \Ll_\GA \cap \Cc_\GA$ be a minimizing sequence of  $R_\GA$. We can also suppose $\underset{h}{\sup}\,	R_\GA(\Phi_h)< +\infty$.
+From Lemma~\ref{lem-compacity} it follows that 
+$$
+\underset{h}{\sup}\,	\norm{ \Phi_h }_{BV^{2}(\GA)} \leq 
+		C(\GA)\left( (1+\rho) \|\Pi_\GA(\nabla_{W^{1,2}(\Ga)}E(\GA))\|_{W^{1,2}(\Ga)} +
+\underset{h}{\sup}\,R_\GA(\Phi_h)\right)\,
+$$   
+where $C(\GA)$ depends only on $\GA$.  This gives a uniform bound for the $BV^2(\GA)$-norms of $\Phi_h$ and  implies that  $\{\Phi_h\}$  converges (up to a subsequence) toward some  $\Phi \in BV^2(\GA)$ with respect to the $BV^2(\GA)$-weak* topology (see Theorem 3.23 in~\cite{AFP}). 
+\par In particular $\Phi_h \rightarrow \Phi$  in $W^{1,1}(\GA)$ which proves that  $\Phi \in \Cc_\GA $, and, by the lower semi-continuity of the $L^2$-norm, we also get  $\Phi \in \Ll_\GA$.
+\par Now, as $R_\GA$ is lower semi-continuous with respect to the $BV^2(\GA)$-weak* topology, the theorem ensues.
+\par In the case where $\GA$ is a circle with radius $r$, for every minimizing sequence $\{\Phi_h\}\subset \Ll_\GA \cap \Cc_\GA$, we consider the sequence 
+\begin{equation}\label{psi-proof}
+\Psi_h(s)=\Phi_h(s) - (\Phi_h(s_0)\cdot \tgam(s_0))\tgam(s) \,
+\end{equation}
+for some $s_0\in \Circ$.
+We remark that $\{\Psi_h \} \subset  \Ll_\GA$. 
+ Moreover 
+\begin{equation}\label{phi-psi}
+\frac{\d\Psi_h}{\d\GA}(s)=\frac{\d\Phi_h}{\d\GA}(s)-\left(\frac{\Phi_h(s_0)\cdot \tgam(s_0)}{r}\right)\ngam(s)
+\end{equation}
+which implies that, for every $h$,  $\Psi_h\in \Cc_\GA$ and
+\begin{equation}\label{equal-TV}
+R_\GA(\Psi_h)=R_\GA(\Phi_h)\,.
+\end{equation}
+Then the sequence $\{\Psi_h\}$ is a minimizing sequence of Problem~\eqref{grad-rigid} such that $\Psi(s_0)\cdot\tgam(s_0)=0$. We can also suppose $\underset{h}{\sup}\,	R_\GA(\Psi_h)< +\infty$.
+
+Then, by Lemma~\ref{lem-compacity-circle} we get
+$$	 \underset{h}{\sup}\,	\norm{ \Psi_h }_{BV^{2}(\GA)} \leq 
+		C(r)\left( (1+\rho) \|\Pi_\GA(\nabla_{W^{1,2}(\Ga)}E(\GA))\|_{W^{1,2}(\Ga)} +
+\underset{h}{\sup}\,R_\GA(\Psi_h)\right)\,
+$$ 
+where $C(r)$ depends only on $r$.
+
+
+This proves a uniform bound for  $\|\Psi_h\|_{BV^2(\GA)}$ which implies that the minimizing sequence $\{\Psi_h\}$ converges (up to a subsequence) with respect to the $BV^2$-weak* topology.  Then we can conclude as in the previous case.
+\end{proof}
+
+We point out that, as showed in the previous proof, when $\GA$ is a circle the Finsler gradient is defined up to a tangential translation. This was actually expected because such a tangential translation is a rotation of the circle.
+ 
+We have defined a penalty for piecewise rigid $BV^2$ deformations for curves belonging to $\Bb$. In the next section we use the Finsler descent method with respect to such a penalty to solve curve matching problems.
+
+%%%%% REMOVED %%%%%
+\begin{comment}
+\textcolor{red}{deuxieme demo: c'est un peu moins general car on demontre un bound pour une suite minimisante particuliere, mais cela unifie les cas du cercle et non cercle}
+
+\begin{lem}\label{lem-compacity-psi}
+Let  $\GA\in \mathcal{B}$  be an injective curve. For every  $\Phi \in \Ll_\GA \,\cap\, C^2(\GA)$ there exists a unique $(a,b)\in\R\times\RR^2$ such that  
+$$\Psi=\Phi +a \GA^\bot +b$$
+verifies 
+\begin{equation}\label{conditions}
+(\Psi\cdot\tgam)(s_0)=(\Psi\cdot\ngam)(s_0)=\left(\frac{\d \Phi}{\d\GA}\cdot \ngam\right)(s_0)=0
+\end{equation}
+for some $s_0\in \Circ$. In particular $\Psi\in\Cc_\GA$ and we have 
+$$TV_\GA\left(\frac{\d \Psi}{\d\GA}\cdot \ngam\right)=TV_\GA\left(\frac{\d \Phi}{\d\GA}\cdot \ngam\right)\,.$$
+Moreover there exists a constant  $C$ depending on $\GA$ such that 
+	\begin{equation}\label{compactness-psi2}
+	 	\norm{ \Psi }_{W^{2,1}(\GA)} \leq 
+		C\left( 
+TV_\GA\left(\frac{\d \Phi}{\d\GA}\cdot \ngam\right)\right)(1+|D^2\GA|(\Circ))\, .
+	\end{equation}
+
+\end{lem}
+
+\begin{proof} Considering a deformation  $\Psi=\Phi +a \GA^\bot +b$ we get
+$$\Psi\cdot\tgam = \Phi\cdot\tgam + a\GA^\bot\cdot\tgam + b\cdot\tgam $$ 
+$$\Psi\cdot\ngam = \Phi\cdot\ngam + a\GA^\bot\cdot\ngam + b\cdot\ngam $$ 
+$$\frac{\d \Psi}{\d\GA}=\frac{\d \Phi}{\d\GA} + a \ngam $$
+which determines the unique $(a,b)$ such that $\Psi$ verifies~\eqref{conditions}. In particular, given $s_0\in\Circ$ we have 
+$$a=-\left(\frac{\d \Phi}{\d\GA}\cdot\ngam \right)(s_0) $$
+$$b=-(\Phi\cdot\tgam + a\GA^\bot\cdot\tgam)(s_0)\tgam - (\Phi\cdot\ngam + a\GA^\bot\cdot\ngam)(s_0)\ngam\,.$$
+Moreover, as $\Phi\in\Cc_\GA$ and $\frac{\d \Psi}{\d\GA}=\frac{\d \Phi}{\d\GA} + a \ngam$, we get that 
+$\Psi\in\Cc_\GA$ and we have 
+$$TV_\GA\left(\frac{\d \Psi}{\d\GA}\cdot \ngam\right)=TV_\GA\left(\frac{\d \Phi}{\d\GA}\cdot \ngam\right)\,.$$
+We prove now   estimate~\eqref{compactness-psi2}. In the following we denotes by $C$ a generic constant depending on $\GA$.
+Now, as $\Psi$ is periodic, the mean value of  its first derivative is equal to zero, so by Poincar\'e's inequality we have 
+\begin{equation}\label{norme-infty-psi}
+\left\|\frac{\d \Psi}{\d\GA}\right\|_{L^{\infty}(\GA)}=\left\|\frac{\d \Psi}{\d\GA}\cdot\ngam\right\|_{L^{\infty}(\GA)}\leq C TV_\GA\left(\frac{\d \Phi}{\d\GA}\cdot \ngam\right)\,.
+\end{equation}
+Moreover, by~\eqref{conditions} and  the fact that $\Psi\in\Cc_\GA$ and $\Psi(s_0)=0$, we get 
+\begin{equation}\label{norme-infty-psi-2}
+\norm{ \Psi}_{L^\infty(\GA)} \leq C TV_\GA(\Psi) = C \left\|\frac{\d \Psi}{\d\GA}\cdot\ngam\right\|_{L^{1}(\GA)}\,.
+\end{equation}
+Then  by~\eqref{norme-infty-psi} and~\eqref{norme-infty-psi-2}, we get 
+\begin{equation}\label{bound-first-der-psi}
+\norm{ \Psi}_{W^{1,\infty}(\GA)}\leq C
+TV_\GA\left(\frac{\d \Phi}{\d\GA}\cdot \ngam\right)\, . 
+\end{equation}
+Concerning the second derivative, as $L_\GA(\Psi)=0$, we get
+$$ 0 = D_\GA\left( \frac{\d\Psi}{\d\GA}\cdot \tgam\right) =\left( \frac{\d^2\Psi}{\d\GA^2}\cdot \tgam \right)\d\GA(s) + \left( \frac{\d\Psi}{\d\GA}\cdot \ngam\right)\d \rm{curv}_\GA(\GA)\,$$
+and
+$$ 
+D_\GA\left(\frac{\d \Psi}{\d\GA}\cdot\ngam\right)=\left(\frac{\d^2 \Psi}{\d \GA(s)^2}\cdot\ngam\right)\d\GA(s)\,.$$
+Then we have
+\begin{equation}\label{bound-second-der-psi} 
+\begin{array}{ll}
+\displaystyle{\left\|\frac{\d^2 \Psi}{\d \GA(s)^2}\right\|_{L^{1}(\GA)}}&\displaystyle{\leq \left\|\frac{\d^2 \Psi}{\d \GA(s)^2}\cdot\tgam\right\|_{L^{1}(\GA)} + \left\|\frac{\d^2 \Psi}{\d \GA(s)^2}\cdot\ngam\right\|_{L^{1}(\GA)}}\\
+&\displaystyle{\leq   |\rm{curv}_\GA(\GA)|(\Circ)\norm{ \Psi\cdot \ngam}_{L^\infty(\GA)}+TV_\GA\left(\frac{\d \Psi}{\d\GA}\cdot\ngam\right)
+}\\
+&\displaystyle{\leq   |D^2\GA|(\Circ)\norm{ \Psi}_{L^\infty(\GA)}+TV_\GA\left(\frac{\d \Psi}{\d\GA}\cdot\ngam\right)
+}
+\,.
+\end{array}
+\end{equation}
+Estimate~\eqref{compactness-psi2} follows by~\eqref{bound-first-der-psi} and~\eqref{bound-second-der-psi}.
+\end{proof}
+
+\begin{proof} (of {\bf Theorem~\ref{existence1}}) Let $\{\Phi_h\}\subset \mathcal{B}$ be a minimizing sequence of  $R_\GA$. Then, we define the sequence
+$$\Psi_h=\Phi_h+ d_h\varphi_h\,$$
+where 
+$$
+d_h=\|(a_h\GA^\bot+b_h)\cdot\ngam\|_{L^2(\GA)}\,,\quad \varphi_h = \frac{a_h\GA^\bot+b_h}{\|(a_h\GA^\bot+b_h)\cdot\ngam\|_{L^2(\GA)}}
+$$
+where $a_h,b_h$ are given  by Lemma~\ref{lem-compacity-psi}. \par We remark that, because of the approximation theorem for $BV$-function with respect to the $BV$-strict topology (see Theorem 3.9 in~\cite{AFP}),~\eqref{compactness-psi2} can be relaxed to $BV^2(\GA)$. It follows that 
+	\begin{equation}\label{compactness-psi2bis}
+	 	\norm{ \Psi_h }_{W^{2,1}(\GA)} \leq 
+		C\left( 
+TV_\GA\left(\frac{\d \Phi_h}{\d\GA}\cdot \ngam\right)\right)(1+|D^2\GA|(\Circ))\, 
+	\end{equation}
+where $C$ depends on $\GA$.
+\par For every $h$, we aim to solve the following problem
+\begin{equation}\label{problem2}
+\rm{Min}\,\{TV_\GA(\alpha\Psi_h+\beta\varphi_h)\,|\,\alpha,\beta \in \R,\,\alpha\Psi_h+\beta\varphi_h\in \Ll_\GA \}\,.
+\end{equation}
+We remark that for every $h$ and $\alpha,\beta \in \R$ $$TV_\GA(\alpha\Psi_h+\beta\varphi_h)=|\alpha|TV_\GA(\Psi_h)\,$$
+and that the minimization problem is well-posed because $\Phi_h=1\Psi_h-d_h\varphi_h$ belongs to $\Ll_\GA$. This means in particular that a solution to problem~\eqref{problem2} verifies $|\alpha| \leq 1$. In the following we assume that $|\alpha| \leq 1$.
+\par Now, the constraint $\alpha\Psi_h+\beta\varphi_h\in \Ll_\GA$ implies that
+\begin{equation}\label{bilinear2}
+(\alpha, \beta)\cdot A
+\begin{pmatrix}
+\alpha\\
+\beta\\
+\end{pmatrix}
+\leq
+(1+\rho) \|\Pi_\GA(\nabla_{L^2(\GA)}E(\GA))\|_{L^{2}(\GA)}
+\end{equation}
+where the matrix $A$ is defined by
+\begin{equation}
+\begin{pmatrix}
+\displaystyle{\int_{\Circ} \left(\Psi_h\cdot\ngam\right)^2\d \GA(s)}&\displaystyle{\int_{\Circ}\left(\Psi_h\cdot\ngam\right)\left(\varphi_h\cdot\ngam\right) \d \GA(s)}\\
+\displaystyle{\int_{\Circ}\left(\Psi_h\cdot\ngam\right)\left(\varphi_h\cdot\ngam\right)\d \GA(s)}&\displaystyle{\int_{\Circ} \left(\varphi_h\cdot\ngam\right)^2\d \GA(s)}\\
+\end{pmatrix}
+.
+\end{equation}
+We suppose that such a bilinear form is not degenerate.
+\par Now,  $\|\Pi_\GA(\varphi_h)\|_{L^2(\GA)}=1$ for every $h$, so that by solving inequality~\eqref{bilinear2}, as $|\alpha|\leq 1$ and  because of~\eqref{compactness-psi2}, we have that $\beta$ can be bounded by a constant depending on $\GA$ and $R_\GA(\Phi_h)$.
+
+\par If the previous bilinear form is degenerate we have 
+$$
+(\Psi_h\cdot\ngam)(s)=(\varphi_h\cdot\ngam)(s) \quad \forall s \in \Circ\,.
+$$ 
+In particular, because of the definition of $\Ll_\GA$ we get that $\varphi_h\cdot\ngam$ is not identically zero. In fact, if $\varphi_h\cdot\ngam$ was identically zero then $(\alpha\Psi_h+\beta\varphi_h)\cdot\ngam$ would be identically zero which is in contradiction with the fact that $\alpha\Psi_h+\beta\varphi_h\in \Ll_\GA$. 
+\par Thus, in the degenerate case, we get that $\alpha\Psi_h+\beta\varphi_h\in \Ll_\GA $ is equivalent to $(\alpha+\beta)\varphi_h\in \Ll_\GA $, so that 
+\begin{equation}\label{ab-bound}\|\Pi_\GA((\alpha+\beta)\varphi_h-\nabla_{L^2(\GA)}E(\GA))\|_{L^{2}(\GA)}\leq \rho
+\|\Pi_\GA(\nabla_{L^2(\GA)}E(\GA))\|_{L^{2}(\GA)}\,.
+\end{equation}
+Now, as  $\|\Pi_\GA(\varphi_h)\|_{L^{2}(\GA)}=1$ for every $h$ and $|\alpha|<1$,~\eqref{ab-bound} proves that $\alpha$ and $ \beta$ are bounded by a constant depending only on $\GA$. This in particular guarantees the existence of a solution  to Problem~\eqref{problem2}. 
+\par Finally we have proved that for every $h$, Problem~\eqref{problem2} admits at least a  solution, denoted by  $(\alpha_h, \beta_h)$.  In particular $\alpha_h$ and $\beta_h$ can be bounded by a constant depending on $\GA$ and $R_\GA(\Phi_h)$.
+\par We consider now the sequence
+$$\tilde{\Phi}_h = \alpha_h\Psi_h+\beta_h\varphi_h$$
+where $(\alpha_h, \beta_h)$ is a solution of Problem~\eqref{problem2}. We have 
+$$TV_\GA(\tilde{\Phi}_h)=|\alpha|TV_\GA(\Psi_h)\leq TV_\GA(\Phi_h)$$
+because $\Phi_h=1\Psi_h-d_h\varphi_h$ belongs to $\Ll_\GA$.
+Moreover $\tilde{\Phi}_h\in \Cc_\GA\cap \Ll_\GA$. Then  $\{\tilde{\Phi}_h\}$ defines a new minimizing sequence for Problem~\eqref{grad-rigid}.
+ Moreover, as said above $\alpha_h, \beta_h$ are bounded by a constant depending on $\GA$ and $R_\GA(\Phi_h)$ and  $\|\Pi_\GA(\varphi_h)\|_{L^2(\GA)}=1$ for every $h$. \textcolor{red}{il faut trouver une borne superieure pour la norme L2 de $\varphi\cdot\tgam$ i.e. pour $\Phi\cdot\tgam$} This implies that 
+$$
+\underset{h}{\sup}\,	\norm{ \tilde{\Phi}_h }_{BV^{2}(\GA)} \leq 
+		C\left( (1+\rho) \|\Pi_\GA(\nabla_{L^2(\GA)}E(\GA))\|_{L^{2}(\GA)} +
+TV_\GA\left(\frac{\d \Phi}{\d\GA}\cdot \ngam\right)\right)(1+|D_\GA^2\GA|(\Circ))\,.
+$$   
+\par This gives an uniform bound for the $BV^2(\GA)$-norms of $\Phi_h$ and  implies that  $\{\Phi_h\}$  converges (up to a subsequence) toward some  $\Phi \in BV^2(\GA)$ with respect to the $BV^2(\GA)$-weak* topology (see Theorem 3.23 in~\cite{AFP}). 
+\par In particular $\Phi_h \rightarrow \Phi$  in $W^{1,1}(\GA)$ which proves that  $\Phi \in \Cc_\GA $, and, by the lower semi-continuity of the $L^2$-norm, we also get  $\Phi \in \Ll_\GA$.
+\par Now, as $R_\GA$ is lower semi-continuous with respect to the $BV^2(\GA)$-weak* topology, the theorem ensues.
+\end{proof}
+\end{comment}
+%%%%% END REMOVED %%%%%
+
+
+
+
+
+

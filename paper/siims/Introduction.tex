@@ -1,0 +1,70 @@
+% !TEX root = ../Geodesics_BV2.tex
+
+\section{Introduction}\label{intro}
+
+This paper addresses the problem of the existence of minimal geodesics in spaces of planar curves endowed with several metrics over the tangent spaces. Given two initial curves, we prove the existence of a minimizing geodesic joining them. Such a result is proved by the direct method of calculus of variations.
+
+We treat the case of  $BV^2$-curves and $H^k$-curves ($k\geq 2$ integer). Although the proofs' strategies are the same, the $BV^2$ and $H^k$ cases are slightly different and the proof in the $H^k$ case is simpler. This difference is essentially due to the inherent geometric structures (Riemannian or Finslerian) of each space. 
+
+We also propose a finite element discretization of the minimal geodesic problem. We further relax the problem to obtain a smooth non-convex minimization problem. This enables the use of a gradient descent algorithm to compute a stationary point of the corresponding functional. Although these stationary points are not in general global minimizers of the energy, they can be used to numerically explore  the geometry of the corresponding spaces of curves, and to illustrate the differences between the Sobolev and $BV^2$ metrics.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Previous Works}
+\label{sec-previous-works}
+
+\paragraph{Shape spaces as Riemannian spaces.}
+
+The  mathematical study of spaces of curves has been largely investigated in recent years; see, for instance, ~\cite{Younes-elastic-distance,Mennucci-CIME}. 
+%
+The set of curves is naturally modeled over a Riemannian manifold~\cite{MaMi}. This consists in defining  a Hilbertian metric on each tangent plane of the space of curves, i.e. the set of vector fields which deform infinitesimally a given curve. 
+%
+Several recent works~\cite{MaMi,charpiat-new-metrics,Yezzi-Menn-2005a,Yezzi-Menn-2005b} point out that  the choice of the metric notably affects the results of gradient descent algorithms for the numerical minimization of functionals. Carefully designing the metric is therefore crucial to reach better local minima of the energy and also to compute descent flows with specific behaviors. These issues are crucial for applications in image processing (e.g. image segmentation) and computer vision (e.g. shape registration).
+% 
+Typical examples of such  Riemannian metrics are Sobolev-type metrics~\cite{sundaramoorthi-sobolev-active,sundaramoorthi-2006,sundaramoorthi-new-possibilities,Yezzi-H2}, which lead to smooth curve evolutions. 
+
+%%%
+\paragraph{Shape spaces as Finslerian spaces.}
+
+It is possible to extend this Riemannian framework by considering more general metrics on the tangent planes of the space of curves. Finsler spaces make use of Banach norms instead of Hilbertian norms~\cite{RF-geometry}. A few recent works~\cite{Mennucci-CIME,Yezzi-Menn-2005a,Rigid-evol} have studied the theoretical properties of Finslerian spaces of curves. 
+
+Finsler metrics are used in~\cite{Rigid-evol} to perform curve evolution in the space of $BV^2$-curves. The authors make use of a generalized gradient, which is the steepest descent direction  according to the Finsler metric. The corresponding gradient flow enables piecewise regular evolutions (i.e. every intermediate curve is piecewise regular), which is useful for applications such as registration of articulated shapes.  
+%
+The present work naturally follows~\cite{Rigid-evol}. Instead of considering gradient flows to minimize smooth functionals, we consider the minimal geodesic problem. 
+However, we do not consider the Finsler metric favoring piecewise-rigid motion, but instead the standard $BV^2$-metric.
+In \cite{Bredies}, the authors study a functional space similar to $BV^2$ by considering functions with finite  total  generalized variation. However, such a framework is not adapted to our applications because functions with finite total generalized variation can be discontinuous.
+
+Our main goal in this work is to study the existence of solutions, which is important to understand the underlying space of curves. This is the first step towards a numerical solution to the minimal path length problem for a metric that favors piecewise-rigid motion.
+
+
+%Note also that, in general, looking at path-length spaces for an $L^1$ norm type is sometimes not very interesting, since in general, there is a whole continuum of optimal solutions.As a simple example, the reader can think of the case of the real line endowed with the $L^1$ norm: monotonic functions $x:[0,1] \mapsto \R$ such that $x(0) = a \in \R$ and $x(1) = b \in \R$ are minimizers of the length. In this particular case, the $L^1$ norm does not vary on $\R$, but in more general cases, the dependency on the point may bring uniqueness of optimal paths as a generic feature.
+
+
+\paragraph{Geodesics in shape spaces.}
+
+The computation of geodesics over Riemannian spaces is now routinely used in many imaging applications. Typical examples of applications include shape registration~\cite{Mennucci-filtering,Younes-04,2010.03.20}, tracking~\cite{Mennucci-filtering}, and shape deformation~\cite{Kilian-shape-space}. In \cite{Rumpf}, the authors study  discrete geodesics and their relationship with continuous geodesics in the Riemannian framework.  Geodesic computations also serve as the basis to perform statistics on shape spaces (see, for instance,~\cite{Younes-04,Arsigny06}) and to generalize standard tools from Euclidean geometry such as averages~\cite{Arsigny:Siam:07}, linear regression~\cite{Niethammer_GeodReg}, and cubic splines~\cite{2010.03.20}, to name a few.  
+% 
+However, due to the infinite dimensional nature of shape spaces, not all Riemannian structures lead to well-posed length-minimizing problems. For instance, a striking result~\cite{MaMi,Yezzi-Menn-2005b,Yezzi-Menn-2005a} is that the natural $L^2$-metric on the space of curves is degenerate, despite its widespread use in computer vision applications. Indeed, the geodesic distance between any pair of curves is equal to zero. 
+
+The study of the geodesic distance over shape spaces (modeled as curves, surfaces, or diffeomorphisms) has been widely developed in the past ten years~\cite{MR3132089,MR3080480,MR3011892}. We refer the reader to~\cite{2013arXiv1305.1150B} for a review of this field of research. These authors typically address the questions of existence of the exponential map, geodesic completeness (the exponential map is defined for all time), and  the computation of the curvature. In some situations of interest, the shape space has a strong Riemannian metric (i.e., the  inner product on the tangent space induces an isomorphism between the tangent space and its corresponding cotangent space) so that the exponential map is a local diffeomorphism. 
+%
+In~\cite{MuMi_ov} the authors describe geodesic equations for Sobolev metrics. They show in Section 4.3 the local existence and uniqueness of a geodesic with prescribed initial conditions. This result is improved in~\cite{Bruveris}, where the authors prove the existence for all time. Both previous results are proved by techniques from ordinary differential equations.
+% 
+In contrast, local existence (and uniqueness) of minimizing geodesics with prescribed boundary conditions (i.e. between a pair of curves) is typically obtained using the exponential map. 
+
+In finite dimensions, existence of minimizing geodesics between any two points (global existence) is obtained by the Hopf-Rinow theorem~\cite{HR}. Indeed, if the exponential map is defined for all time (i.e. the space is geodesically complete) then global existence holds. This is, however, not true in infinite dimensions, and a counterexample of non-existence of a geodesic between two points over a manifold is given in~\cite{MR0188943}. An even more pathological case is described in~\cite{MR0400283}, where an example is given where the exponential map is not surjective although the manifold is geodesically complete.
+Some positive results exist for infinite dimensional manifolds (see in particular Theorem B in~\cite{Ekland} and Theorem 1.3.36 in~\cite{Mennucci-CIME}) but the surjectivity of the exponential map still needs to be checked directly on a case-by-case basis. 
+
+In the case of a Finsler structure on the shape space, the situation is more complicated, since the norm over the tangent plane is often non-differentiable . This non-differentiability is indeed crucial to deal with curves and evolutions that are not smooth (we mean evolutions of non-smooth curves). That implies that geodesic equations need to be understood in a weak sense. More precisely, the minimal geodesic problem can be seen as a Bolza problem on the trajectories $H^1([0,1],BV^2(\Circ,\RR^2))$. In~\cite{Mord} several necessary conditions for existence of solutions to Bolza problems in Banach spaces are proved within the framework of differential inclusions. Unfortunately, these results require some hypotheses on the Banach space (for instance the Radon-Nikodym property for the dual space) that are not satisfied by the Banach space that we consider in this paper. 
+
+We therefore tackle these issues in the present work and prove  existence of minimal geodesics in the space of $BV^2$ curves by a variational approach. We also show how similar techniques can be applied to the case of Sobolev metrics. 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Contributions}
+
+Section~\ref{BV2} deals with the Finsler space of $BV^2$-curves. Our main contribution is Theorem~\ref{local_existence}  proving the existence of a minimizing geodesic between two $BV^2$-curves. We also explain how this result can be generalized to the setting of geometric curves (i.e. up to reparameterizations).
+
+Section~\ref{Hs} extends these results to $H^k$-curves with $k\geq 2$ integer, which gives rise to Theorems~\ref{existence_sobolev} and \ref{geom-sob}.  Our results are complementary to those presented in~\cite{MuMi_ov} and~\cite{Bruveris} where the authors show the geodesic completeness of curves endowed with the $H^k$-metrics with $k \geq 2$ integer. We indeed show that the exponential map is surjective.
+
+Section~\ref{discretization} proposes a discretized minimal geodesic problem for $BV^2$ and Sobolev curves. We show  numerical simulations for the computation of stationary points of the energy. In particular, minimization is made by a gradient descent scheme, which requires, in the $BV^2$-case, a preliminary regularization of the geodesic energy.  

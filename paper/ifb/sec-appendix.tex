@@ -1,0 +1,61 @@
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\appendix
+\section{Appendix: $BV$ and $BV^2$ functions}\label{appendix}
+
+In this section we remind the definition of $BV$ and $BV^2$ functions in dimension one.
+
+\begin{defn}
+ Let $u\in L^1([0,1],\RR)$. We say that u is a function of bounded variation in $[0,1]$ if
+\begin{equation}\label{bv1}
+|D u|([0,1])=\sup \enscond{
+ 	\int_0^1u\,g'\, \d x 
+	}{
+		g\in \mathrm{C}^\infty_c([0,1],\RR),\|g\|_{L^\infty([0,1],\RR)}\leq 1
+	}< \infty\,.
+\end{equation}
+By  Riesz's representation theorem this is equivalent to state that there exists a unique finite Radon measure, denoted by $D u$, such that 
+$$\int_0^1u\,g'\, \d x = - \int_0^1g\, \d D u \quad \foralls g\in \mathrm{C}^1_c({[0,1]})\,.$$
+Clearly the total variation of the measure $D u$ on $[0,1]$, i.e., $|D u|([0,1])$, coincides with the quantity defined in~\eqref{bv1} and this justifies our notations. 
+We denote the space of functions of bounded variation in $[0,1]$ by $\BV([0,1],\RR)$. 
+The space $\BV([0,1],\RR)$ equipped with the norm 
+$$\|u\|_{\BV} = \|u\|_{L^1} + |D u |([0,1])$$
+is a Banach space. We say that $\{u_h\}$  weakly* converges in $\BV([0,1],\RR)$ to $u$ if
+$$u_h \overset{L^1}{\longrightarrow} u \quad\mbox{and}\quad D u_h \overset{*}{\rightharpoonup}D u\,, \quad\mbox{as}\quad h \rightarrow \infty\,.$$
+\end{defn}
+
+We now define the set of $BV^2$-functions as the functions whose second derivative are Radon measures:
+\begin{defn}
+ Let $u\in W^{1,1}([0,1],\RR)$. 
+ %We define the following operator: $$H: g \in C^2([0,1],\RR)\mapsto \sum_{i,j=1}^n \frac{\partial^2 g}{\partial x_i \partial x_j}\,.$$
+ We say that $u$ belongs to $BV^2([0,1],\RR)$ if 
+ \begin{equation}\label{2var}
+ |D^2 u|([0,1]):=\sup \enscond{
+ 		\int_0^1u\,g''\, \d x 
+	}{
+		g\in \mathrm{C}^\infty_c({[0,1]},\mathbb{R} ),\|g\|_{L^{\infty}([0,1],\mathbb{R} )}\leq 1
+	}
+	< \infty\,.
+\end{equation}
+As for the first variation, the functional considered in \eqref{2var} can be represented by a measure $D^2u$ whose total variation coincides with  the quantity $|D^2 u|([0,1])$ previously defined.
+\par $\BV^2([0,1],\RR)$ equipped with the norm 
+\begin{equation}\label{normbv2}
+\|u\|_{\BV^2} = \|u\|_{BV} + |D^2u |([0,1])
+\end{equation}
+is a Banach space. In particular we have $W^{2,1}([0,1],\RR)\subset BV^2([0,1],\RR)$.
+ We say that $\{u_h\}$  weakly* converges in $\BV^2([0,1],\RR)$ to $u$ if
+$$u_h \overset{W^{1,1}}{\longrightarrow} u \quad\mbox{and}\quad D^2 u_h \overset{*}{\rightharpoonup}D^2 u\,, \quad\mbox{as}\quad h \rightarrow \infty\,.$$
+\end{defn}
+We remind that if $\{u_h\}\subset BV^2([0,1],\RR)$ is such that  $\underset{h}{\sup}\,\|u_h\|_{BV^2}< M$ then there exists $u\in  BV^2([0,1],\RR)$ and a subsequence (not relabeled)  $\{u_h\}$  that weakly* converges in $\BV^2([0,1],\RR)$ toward $u$ and
+$$|D^2u |([0,1]) \leq \, \underset{h \rightarrow \infty}{\liminf}\, |D^2 u_h |([0,1])\,.$$
+
+Moreover we have the following proposition showing the link between $BV$ and $BV^2$ functions\begin{prop} \label{bv-bv2} A function $u$ belongs to $ BV^2([0,1],\RR)$ if and only if $u\in W^{1,1}([0,1],\RR)$ and $u' \in BV([0,1],\RR)$, for every $i=1,...,n$. Moreover
+$$|D^2u|([0,1]) = \left|D u'\right|([0,1])\,.$$\end{prop}
+
+\par We also remind that  
+%$BV^2([0,1],\RR)$ is embedded in $L^\infty([0,1],\RR)$, $W^{1,1}([0,1],\RR)$, and in $C(\overline{[0,1]})$. Moreover 
+ $BV^2([0,1],\RR)$ is embedded in $ W^{1,\infty}([0,1],\RR)$ so $BV^2$ functions are  Lipschitz continuous (see Theorem 5,~\cite{EG} pag. 131). Then,  as $[0,1]\subset \R$ is bounded, $BV^2([0,1],\RR)$ is embedded $W^{1,p}([0,1],\RR)$, for every $p\geq 1$. In particular this implies that  $BV^2([0,1],\RR)$ is dense in $W^{1,p}([0,1],\RR)$, for every $p\geq 1$.
+\par A vector field ${\bf u}$ belongs to $BV([0,1],\RR^2)$ ($BV^2([0,1],\RR^2)$ respectively)  if every component of ${\bf u}$ belongs to $BV([0,1],\RR)$ ($BV^2([0,1],\RR)$ respectively). 
+We refer to~\cite{AFP} and~\cite{Demengel} for more properties of these spaces.

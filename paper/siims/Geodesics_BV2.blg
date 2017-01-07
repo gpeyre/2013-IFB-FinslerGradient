@@ -1,0 +1,46 @@
+This is BibTeX, Version 0.99d (TeX Live 2011)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: Geodesics_BV2.aux
+The style file: plain.bst
+Database file #1: bibliography.bib
+You've used 51 entries,
+            2118 wiz_defined-function locations,
+            907 strings with 13245 characters,
+and the built_in function-call counts, 16997 in all, are:
+= -- 1724
+> -- 742
+< -- 9
++ -- 302
+- -- 242
+* -- 1191
+:= -- 2842
+add.period$ -- 155
+call.type$ -- 51
+change.case$ -- 274
+chr.to.int$ -- 0
+cite$ -- 51
+duplicate$ -- 629
+empty$ -- 1312
+format.name$ -- 242
+if$ -- 3521
+int.to.chr$ -- 0
+int.to.str$ -- 51
+missing$ -- 51
+newline$ -- 258
+num.names$ -- 102
+pop$ -- 220
+preamble$ -- 1
+purify$ -- 223
+quote$ -- 0
+skip$ -- 462
+stack$ -- 0
+substring$ -- 1221
+swap$ -- 122
+text.length$ -- 9
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 204
+warning$ -- 0
+while$ -- 177
+width$ -- 53
+write$ -- 556

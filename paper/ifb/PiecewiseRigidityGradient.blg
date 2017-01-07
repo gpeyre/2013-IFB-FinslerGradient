@@ -1,0 +1,46 @@
+This is BibTeX, Version 0.99d (TeX Live 2015)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: PiecewiseRigidityGradient.aux
+The style file: plain.bst
+Database file #1: bibliography.bib
+You've used 51 entries,
+            2118 wiz_defined-function locations,
+            881 strings with 12787 characters,
+and the built_in function-call counts, 17020 in all, are:
+= -- 1710
+> -- 834
+< -- 2
++ -- 333
+- -- 276
+* -- 1291
+:= -- 2914
+add.period$ -- 153
+call.type$ -- 51
+change.case$ -- 291
+chr.to.int$ -- 0
+cite$ -- 51
+duplicate$ -- 569
+empty$ -- 1251
+format.name$ -- 276
+if$ -- 3431
+int.to.chr$ -- 0
+int.to.str$ -- 51
+missing$ -- 51
+newline$ -- 258
+num.names$ -- 102
+pop$ -- 215
+preamble$ -- 1
+purify$ -- 240
+quote$ -- 0
+skip$ -- 399
+stack$ -- 0
+substring$ -- 1211
+swap$ -- 71
+text.length$ -- 2
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 204
+warning$ -- 0
+while$ -- 177
+width$ -- 53
+write$ -- 552

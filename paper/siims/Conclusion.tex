@@ -1,0 +1,24 @@
+% !TEX root = ../Geodesics_BV2.tex
+
+\section{Conclusion}
+
+The variational approach defined in this work  is a general strategy to prove the existence of minimal geodesics with respect to Finslerian metrics. %The uniqueness  is at the moment an open question. 
+
+In order to generalize previous results to more general Banach spaces, we point out the main properties which must be satisfied by the Banach topology:
+
+\begin{itemize}
+\item[(i)] the two constants $m_\gm, M_\gm$ appearing in Proposition \ref{equiv-norms} must be bounded on geodesic balls;
+
+\item[(ii)] the topology of the space must imply a suitable convergence of the reparameterizations in order to get semicontinuity of the norm of $\{\GA^{h}_t \circ \phi^h(t) \}_h$; in the $BV^2$ case such a convergence is given by the  $W^{1,1}$-strong topology.
+\end{itemize}
+
+For the $BV^2$ metric, the major difficulty concerns the characterization of the weak topology of the space of the paths. The usual characterization of the dual of Bochner spaces $H^1([0,1],B)$ ($B$ is a Banach space) requires that the dual of $B$ verifies the RNP \cite{Bochner_dual, Bochner_dual_2}.
+We point out that the martingale argument used to prove Theorem \ref{local_existence} avoids using such a characterization and allows one to define a suitable topology in such a space guaranteeing the lower semicontinuity of the geodesic energy.
+
+Moreover, as pointed out in the introduction, the necessary conditions proved in ~\cite{Mord} are not valid in our case. This represents an interesting direction of research because optimality conditions allow one to study regularity properties of minimal geodesics. It remains an open question whether the generalized Euler-Lagrange equations in \cite{Mord} can be generalized to our case and give the Hamiltonian geodesic equations. Strongly linked to this question is the issue of convergence of the numerical method. Indeed, the convergence of the sequence of discretized problems would imply the existence of geodesic equations.
+
+From a numerical point of view, as we have shown, the  geodesic energy suffers from many poor local minima. To avoid some of these poor local minima, it is possible to modify the metric to take into account some prior on the set of deformations. For instance, in the spirit of~\cite{Rigid-evol}, a Finsler metric can be designed to favor piecewise rigid motions.
+
+\section*{Acknowledgement}
+
+The authors want to warmly thank Martins Bruveris for pointing out the geodesic completeness of the Sobolev metric on immersed plane curves. This work has been supported by the European Research Council (ERC project SIGMA-Vision).
